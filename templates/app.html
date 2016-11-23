@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow,noarchive"/>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 
     <title>📋 Web Todo.txt</title>
@@ -19,9 +20,9 @@
             <small v-show="loading">Loading...</small>
         </div>
         <div class="menu">
-            <button>➕</button>
-            <button>🔄</button>
-            <button>💾</button>
+            <button>➕ Add</button>
+            <button>🔄 Reload</button>
+            <button>💾 Save</button>
         </div>
     </header>
     <div id="page">
@@ -46,7 +47,7 @@
                 <div><input type="checkbox"> truc</div>
             </div>
             <div>
-                <button>Clear all</button>
+                <button>❌ Clear all</button>
             </div>
         </div>
         <div id="todos">
@@ -55,95 +56,27 @@
                 <div class="col-completed-checkbox">
                     <input type="checkbox" class="completed" :checked="todo.completed">
                 </div>
-                <div class="col-priority" v-show="todo.priority"><span
-                        v-bind:class="['priority', todo.priority]">${ todo.priority }</span></div>
+                <div class="col-priority" v-show="todo.priority"><span v-bind:class="['priority', todo.priority]">${ todo.priority }</span></div>
                 <div class="col-content">
                     <div class="row-text">${ todo.text }</div>
-                    <div class="row-metadata">
-                        <template v-for="project in todo.projects">+${ project } </template>
-                        <template v-for="context in todo.contexts">@${ context } </template>
-                        <template v-if="todo.creation_date">Created ${ todo.creation_date }</template>
-                        <template v-if="todo.completion_date">Completed ${ todo.completion_date }</template>
+                    <div class="row-infos">
+                        <div class="metadata">
+                            <template v-for="project in todo.projects">+${ project } </template>
+                            <template v-for="context in todo.contexts">@${ context } </template>
+                            <template v-if="todo.creation_date">Created ${ todo.creation_date }</template>
+                            <template v-if="todo.completion_date">Completed ${ todo.completion_date }</template>
+                        </div>
+                        <div class="actions"><a href="">✏</a>️ <a href="">❌</a>️</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer>© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • Licensed under the <a href="">DBAD Public
-        License</a> • <a href="">Source code on GitHub</a></footer>
+    <footer>© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">Source code on GitHub</a> • Licensed under the <a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD Public License</a></footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <script src="https://unpkg.com/vue@2.1.0/dist/vue.min.js"></script>
-<script>
-    var app = new Vue({
-        delimiters: ['${', '}'],
-        el: '#app',
-        data: {
-            loading: false,
-            todos: [
-                {
-                    text: 'Chuck Norris doesn\'t have disk latency because the hard drive knows to hurry the hell up',
-                    completion_date: '2016-11-20',
-                    priority: 'A',
-                    projects: ['machine'],
-                    contexts: ['truc', 'blah']
-                },
-                {
-                    text: 'Chuck Norris doesn\'t have disk latency because the hard drive knows to hurry the hell up',
-                    completed: false,
-                    completion_date: '2016-11-20',
-                    priority: 'B',
-                    creation_date: '2016-10-05',
-                    projects: ['machine', 'ahah'],
-                    contexts: ['truc']
-                },
-                {
-                    text: 'Chuck Norris doesn\'t have disk latency because the hard drive knows to hurry the hell up',
-                    completed: true,
-                    completion_date: '2016-11-20',
-                    creation_date: '2016-10-05',
-                    projects: ['machine'],
-                    contexts: ['truc', 'tasoeur']
-                },
-                {
-                    text: 'Chuck Norris doesn\'t have disk latency because the hard drive knows to hurry the hell up',
-                    completed: false,
-                    completion_date: '2016-11-20',
-                    priority: 'C',
-                    creation_date: '2016-10-05',
-                    projects: ['machine', 'ahah'],
-                    contexts: ['truc']
-                },
-                {
-                    text: 'Chuck Norris doesn\'t have disk latency because the hard drive knows to hurry the hell up',
-                    completed: false,
-                    completion_date: '2016-11-20',
-                    priority: 'D',
-                    creation_date: '2016-10-05',
-                    projects: ['machine', 'ahah'],
-                    contexts: ['truc']
-                },
-                {
-                    text: 'Chuck Norris doesn\'t have disk latency because the hard drive knows to hurry the hell up',
-                    completed: false,
-                    completion_date: '2016-11-20',
-                    priority: 'E',
-                    creation_date: '2016-10-05',
-                    projects: ['machine', 'ahah'],
-                    contexts: ['truc']
-                },
-                {
-                    text: 'Chuck Norris doesn\'t have disk latency because the hard drive knows to hurry the hell up',
-                    completed: false,
-                    completion_date: '2016-11-20',
-                    priority: 'F',
-                    creation_date: '2016-10-05',
-                    projects: ['machine', 'ahah'],
-                    contexts: ['truc']
-                }
-            ]
-        }
-    })
-</script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
