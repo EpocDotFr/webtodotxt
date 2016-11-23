@@ -21,7 +21,7 @@
         </div>
         <div class="menu">
             <button>➕ Add</button>
-            <button>🔄 Reload</button>
+            <button @click="loadTodos()">🔄 Reload</button>
             <button>💾 Save</button>
         </div>
     </header>
@@ -77,6 +77,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <script src="https://unpkg.com/vue@2.1.0/dist/vue.min.js"></script>
+<script>
+ROOT_URL = '{{ request.url_root }}';
+</script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>

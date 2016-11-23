@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json
+from flask import Flask, render_template, json, request
 from flask_httpauth import HTTPBasicAuth
 import logging
 import sys
@@ -21,6 +21,16 @@ logging.getLogger().setLevel(logging.INFO)
 @auth.login_required
 def home():
     return render_template('app.html')
+
+
+@app.route('/todo.txt', methods=['GET', 'POST'])
+def todotxt():
+    if request.method == 'GET':
+        result = {'status': 'success', 'data': []}
+    elif request.method == 'POST':
+        result = {'status': 'success', 'data': []}
+
+    return json.dumps(result)
 
 
 @auth.get_password

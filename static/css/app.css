@@ -290,6 +290,7 @@ footer a:visited {
 
 #todos .no-todos {
     text-align: center;
+    padding: 5px;
 }
 
 #todos .col-completed-checkbox,
