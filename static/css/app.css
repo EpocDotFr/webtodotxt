@@ -1,0 +1,315 @@
+/************************************************************************
+ * Global styles */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+#page {
+    display: table;
+    width: 100%;
+    border: 1px solid #DDD;
+    border-radius: 3px;
+}
+
+#app {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    margin: 0;
+}
+
+/************************************************************************
+ * Links */
+
+a:hover {
+    text-decoration: none;
+}
+
+/************************************************************************
+ * Priorities */
+
+.priority {
+    border-radius: 5px;
+    padding: 0 5px;
+    background-color: #DDD;
+    color: #000;
+    border: 1px solid #CCC;
+}
+
+.priority.A {
+    background-color: #F29B9B;
+    color: #FFF;
+    border-color: #c56a6a;
+}
+
+.priority.B {
+    background-color: #FEDE82;
+    color: #000;
+    border-color: #e1bb1c;
+}
+
+.priority.C {
+    background-color: #F9FC87;
+    color: #000;
+    border-color: #dedc13;
+}
+
+.priority.D {
+    background-color: #CFFFCF;
+    color: #000;
+    border-color: #56f252;
+}
+
+.priority.E {
+    background-color: #8787FF;
+    color: #FFF;
+    border-color: #446dfe;
+}
+
+/************************************************************************
+ * Alerts */
+
+p.alert,
+div.alert {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+span.alert,
+small.alert {
+    padding: 3px;
+}
+
+.alert {
+    border-radius: 3px;
+    border: 1px solid;
+}
+
+.alert a,
+.alert a:visited,
+.alert a:hover,
+.alert a:focus {
+    color: inherit;
+}
+
+.alert.success {
+    background-color: #f0ffe9;
+    border-color: #C5E9B7;
+}
+
+.alert.error {
+    background-color: #fff8c1;
+    border-color: #DDD64F;
+}
+
+.alert.info {
+    background-color: #D9E8FF;
+    border-color: #b3d4ff;
+}
+
+/************************************************************************
+ * Buttons */
+
+button, .button {
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #DDD;
+    border: 1px solid #AAA;
+    outline: none;
+    padding: 3px;
+    text-decoration: none;
+    text-shadow: 1px 1px 0px #FFF;
+    font-size: 16px;
+}
+
+button:hover, .button:hover,
+button:focus, .button:focus {
+    background-color: #EEE;
+    outline: none;
+}
+
+button:disabled {
+    background-color: #EEE;
+    border-color: #CCC;
+    color: #BBB;
+}
+
+/************************************************************************
+ * Inputs */
+
+input,
+select,
+textarea {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    background-color: #FFF;
+    padding: 3px 6px;
+    border: 1px solid #DDD;
+    border-radius: 3px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #BBB;
+    outline: none;
+}
+
+/************************************************************************
+ * Header */
+
+header {
+    display: table;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+header .title {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 24px;
+}
+
+header .title small {
+    font-size: 60%;
+    color: #BBB;
+}
+
+header .menu {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+}
+
+/************************************************************************
+ * Footer */
+
+footer {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 5px;
+    color: #BBB;
+}
+
+footer a,
+footer a:visited {
+    color: #BBB;
+}
+
+/************************************************************************
+ * Filters column */
+
+#filters {
+    display: table-cell;
+    vertical-align: top;
+    width: 25%;
+    border-right: 1px solid #DDD;
+    background-color: #EEE;
+}
+
+#filters > div {
+    border-top: 1px solid #FFF;
+    border-bottom: 1px solid #DDD;
+    padding: 10px;
+}
+
+#filters > div:first-child {
+    border-top-left-radius: 3px;
+}
+
+#filters > div:last-child {
+    border-bottom: none;
+}
+
+#filters > div h2 {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    text-shadow: 1px 1px 0px #FFF;
+}
+
+#filters > div > div {
+    margin-top: 5px;
+}
+
+#filters input[type="text"],
+#filters input[type="date"] {
+    width: 100%;
+}
+
+/************************************************************************
+ * Todos list column */
+
+#todos {
+    display: table-cell;
+    vertical-align: top;
+    width: 75%;
+    padding: 10px;
+}
+
+#todos > div {
+    display: table;
+    width: 100%;
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    background-color: #EEE;
+    margin-bottom: 10px;
+}
+
+#todos > div:last-child {
+    margin-bottom: 0;
+}
+
+#todos > div > div {
+    border-top: 1px solid #FFF;
+}
+
+#todos > div > div:first-child {
+    border-top-left-radius: 3px;
+}
+
+#todos > div > div:last-child {
+    border-top-right-radius: 3px;
+}
+
+#todos .no-todos {
+    text-align: center;
+}
+
+#todos .col-completed-checkbox,
+#todos .col-priority,
+#todos .col-content {
+    display: table-cell;
+    vertical-align: top;
+    padding: 5px;
+}
+
+#todos .row-metadata {
+    color: #AAA;
+    font-size: 14px;
+}
+
+#todos .col-completed-checkbox {
+    width: 25px;
+}
+
+#todos .col-priority {
+    width: 30px;
+}
+
+#todos .col-completed-checkbox,
+#todos .col-priority {
+    vertical-align: middle;
+}
