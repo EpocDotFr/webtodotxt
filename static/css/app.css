@@ -125,7 +125,7 @@ button, .button {
     border-radius: 5px;
     cursor: pointer;
     background-color: #DDD;
-    border: 1px solid #AAA;
+    border: 1px solid #BBB;
     outline: none;
     padding: 3px 5px;
     text-decoration: none;
@@ -180,6 +180,11 @@ header .title {
     display: table-cell;
     vertical-align: middle;
     font-size: 24px;
+}
+
+header .title a {
+    text-decoration: none;
+    color: inherit;
 }
 
 header .title small {
