@@ -11,8 +11,17 @@ var app = new Vue({
         });
     },
     methods: {
+        removeTodo: function (todo) {
+            if (!confirm('Are you sure?')) {
+                return;
+            }
+
+            var index = this.todos.indexOf(todo);
+
+            this.todos.splice(index, 1);
+        },
         loadTodoTxt: function() {
-            app.loading = true;
+            this.loading = true;
 
             $.ajax({
                 type: 'GET',
@@ -34,7 +43,7 @@ var app = new Vue({
                         message = error;
                     }
 
-                    alert('Network error while loading the Todo.txt file: ' + message);
+                    alert('Error while loading the Todo.txt file: ' + message);
                 },
                 complete: function() {
                     app.loading = false;
@@ -42,7 +51,7 @@ var app = new Vue({
             });
         },
         saveTodoTxt: function() {
-            app.loading = true;
+            this.loading = true;
 
             $.ajax({
                 type: 'POST',
@@ -62,7 +71,7 @@ var app = new Vue({
                         message = error;
                     }
                     
-                    alert('Network error while updating the Todo.txt file: ' + message);
+                    alert('Error while updating the Todo.txt file: ' + message);
                 },
                 complete: function() {
                     app.loading = false;

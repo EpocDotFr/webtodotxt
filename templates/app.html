@@ -47,7 +47,7 @@
                 <div><input type="checkbox"> truc</div>
             </div>
             <div>
-                <button>❌ Clear all</button>
+                <button>✖ Clear all</button>
             </div>
         </div>
         <div id="todos">
@@ -66,7 +66,7 @@
                             <template v-if="todo.creation_date">Created ${ todo.creation_date }</template>
                             <template v-if="todo.completion_date">Completed ${ todo.completion_date }</template>
                         </div>
-                        <div class="actions"><a href="">✏</a>️ <a href="">❌</a>️</div>
+                        <div class="actions"><a href="">✏</a>️ <a href="" @click.prevent="removeTodo(todo)" >✖</a>️</div>
                     </div>
                 </div>
             </div>
