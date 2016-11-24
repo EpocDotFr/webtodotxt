@@ -21,8 +21,8 @@
         </div>
         <div class="menu">
             <button>➕ Add</button>
-            <button @click="loadTodos()">🔄 Reload</button>
-            <button>💾 Save</button>
+            <button @click="loadTodoTxt()" :disabled="loading">🔄 Reload</button>
+            <button @click="saveTodoTxt()" :disabled="loading">💾 Save</button>
         </div>
     </header>
     <div id="page">

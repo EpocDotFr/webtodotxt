@@ -1,7 +1,8 @@
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, jsonify, request, abort
 from flask_httpauth import HTTPBasicAuth
 import logging
 import sys
+import todotxtio
 
 app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('config.py')
@@ -16,6 +17,7 @@ logging.basicConfig(
 
 logging.getLogger().setLevel(logging.INFO)
 
+# -----------------------------------------------------------
 
 @app.route('/')
 @auth.login_required
@@ -25,13 +27,30 @@ def home():
 
 @app.route('/todo.txt', methods=['GET', 'POST'])
 def todotxt():
-    if request.method == 'GET':
-        result = {'status': 'success', 'data': []}
-    elif request.method == 'POST':
-        result = {'status': 'success', 'data': []}
+    status = 200
 
-    return json.dumps(result)
+    if request.is_xhr:
+        try:
+            if request.method == 'GET':
+                todos = todotxtio.from_file(app.config['TODOTXT_LOCATION'])
 
+                result = {'status': 'success', 'data': todotxtio.to_dicts(todos)}
+            elif request.method == 'POST':
+                todos = todotxtio.from_dicts(request.get_json())
+
+                todotxtio.to_file(app.config['TODOTXT_LOCATION'], todos)
+
+                result = {'status': 'success', 'data': []}
+        except Exception as e:
+            result = {'status': 'failure', 'data': {'message': str(e)}}
+            status = 500
+    else:
+        result = {'status': 'failure', 'data': {'message': 'Invalid request.'}}
+        status = 400
+
+    return jsonify(result), status
+
+# -----------------------------------------------------------
 
 @auth.get_password
 def get_password(username):
