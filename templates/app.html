@@ -54,9 +54,9 @@
             <div class="no-todos" v-show="todos.length == 0 && !loading">No todo to display.</div>
             <div v-for="todo in todos">
                 <div class="col-completed-checkbox">
-                    <input type="checkbox" class="completed" :checked="todo.completed">
+                    <input type="checkbox" class="completed" v-model="todo.completed">
                 </div>
-                <div class="col-priority" v-show="todo.priority"><span v-bind:class="['priority', todo.priority]">${ todo.priority }</span></div>
+                <div class="col-priority" v-show="todo.priority"><span :class="['priority', todo.priority]">${ todo.priority }</span></div>
                 <div class="col-content">
                     <div class="row-text">${ todo.text }</div>
                     <div class="row-infos">

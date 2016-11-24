@@ -50,9 +50,7 @@ var app = new Vue({
                 contentType: 'application/json',
                 data: JSON.stringify(app.todos),
                 success: function(response, status, xhr) {
-                    if (response.status == 'success') {
-                        app.todos = response.data;
-                    } else {
+                    if (response.status != 'success') {
                         alert(response.data.message);
                     }
                 },
