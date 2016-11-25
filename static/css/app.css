@@ -39,7 +39,7 @@ a:hover {
 /************************************************************************
  * Priorities */
 
-.priority {
+.priority-chip {
     border-radius: 5px;
     padding: 0 5px;
     background-color: #DDD;
@@ -47,31 +47,31 @@ a:hover {
     border: 1px solid #CCC;
 }
 
-.priority.A {
+.priority-chip.A {
     background-color: #F29B9B;
     color: #FFF;
     border-color: #c56a6a;
 }
 
-.priority.B {
+.priority-chip.B {
     background-color: #FEDE82;
     color: #000;
     border-color: #dbb71f;
 }
 
-.priority.C {
+.priority-chip.C {
     background-color: #F9FC87;
     color: #000;
     border-color: #dedc13;
 }
 
-.priority.D {
+.priority-chip.D {
     background-color: #CFFFCF;
     color: #000;
     border-color: #56f252;
 }
 
-.priority.E {
+.priority-chip.E {
     background-color: #6072FB;
     color: #FFF;
     border-color: #1d46d5;
@@ -298,52 +298,54 @@ footer a:visited {
     padding: 5px;
 }
 
-#todos .col-completed-checkbox,
-#todos .col-priority,
-#todos .col-content {
+#todos .col {
     display: table-cell;
     vertical-align: top;
     padding: 5px;
 }
 
-#todos .row-infos {
+#todos .col.priority {
+    width: 35px;
+}
+
+#todos .col.completed-checkbox,
+#todos .col.priority {
+    vertical-align: middle;
+}
+
+#todos .row.text.completed {
+    text-decoration: line-through;
+}
+
+#todos .row.infos {
     display: table;
     width: 100%;
 }
 
-#todos .row-infos > div {
+#todos .row.infos > div {
     display: table-cell;
     vertical-align: middle;
     padding-top: 3px;
 }
 
-#todos .row-infos .metadata {
+#todos .row.infos .metadata {
     color: #AAA;
     font-size: 14px;
 }
 
-#todos .row-infos .actions {
+#todos .row.infos .actions {
     text-align: right;
 }
 
-#todos .row-infos .actions a {
+#todos .row.infos .actions a {
     text-decoration: none;
     display: none;
 }
 
-#todos > div:hover .row-infos .actions a {
+#todos > div:hover .row.infos .actions a {
     display: inline;
 }
 
-#todos .col-completed-checkbox {
+#todos .col.completed-checkbox {
     width: 25px;
-}
-
-#todos .col-priority {
-    width: 35px;
-}
-
-#todos .col-completed-checkbox,
-#todos .col-priority {
-    vertical-align: middle;
 }

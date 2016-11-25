@@ -36,7 +36,7 @@
             </div>
             <div id="filter-priorities">
                 <h2>Priorities</h2>
-                <div><input type="checkbox"> <span class="priority A">A</span></div>
+                <div><input type="checkbox"> <span class="priority-chip A">A</span></div>
             </div>
             <div id="filter-projects">
                 <h2>Projects</h2>
@@ -53,20 +53,20 @@
         <div id="todos">
             <div class="no-todos" v-show="todos.length == 0 && !loading">No todo to display.</div>
             <div v-for="todo in todos">
-                <div class="col-completed-checkbox">
-                    <input type="checkbox" class="completed" v-model="todo.completed">
+                <div class="col completed-checkbox">
+                    <input type="checkbox" v-model="todo.completed">
                 </div>
-                <div class="col-priority" v-show="todo.priority"><span :class="['priority', todo.priority]">${ todo.priority }</span></div>
-                <div class="col-content">
-                    <div class="row-text">${ todo.text }</div>
-                    <div class="row-infos">
+                <div class="col priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
+                <div class="col content">
+                    <div :class="['row', 'text', todo.completed ? 'completed' : '']">${ todo.text }</div>
+                    <div class="row infos">
                         <div class="metadata">
                             <template v-for="project in todo.projects">+${ project } </template>
                             <template v-for="context in todo.contexts">@${ context } </template>
                             <template v-if="todo.creation_date">Created ${ todo.creation_date }</template>
                             <template v-if="todo.completion_date">Completed ${ todo.completion_date }</template>
                         </div>
-                        <div class="actions"><a href="">✏</a>️ <a href="" @click.prevent="removeTodo(todo)" >✖</a>️</div>
+                        <div class="actions"><a href="">✏</a> <a href="" @click.prevent="removeTodo(todo)">✖</a>️</div>
                     </div>
                 </div>
             </div>
