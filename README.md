@@ -4,7 +4,7 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
 
 ## Prerequisites
 
-  - Should work on any Python 3.x version
+  - Should work on any Python 3.x version. Feel free to test with another Python version and give me feedback
   - A [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/)-capable web server (optional, but recommended)
 
 ## Installation
@@ -47,3 +47,9 @@ The uWSGI file you'll have to set in your uWSGI configuration is `uwsgi.py`. The
 This project is built on [Vue.js](http://vuejs.org/) 2 for the frontend and [Flask](http://flask.pocoo.org/) (Python) for
 the backend. The [todotxtio](https://github.com/EpocDotFr/todotxtio) PyPI package is used to parse/write the Todo.txt file,
 giving/receiving data through [Ajax](https://en.wikipedia.org/wiki/Ajax_(programming)).
+
+## End words
+
+If you have questions or problems, you can [submit an issue](https://github.com/EpocDotFr/webtodotxt/issues).
+
+You can also submit pull requests. It's open-source man!
