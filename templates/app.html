@@ -34,7 +34,7 @@
                     <label><input type="radio" v-model="filters.completed" value="yes"> Yes</label>
                     <label><input type="radio" v-model="filters.completed" value="no"> No</label>
                 </div>
-                <div><input type="text" id="filter-text" placeholder="Text"></div>
+                <div><input type="text" v-model="filters.text" placeholder="Text"></div>
                 <div><input type="date" id="filter-completion-date" placeholder="Completion date"></div>
                 <div><input type="date" id="filter-creation-date" placeholder="Creation date"></div>
             </div>

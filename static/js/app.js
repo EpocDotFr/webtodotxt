@@ -8,6 +8,7 @@ var app = new Vue({
         todos: [],
         filters: {
             completed: 'all',
+            text: '',
             completion_date: null,
             creation_date: null
         }
@@ -26,6 +27,10 @@ var app = new Vue({
     computed: {
         filteredTodos: function () {
             return this.todos.filter(function (todo) {
+                if (app.filters.text) {
+                    return todo.text.indexOf(app.filters.text) !== -1;
+                }
+
                 if (app.filters.completed == 'yes') {
                     return todo.completed;
                 } else if (app.filters.completed == 'no') {
