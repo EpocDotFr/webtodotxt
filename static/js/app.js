@@ -7,10 +7,10 @@ var app = new Vue({
         todoBeingEdited: null,
         todos: [],
         filters: {
-            completed: 'all',
             text: '',
+            completed: 'all',
             completion_date: null,
-            creation_date: null
+            priorities: []
         }
     },
     mounted: function () {
@@ -27,17 +27,38 @@ var app = new Vue({
     computed: {
         filteredTodos: function () {
             return this.todos.filter(function (todo) {
-                if (app.filters.text) {
+                if (app.filters.text && ('text' in todo)) {
                     return todo.text.indexOf(app.filters.text) !== -1;
                 }
 
-                if (app.filters.completed == 'yes') {
+                if (app.filters.completed == 'yes' && ('completed' in todo)) {
                     return todo.completed;
-                } else if (app.filters.completed == 'no') {
+                } else if (app.filters.completed == 'no' && ('completed' in todo)) {
                     return !todo.completed;
                 }
 
+                if (app.filters.completion_date && ('competion_date' in todo)) {
+                    return app.filters.completion_date == todo.competion_date;
+                }
+
+                if (app.filters.priorities && app.filters.priorities.length > 0) {
+                    return $.inArray(todo.priority, app.filters.priorities) !== -1;
+                }
+
                 return true;
+            });
+        },
+        allPriorities: function() {
+            var all_priorities = [];
+
+            return $.map(this.todos, function(todo) {
+                if (!('priority' in todo) || !todo.priority || $.inArray(todo.priority, all_priorities) !== -1) {
+                    return null;
+                }
+
+                all_priorities.push(todo.priority);
+
+                return todo.priority;
             });
         }
     },

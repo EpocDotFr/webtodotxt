@@ -197,8 +197,8 @@ footer a:visited {
 }
 
 #filters > div h2 {
-    padding: 0;
     margin: 0;
+    padding: 0 0 5px;
     font-size: 18px;
     text-shadow: 1px 1px 0 #FFF;
 }
@@ -212,6 +212,11 @@ footer a:visited {
     width: 100%;
 }
 
+#filters #filter-priorities label {
+    width: 100%;
+    display: block;
+}
+
 /************************************************************************
  * Todos list column */
 
@@ -223,12 +228,19 @@ footer a:visited {
 #todos .no-todos {
     text-align: center;
     padding: 5px;
-    border-color: #EEE;
+    border: 1px solid #EEE;
+    border-radius: 3px;
     background-color: #FAFAFA;
+    color: #CCC;
 }
 
 #todos > .todo {
     position: relative;
+    margin-bottom: 10px;
+}
+
+#todos > .todo:last-child {
+    margin-bottom: 0;
 }
 
 #todos > .todo > .actions {
@@ -256,7 +268,6 @@ footer a:visited {
     border: 1px solid #DDD;
     border-radius: 3px;
     background-color: #EEE;
-    margin-bottom: 10px;
 }
 
 #todos > .todo:hover > .container {
