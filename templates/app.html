@@ -10,18 +10,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 
-    <title>📋 Web Todo.txt</title>
+    <title>Web Todo.txt</title>
 </head>
 <body>
 <div id="app">
     <header>
-        <div class="title"><a href="{{ request.url_root }}">📋 Web Todo.txt</a>
+        <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='images/logo.svg') }}" width="32" height="32"> Web Todo.txt</a>
             <small v-show="loading">Loading...</small>
         </div>
         <div class="menu">
             <button @click="addTodo()" :disabled="loading">➕ Add</button>
             <button @click="loadTodoTxt()" :disabled="loading">🔄 Reload</button>
-            <button @click="saveTodoTxt()" :disabled="loading">💾 Save</button>
+            <button @click="saveTodoTxt()" :disabled="loading"><img src="{{ url_for('static', filename='images/save.svg') }}" width="16" height="16"> Save</button>
         </div>
     </header>
     <div id="page">
