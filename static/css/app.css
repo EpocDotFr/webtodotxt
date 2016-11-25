@@ -187,11 +187,6 @@ header .title a {
     color: inherit;
 }
 
-header .title small {
-    font-size: 60%;
-    color: #BBB;
-}
-
 header .menu {
     display: table-cell;
     vertical-align: middle;

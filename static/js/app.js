@@ -13,6 +13,12 @@ var app = new Vue({
         });
     },
     methods: {
+        addTodo: function() {
+            new_todo = {};
+
+            this.todos.unshift(new_todo);
+            this.editTodo(new_todo);
+        },
         editTodo: function (todo) {
             this.todoTextBackup = todo.text;
             this.todoBeingEdited = todo;

@@ -16,11 +16,10 @@
 <div id="app">
     <header>
         <div class="title"><a href="{{ request.url_root }}">📋 Web Todo.txt</a>
-            <small>0.1</small>
             <small v-show="loading">Loading...</small>
         </div>
         <div class="menu">
-            <button>➕ Add</button>
+            <button @click="addTodo()" :disabled="loading">➕ Add</button>
             <button @click="loadTodoTxt()" :disabled="loading">🔄 Reload</button>
             <button @click="saveTodoTxt()" :disabled="loading">💾 Save</button>
         </div>
@@ -52,7 +51,7 @@
         </div>
         <div id="todos">
             <div class="no-todos" v-show="todos.length == 0 && !loading">No todo to display.</div>
-            <div :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']" v-for="todo in todos">
+            <div v-for="todo in todos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
                 <div class="actions">
                     <a href="#">✏</a> <a href="#" @click.prevent="removeTodo(todo)">✖</a>
                 </div>
@@ -63,7 +62,7 @@
                     <div class="col priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
                     <div class="col content">
                         <div class="row text" @dblclick="editTodo(todo)">${ todo.text }</div>
-                        <div class="row text-editing"><input type="text" v-model="todo.text" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)"></div>
+                        <div class="row text-editing"><input type="text" v-model="todo.text" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" placeholder="Type some text here"></div>
                         <div class="row metadata">
                             <template v-for="project in todo.projects">+${ project } </template>
                             <template v-for="context in todo.contexts">@${ context } </template>
