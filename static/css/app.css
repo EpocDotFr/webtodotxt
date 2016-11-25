@@ -154,7 +154,7 @@ textarea {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-size: 16px;
     background-color: #FFF;
-    padding: 6px;
+    padding: 5px;
     border: 1px solid #DDD;
     border-radius: 3px;
 }
@@ -264,7 +264,39 @@ footer a:visited {
     padding: 10px;
 }
 
-#todos > div {
+#todos .no-todos {
+    text-align: center;
+    padding: 5px;
+    border-color: #EEE;
+    background-color: #FAFAFA;
+}
+
+#todos > .todo {
+    position: relative;
+}
+
+#todos > .todo > .actions {
+    border-bottom: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+    padding: 3px;
+    background-color: #EEE;
+    display: none;
+    border-bottom-left-radius: 3px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+}
+
+#todos > .todo > .actions a {
+    color: inherit;
+    text-decoration: none;
+}
+
+#todos > .todo:hover > .actions {
+    display: inline;
+}
+
+#todos > .todo > .container {
     display: table;
     width: 100%;
     border: 1px solid #DDD;
@@ -273,79 +305,59 @@ footer a:visited {
     margin-bottom: 10px;
 }
 
-#todos > div:hover {
+#todos > .todo:hover > .container {
     background-color: #F3F3F3;
 }
 
-#todos > div:last-child {
-    margin-bottom: 0;
-}
-
-#todos > div > div {
-    border-top: 1px solid #FFF;
-}
-
-#todos > div > div:first-child {
-    border-top-left-radius: 3px;
-}
-
-#todos > div > div:last-child {
-    border-top-right-radius: 3px;
-}
-
-#todos .no-todos {
-    text-align: center;
-    padding: 5px;
-}
-
-#todos .col {
+#todos .todo .col {
     display: table-cell;
     vertical-align: top;
     padding: 5px;
+    border-top: 1px solid #FFF;
 }
 
-#todos .col.priority {
+#todos .todo .col:first-child {
+    border-top-left-radius: 3px;
+}
+
+#todos .todo .col:last-child {
+    border-top-right-radius: 3px;
+}
+
+#todos .todo .col.priority {
     width: 35px;
 }
 
-#todos .col.completed-checkbox,
-#todos .col.priority {
+#todos .todo .col.completed-checkbox,
+#todos .todo .col.priority {
     vertical-align: middle;
 }
 
-#todos .row.text.completed {
-    text-decoration: line-through;
+#todos .todo .col.completed-checkbox {
+    width: 25px;
 }
 
-#todos .row.infos {
-    display: table;
+#todos .todo .row.text-editing input[type="text"] {
     width: 100%;
 }
 
-#todos .row.infos > div {
-    display: table-cell;
-    vertical-align: middle;
-    padding-top: 3px;
+#todos .todo.completed .row.text  {
+    text-decoration: line-through;
 }
 
-#todos .row.infos .metadata {
-    color: #AAA;
-    font-size: 14px;
-}
-
-#todos .row.infos .actions {
-    text-align: right;
-}
-
-#todos .row.infos .actions a {
-    text-decoration: none;
+#todos .todo.editing .row.text {
     display: none;
 }
 
-#todos > div:hover .row.infos .actions a {
-    display: inline;
+#todos .todo .row.text-editing {
+    display: none;
 }
 
-#todos .col.completed-checkbox {
-    width: 25px;
+#todos .todo.editing .row.text-editing {
+    display: block;
+}
+
+#todos .todo .row.metadata {
+    color: #AAA;
+    font-size: 14px;
 }

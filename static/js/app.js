@@ -3,6 +3,8 @@ var app = new Vue({
     el: '#app',
     data: {
         loading: false,
+        todoTextBackup: null,
+        todoBeingEdited: null,
         todos: []
     },
     mounted: function () {
@@ -11,14 +13,31 @@ var app = new Vue({
         });
     },
     methods: {
-        removeTodo: function (todo) {
-            if (!confirm('Are you sure?')) {
+        editTodo: function (todo) {
+            this.todoTextBackup = todo.text;
+            this.todoBeingEdited = todo;
+        },
+        doneEdit: function (todo) {
+            if (!this.todoBeingEdited) {
                 return;
             }
 
-            var index = this.todos.indexOf(todo);
+            this.todoBeingEdited = null;
 
-            this.todos.splice(index, 1);
+            todo.text = todo.text.trim();
+
+            if (!todo.text) {
+                this.removeTodo(todo);
+            }
+        },
+        cancelEdit: function (todo) {
+            todo.text = this.todoTextBackup;
+
+            this.todoTextBackup = null;
+            this.todoBeingEdited = null;
+        },
+        removeTodo: function (todo) {
+            this.todos.splice(this.todos.indexOf(todo), 1);
         },
         loadTodoTxt: function() {
             this.loading = true;
