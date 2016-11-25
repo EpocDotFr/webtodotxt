@@ -8,6 +8,7 @@
     <meta name="robots" content="noindex,nofollow,noarchive"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 
     <title>Web Todo.txt</title>
@@ -15,13 +16,13 @@
 <body>
 <div id="app">
     <header>
-        <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='images/logo.svg') }}" width="32" height="32"> Web Todo.txt</a>
-            <small v-show="loading">Loading...</small>
+        <div class="title"><a href="{{ request.url_root }}"><i class="fa fa-sticky-note"></i> Web Todo.txt</a>
+            <small v-show="loading"><i class="fa fa-spinner"></i> Loading...</small>
         </div>
         <div class="menu">
-            <button @click="addTodo()" :disabled="loading">➕ Add</button>
-            <button @click="loadTodoTxt()" :disabled="loading">🔄 Reload</button>
-            <button @click="saveTodoTxt()" :disabled="loading"><img src="{{ url_for('static', filename='images/save.svg') }}" width="16" height="16"> Save</button>
+            <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> Add</button>
+            <button @click="loadTodoTxt()" :disabled="loading"><i class="fa fa-refresh"></i> Reload</button>
+            <button @click="saveTodoTxt()" :disabled="loading"><i class="fa fa-floppy-o"></i> Save</button>
         </div>
     </header>
     <div id="page">
@@ -46,14 +47,14 @@
                 <div><input type="checkbox"> truc</div>
             </div>
             <div>
-                <button>✖ Clear all</button>
+                <button><i class="fa fa-eraser"></i> Clear all</button>
             </div>
         </div>
         <div id="todos">
             <div class="no-todos" v-show="todos.length == 0 && !loading">No todo to display.</div>
             <div v-for="todo in todos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
                 <div class="actions">
-                    <a href="#">✏</a> <a href="#" @click.prevent="removeTodo(todo)">✖</a>
+                    <a href="#"><i class="fa fa-pencil"></i></a> <a href="#" @click.prevent="removeTodo(todo)"><i class="fa fa-trash"></i></a>
                 </div>
                 <div class="container">
                     <div class="col completed-checkbox">
