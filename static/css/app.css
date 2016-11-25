@@ -78,47 +78,6 @@ a:hover {
 }
 
 /************************************************************************
- * Alerts */
-
-p.alert,
-div.alert {
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-span.alert,
-small.alert {
-    padding: 5px;
-}
-
-.alert {
-    border-radius: 3px;
-    border: 1px solid;
-}
-
-.alert a,
-.alert a:visited,
-.alert a:hover,
-.alert a:focus {
-    color: inherit;
-}
-
-.alert.success {
-    background-color: #f0ffe9;
-    border-color: #C5E9B7;
-}
-
-.alert.error {
-    background-color: #fff8c1;
-    border-color: #DDD64F;
-}
-
-.alert.info {
-    background-color: #D9E8FF;
-    border-color: #b3d4ff;
-}
-
-/************************************************************************
  * Buttons */
 
 button, .button {
