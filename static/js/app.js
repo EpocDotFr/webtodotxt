@@ -5,12 +5,36 @@ var app = new Vue({
         loading: false,
         todoTextBackup: null,
         todoBeingEdited: null,
-        todos: []
+        todos: [],
+        filters: {
+            completed: 'all',
+            completion_date: null,
+            creation_date: null
+        }
     },
     mounted: function () {
         this.$nextTick(function () {
             app.loadTodoTxt();
         });
+    },
+    watch: {
+        /*todos: function() {
+            // https://vuejs.org/v2/guide/computed.html#Watchers
+            // http://stackoverflow.com/questions/5226578/check-if-a-timeout-has-been-cleared
+        }*/
+    },
+    computed: {
+        filteredTodos: function () {
+            return this.todos.filter(function (todo) {
+                if (app.filters.completed == 'yes') {
+                    return todo.completed;
+                } else if (app.filters.completed == 'no') {
+                    return !todo.completed;
+                }
+
+                return true;
+            });
+        }
     },
     methods: {
         addTodo: function() {

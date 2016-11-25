@@ -13,8 +13,6 @@ body {
 }
 
 #page {
-    display: table;
-    width: 100%;
     border: 1px solid #DDD;
     border-radius: 3px;
 }
@@ -129,15 +127,11 @@ textarea:focus {
  * Header */
 
 header {
-    display: table;
-    width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 header .title {
-    display: table-cell;
-    vertical-align: middle;
     font-size: 24px;
 }
 
@@ -147,7 +141,6 @@ header .title a {
 }
 
 header .menu {
-    display: table-cell;
     vertical-align: middle;
     text-align: right;
 }
@@ -168,11 +161,22 @@ footer a:visited {
 }
 
 /************************************************************************
+ * Rows */
+
+.row {
+    display: table;
+    width: 100%;
+}
+
+.row > div {
+    display: table-cell;
+    vertical-align: top;
+}
+
+/************************************************************************
  * Filters column */
 
 #filters {
-    display: table-cell;
-    vertical-align: top;
     width: 25%;
     border-right: 1px solid #DDD;
     background-color: #EEE;
@@ -212,8 +216,6 @@ footer a:visited {
  * Todos list column */
 
 #todos {
-    display: table-cell;
-    vertical-align: top;
     width: 75%;
     padding: 10px;
 }
@@ -251,8 +253,6 @@ footer a:visited {
 }
 
 #todos > .todo > .container {
-    display: table;
-    width: 100%;
     border: 1px solid #DDD;
     border-radius: 3px;
     background-color: #EEE;
@@ -263,31 +263,29 @@ footer a:visited {
     background-color: #F3F3F3;
 }
 
-#todos .todo .col {
-    display: table-cell;
-    vertical-align: top;
+#todos .todo .container > div {
     padding: 5px;
     border-top: 1px solid #FFF;
 }
 
-#todos .todo .col:first-child {
+#todos .todo .container > div:first-child {
     border-top-left-radius: 3px;
 }
 
-#todos .todo .col:last-child {
+#todos .todo .container > div:last-child {
     border-top-right-radius: 3px;
 }
 
-#todos .todo .col.priority {
+#todos .todo .container > div.priority {
     width: 35px;
 }
 
-#todos .todo .col.completed-checkbox,
-#todos .todo .col.priority {
+#todos .todo .container > div.completed-checkbox,
+#todos .todo .container > div.priority {
     vertical-align: middle;
 }
 
-#todos .todo .col.completed-checkbox {
+#todos .todo .container > div.completed-checkbox {
     width: 25px;
 }
 
@@ -295,23 +293,23 @@ footer a:visited {
     width: 100%;
 }
 
-#todos .todo.completed .row.text  {
+#todos .todo.completed .content > div.text  {
     text-decoration: line-through;
 }
 
-#todos .todo.editing .row.text {
+#todos .todo.editing .content > div.text {
     display: none;
 }
 
-#todos .todo .row.text-editing {
+#todos .todo .content > div.text-editing {
     display: none;
 }
 
-#todos .todo.editing .row.text-editing {
+#todos .todo.editing .content > div.text-editing {
     display: block;
 }
 
-#todos .todo .row.metadata {
+#todos .todo .content > div.metadata {
     color: #AAA;
     font-size: 14px;
 }

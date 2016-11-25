@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="app">
-    <header>
+    <header class="row">
         <div class="title"><a href="{{ request.url_root }}"><i class="fa fa-sticky-note"></i> Web Todo.txt</a>
             <small v-show="loading"><i class="fa fa-spinner"></i> Loading...</small>
         </div>
@@ -25,46 +25,50 @@
             <button @click="saveTodoTxt()" :disabled="loading"><i class="fa fa-floppy-o"></i> Save</button>
         </div>
     </header>
-    <div id="page">
+    <div id="page" class="row">
         <div id="filters">
             <div>
                 <h2>General filters</h2>
-                <div>Completed: <input type="radio"> All <input type="radio"> Yes <input type="radio"> No</div>
+                <div>Completed:
+                    <label><input type="radio" v-model="filters.completed" value="all"> All</label>
+                    <label><input type="radio" v-model="filters.completed" value="yes"> Yes</label>
+                    <label><input type="radio" v-model="filters.completed" value="no"> No</label>
+                </div>
                 <div><input type="text" id="filter-text" placeholder="Text"></div>
                 <div><input type="date" id="filter-completion-date" placeholder="Completion date"></div>
                 <div><input type="date" id="filter-creation-date" placeholder="Creation date"></div>
             </div>
             <div id="filter-priorities">
                 <h2>Priorities</h2>
-                <div><input type="checkbox"> <span class="priority-chip A">A</span></div>
+                <div><label><input type="checkbox"> <span class="priority-chip A">A</span></label></div>
             </div>
             <div id="filter-projects">
                 <h2>Projects</h2>
-                <div><input type="checkbox"> machine</div>
+                <div><label><input type="checkbox"> machine</label></div>
             </div>
             <div id="filter-contexts">
                 <h2>Contexts</h2>
-                <div><input type="checkbox"> truc</div>
+                <div><label><input type="checkbox"> truc</label></div>
             </div>
             <div>
                 <button><i class="fa fa-eraser"></i> Clear all</button>
             </div>
         </div>
         <div id="todos">
-            <div class="no-todos" v-show="todos.length == 0 && !loading">No todo to display.</div>
-            <div v-for="todo in todos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
+            <div class="no-todos" v-show="todos.length == 0">No todo to display <i class="fa fa-smile-o"></i></div>
+            <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
                 <div class="actions">
                     <a href="#"><i class="fa fa-pencil"></i></a> <a href="#" @click.prevent="removeTodo(todo)"><i class="fa fa-trash"></i></a>
                 </div>
-                <div class="container">
-                    <div class="col completed-checkbox">
+                <div class="container row">
+                    <div class="completed-checkbox">
                         <input type="checkbox" v-model="todo.completed">
                     </div>
-                    <div class="col priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
-                    <div class="col content">
-                        <div class="row text" @dblclick="editTodo(todo)">${ todo.text }</div>
-                        <div class="row text-editing"><input type="text" v-model="todo.text" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" placeholder="Type some text here"></div>
-                        <div class="row metadata">
+                    <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
+                    <div class="content">
+                        <div class="text" @dblclick="editTodo(todo)">${ todo.text }</div>
+                        <div class="text-editing"><input type="text" v-model="todo.text" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" placeholder="Type some text here"></div>
+                        <div class="metadata">
                             <template v-for="project in todo.projects">+${ project } </template>
                             <template v-for="context in todo.contexts">@${ context } </template>
                             <template v-if="todo.creation_date">Created ${ todo.creation_date }</template>
