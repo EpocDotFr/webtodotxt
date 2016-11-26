@@ -1,18 +1,27 @@
+var defaultFilters = {
+    text: '',
+    completed: 'all',
+    completion_date: null,
+    priorities: [],
+    creation_date: '',
+    projects: [],
+    contexts: []
+};
+
 var app = new Vue({
-    delimiters: ['${', '}'],
+    delimiters: ['${', '}'], // Because Jinja2 already uses double brakets
     el: '#app',
     data: {
-        loading: false,
+        loading: false, // Something is loading
+
+        // New todo creation
         todoTextBackup: null,
         todoBeingEdited: null,
-        todos: [],
-        filters: {
-            text: '',
-            completed: 'all',
-            completion_date: null,
-            priorities: []
-        }
+
+        todos: [], // List of all todos straight from the Todo.txt
+        filters: defaultFilters // Filters used to filter the todo list above
     },
+    // When Vue is ready
     mounted: function () {
         this.$nextTick(function () {
             app.loadTodoTxt();
@@ -25,29 +34,47 @@ var app = new Vue({
         }*/
     },
     computed: {
+        // The todo list, filtered according filters
         filteredTodos: function () {
             return this.todos.filter(function (todo) {
-                if (app.filters.text && ('text' in todo)) {
+                if (('text' in todo) && app.filters.text) {
                     return todo.text.indexOf(app.filters.text) !== -1;
                 }
 
-                if (app.filters.completed == 'yes' && ('completed' in todo)) {
+                if (('completed' in todo) && app.filters.completed == 'yes') {
                     return todo.completed;
-                } else if (app.filters.completed == 'no' && ('completed' in todo)) {
+                } else if (('completed' in todo) && app.filters.completed == 'no') {
                     return !todo.completed;
                 }
 
-                if (app.filters.completion_date && ('competion_date' in todo)) {
+                if (('competion_date' in todo) && app.filters.completion_date) {
                     return app.filters.completion_date == todo.competion_date;
                 }
 
-                if (app.filters.priorities && app.filters.priorities.length > 0) {
+                if (('priority' in todo) && todo.priority && app.filters.priorities && app.filters.priorities.length > 0) {
                     return $.inArray(todo.priority, app.filters.priorities) !== -1;
+                }
+
+                if (('creation_date' in todo) && app.filters.creation_date) {
+                    return app.filters.creation_date == todo.creation_date;
+                }
+
+                if (('projects' in todo) && todo.projects && app.filters.projects && app.filters.projects.length > 0) {
+                    return $.grep(todo.projects, function(project) {
+                        return $.inArray(project, app.filters.projects) !== -1;
+                    }).length > 0;
+                }
+
+                if (('contexts' in todo) && todo.contexts && app.filters.contexts && app.filters.contexts.length > 0) {
+                    return $.grep(todo.contexts, function(context) {
+                        return $.inArray(context, app.filters.contexts) !== -1;
+                    }).length > 0;
                 }
 
                 return true;
             });
         },
+        // All priorities extracted from the current todo list
         allPriorities: function() {
             var all_priorities = [];
 
@@ -60,9 +87,53 @@ var app = new Vue({
 
                 return todo.priority;
             });
+        },
+        // All projects extracted from the current todo list
+        allProjects: function() {
+            var all_projects = [];
+
+            return $.map(this.todos, function(todo) {
+                if (!('projects' in todo) || !todo.projects) {
+                    return null;
+                }
+
+                return $.map(todo.projects, function(project) {
+                    if ($.inArray(project, all_projects) !== -1) {
+                        return null;
+                    }
+
+                    all_projects.push(project);
+
+                    return project;
+                });
+            });
+        },
+        // All contexts extracted from the current todo list
+        allContexts: function() {
+            var all_contexts = [];
+
+            return $.map(this.todos, function(todo) {
+                if (!('contexts' in todo) || !todo.contexts) {
+                    return null;
+                }
+
+                return $.map(todo.contexts, function(context) {
+                    if ($.inArray(context, all_contexts) !== -1) {
+                        return null;
+                    }
+
+                    all_contexts.push(context);
+
+                    return context;
+                });
+            });
         }
     },
     methods: {
+        // Reset all filters
+        clearFilters: function() {
+            this.filters = defaultFilters;
+        },
         addTodo: function() {
             new_todo = {};
 
@@ -92,9 +163,11 @@ var app = new Vue({
             this.todoTextBackup = null;
             this.todoBeingEdited = null;
         },
+        // Delete a todo
         removeTodo: function (todo) {
             this.todos.splice(this.todos.indexOf(todo), 1);
         },
+        // Load all todos from the Todo.txt file
         loadTodoTxt: function() {
             this.loading = true;
 
@@ -125,6 +198,7 @@ var app = new Vue({
                 }
             });
         },
+        // Save all todos in the Todo.txt file
         saveTodoTxt: function() {
             this.loading = true;
 

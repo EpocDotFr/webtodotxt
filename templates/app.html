@@ -11,12 +11,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
     <title>Web Todo.txt</title>
 </head>
 <body>
 <div id="app">
     <header class="row">
-        <div class="title"><a href="{{ request.url_root }}"><i class="fa fa-list-alt"></i> Web Todo.txt</a>
+        <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a>
             <small v-show="loading"><i class="fa fa-spinner"></i> Loading...</small>
         </div>
         <div class="menu">
@@ -29,6 +32,7 @@
         <div id="filters">
             <div>
                 <h2>General filters</h2>
+
                 <div>Completed:
                     <label><input type="radio" v-model="filters.completed" value="all"> All</label>
                     <label><input type="radio" v-model="filters.completed" value="yes"> Yes</label>
@@ -38,27 +42,36 @@
                 <div><input type="date" id="filter-completion-date" placeholder="Completion date"></div>
                 <div><input type="date" id="filter-creation-date" placeholder="Creation date"></div>
             </div>
-            <div id="filter-priorities">
+            <div class="lists">
                 <h2>Priorities</h2>
 
+                <div class="muted" v-show="allPriorities.length == 0">None a this moment.</div>
                 <div v-for="priority in allPriorities">
                     <label><input type="checkbox" v-model="filters.priorities" :value="priority"> <span :class="['priority-chip', priority]">${ priority }</span></label>
                 </div>
             </div>
-            <div id="filter-projects">
+            <div class="lists">
                 <h2>Projects</h2>
-                <div><label><input type="checkbox"> machine</label></div>
+
+                <div class="muted" v-show="allProjects.length == 0">None a this moment.</div>
+                <div v-for="project in allProjects">
+                    <label><input type="checkbox" v-model="filters.projects" :value="project"> ${ project }</label>
+                </div>
             </div>
-            <div id="filter-contexts">
+            <div class="lists">
                 <h2>Contexts</h2>
-                <div><label><input type="checkbox"> truc</label></div>
+
+                <div class="muted" v-show="allContexts.length == 0">None a this moment.</div>
+                <div v-for="context in allContexts">
+                    <label><input type="checkbox" v-model="filters.contexts" :value="context"> ${ context }</label>
+                </div>
             </div>
             <div>
-                <button><i class="fa fa-eraser"></i> Clear all</button>
+                <button @click="clearFilters()"><i class="fa fa-eraser"></i> Clear all</button>
             </div>
         </div>
         <div id="todos">
-            <div class="no-todos" v-show="todos.length == 0">No todos to display <i class="fa fa-smile-o"></i></div>
+            <div class="muted" v-show="filteredTodos.length == 0">No todos to display <i class="fa fa-smile-o"></i></div>
             <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
                 <div class="actions">
                     <a href="#"><i class="fa fa-pencil"></i></a> <a href="#" @click.prevent="removeTodo(todo)"><i class="fa fa-trash"></i></a>
@@ -82,7 +95,7 @@
             </div>
         </div>
     </div>
-    <footer>© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">Source code on GitHub</a> • Licensed under the <a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD Public License</a></footer>
+    <footer class="muted">© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">Source code on GitHub</a> • Licensed under the <a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD Public License</a></footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>

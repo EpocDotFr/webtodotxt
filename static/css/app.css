@@ -27,6 +27,10 @@ input[type="radio"] {
     margin: 0;
 }
 
+.muted {
+    color: #BBB;
+}
+
 /************************************************************************
  * Links */
 
@@ -212,7 +216,7 @@ footer a:visited {
     width: 100%;
 }
 
-#filters #filter-priorities label {
+#filters .lists label {
     width: 100%;
     display: block;
 }
@@ -225,13 +229,9 @@ footer a:visited {
     padding: 10px;
 }
 
-#todos .no-todos {
+#todos .muted {
     text-align: center;
-    padding: 5px;
-    border: 1px solid #EEE;
-    border-radius: 3px;
-    background-color: #FAFAFA;
-    color: #CCC;
+    margin-top: 15px;
 }
 
 #todos > .todo {
