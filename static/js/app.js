@@ -140,24 +140,24 @@ var app = new Vue({
             this.todos.unshift(new_todo);
             this.editTodo(new_todo);
         },
-        editTodo: function (todo) {
+        editTodoText: function (todo) {
             this.todoTextBackup = todo.text;
             this.todoBeingEdited = todo;
         },
-        doneEdit: function (todo) {
+        doneEditTodoText: function (todo) {
             if (!this.todoBeingEdited) {
                 return;
             }
 
             this.todoBeingEdited = null;
 
-            todo.text = todo.text.trim();
+            todo.text = $.trim(todo.text);
 
             if (!todo.text) {
                 this.removeTodo(todo);
             }
         },
-        cancelEdit: function (todo) {
+        cancelEditTodoText: function (todo) {
             todo.text = this.todoTextBackup;
 
             this.todoTextBackup = null;

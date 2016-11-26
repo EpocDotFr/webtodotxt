@@ -82,8 +82,8 @@
                     </div>
                     <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
                     <div class="content">
-                        <div class="text" @dblclick="editTodo(todo)">${ todo.text }</div>
-                        <div class="text-editing"><input type="text" v-model="todo.text" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" placeholder="Type some text here"></div>
+                        <div class="text" @dblclick="editTodoText(todo)">${ todo.text }</div>
+                        <div class="text-editing"><input type="text" v-model="todo.text" @blur="doneEditTodoText(todo)" @keyup.enter="doneEditTodoText(todo)" @keyup.esc="cancelEditTodoText(todo)" placeholder="Type some text"></div>
                         <div class="metadata">
                             <template v-for="project in todo.projects">+${ project } </template>
                             <template v-for="context in todo.contexts">@${ context } </template>

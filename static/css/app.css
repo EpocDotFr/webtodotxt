@@ -300,7 +300,7 @@ footer a:visited {
     width: 25px;
 }
 
-#todos .todo .row.text-editing input[type="text"] {
+#todos .todo .text-editing input[type="text"] {
     width: 100%;
 }
 
