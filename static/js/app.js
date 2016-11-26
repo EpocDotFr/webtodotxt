@@ -47,8 +47,8 @@ var app = new Vue({
                     return !todo.completed;
                 }
 
-                if (('competion_date' in todo) && app.filters.completion_date) {
-                    return app.filters.completion_date == todo.competion_date;
+                if (('completion_date' in todo) && app.filters.completion_date) {
+                    return app.filters.completion_date == todo.completion_date;
                 }
 
                 if (('priority' in todo) && app.filters.priorities && app.filters.priorities.length > 0) {

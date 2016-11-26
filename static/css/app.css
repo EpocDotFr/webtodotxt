@@ -128,7 +128,7 @@ input[type="radio"] {
     margin: 0;
 }
 
-input[type="date"][readonly] {
+input.date {
     cursor: default;
 }
 
