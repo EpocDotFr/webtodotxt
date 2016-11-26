@@ -51,7 +51,7 @@ var app = new Vue({
                     return app.filters.completion_date == todo.competion_date;
                 }
 
-                if (('priority' in todo) && todo.priority && app.filters.priorities && app.filters.priorities.length > 0) {
+                if (('priority' in todo) && app.filters.priorities && app.filters.priorities.length > 0) {
                     return $.inArray(todo.priority, app.filters.priorities) !== -1;
                 }
 

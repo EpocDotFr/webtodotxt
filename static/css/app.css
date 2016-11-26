@@ -10,6 +10,7 @@ body {
     font-size: 16px;
     margin: 0;
     padding: 0;
+    cursor: default;
 }
 
 #page {
@@ -20,11 +21,6 @@ body {
 #app {
     max-width: 1000px;
     margin: 0 auto;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    margin: 0;
 }
 
 .muted {
@@ -125,6 +121,15 @@ select:focus,
 textarea:focus {
     border-color: #BBB;
     outline: none;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    margin: 0;
+}
+
+input[type="date"][readonly] {
+    cursor: default;
 }
 
 /************************************************************************

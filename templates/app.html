@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/css/pikaday.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
@@ -20,7 +21,7 @@
 <div id="app">
     <header class="row">
         <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a>
-            <small v-show="loading"><i class="fa fa-spinner"></i> Loading...</small>
+            <small v-show="loading" class="muted"><i class="fa fa-spinner fa-pulse"></i> Loading...</small>
         </div>
         <div class="menu">
             <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> Add</button>
@@ -39,8 +40,8 @@
                     <label><input type="radio" v-model="filters.completed" value="no"> No</label>
                 </div>
                 <div><input type="text" v-model="filters.text" placeholder="Text"></div>
-                <div><input type="date" id="filter-completion-date" placeholder="Completion date"></div>
-                <div><input type="date" id="filter-creation-date" placeholder="Creation date"></div>
+                <div><input type="text" placeholder="Completion date" class="date" readonly></div>
+                <div><input type="text" placeholder="Creation date" class="date" readonly></div>
             </div>
             <div class="lists">
                 <h2>Priorities</h2>
@@ -100,8 +101,20 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <script src="https://unpkg.com/vue@2.1.0/dist/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/pikaday.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
 <script>
 ROOT_URL = '{{ request.url_root }}';
+
+$(function() {
+    $('input[type="text"].date').each(function() {
+        new Pikaday({
+            field: this,
+            firstDay: 1,
+            format: 'YYYY-MM-DD'
+        });
+    });
+});
 </script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
