@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ g.CURRENT_LOCALE }}">
 <head>
     <meta charset="UTF-8">
 
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="lists">
-                    <h2>{{ _('Projects') }} <button class="small" @click="clearProjectsFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></small></h2>
+                    <h2>{{ _('Projects') }} <button class="small" @click="clearProjectsFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="project in allProjects">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="lists">
-                    <h2>{{ _('Contexts') }} <button class="small" @click="clearContextsFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></small></h2>
+                    <h2>{{ _('Contexts') }} <button class="small" @click="clearContextsFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="context in allContexts">

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, abort
+from flask import Flask, render_template, jsonify, request, g
 from flask_httpauth import HTTPBasicAuth
 from flask_babel import Babel, _
 import logging
@@ -7,6 +7,10 @@ import todotxtio
 
 app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('config.py')
+app.config['LANGUAGES'] = {
+    'en': 'English',
+    'fr': 'Français'
+}
 
 babel = Babel(app)
 
@@ -20,12 +24,8 @@ logging.basicConfig(
 
 logging.getLogger().setLevel(logging.INFO)
 
-app.config['LANGUAGES'] = {
-    'en': 'English',
-    'fr': 'Français'
-}
-
 # -----------------------------------------------------------
+
 
 @app.route('/')
 @auth.login_required
@@ -60,6 +60,12 @@ def todotxt():
 
 # -----------------------------------------------------------
 
+@app.before_request
+def set_locale():
+    if not hasattr(g, 'current_locale'):
+        g.CURRENT_LOCALE = request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+
+
 @auth.get_password
 def get_password(username):
     if username in app.config['USER']:
@@ -67,6 +73,7 @@ def get_password(username):
 
     return None
 
+
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+    return g.CURRENT_LOCALE

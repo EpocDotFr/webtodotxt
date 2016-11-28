@@ -24,7 +24,7 @@ body {
 }
 
 .muted {
-    color: #BBB;
+    color: #AAA;
 }
 
 /************************************************************************
@@ -178,12 +178,11 @@ footer {
     text-align: center;
     font-size: 12px;
     margin: 10px;
-    color: #BBB;
 }
 
 footer a,
 footer a:visited {
-    color: #BBB;
+    color: inherit;
 }
 
 /************************************************************************
