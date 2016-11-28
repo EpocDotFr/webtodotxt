@@ -32,7 +32,7 @@
         <div id="page" class="row">
             <div id="filters">
                 <div>
-                    <h2>{{ _('General filters') }} <button class="small" @click="clearGeneralFilters()"><i class="fa fa-eraser"></i></button></h2>
+                    <h2>{{ _('General filters') }} <button class="small" @click="clearGeneralFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div>{{ _('Completed:') }}
                         <label><input type="radio" v-model="filters.completed" value="all"> {{ _('All') }}</label>
@@ -44,7 +44,7 @@
                     <div><input type="text" placeholder="{{ _('Creation date') }}" class="date" readonly></div>
                 </div>
                 <div class="lists">
-                    <h2>{{ _('Priorities') }} <button class="small" @click="clearPrioritiesFilters()"><i class="fa fa-eraser"></i></button></h2>
+                    <h2>{{ _('Priorities') }} <button class="small" @click="clearPrioritiesFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div class="muted" v-show="allPriorities.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="priority in allPriorities">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="lists">
-                    <h2>{{ _('Projects') }} <button class="small" @click="clearProjectsFilters()"><i class="fa fa-eraser"></i></small></h2>
+                    <h2>{{ _('Projects') }} <button class="small" @click="clearProjectsFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></small></h2>
 
                     <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="project in allProjects">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="lists">
-                    <h2>{{ _('Contexts') }} <button class="small" @click="clearContextsFilters()"><i class="fa fa-eraser"></i></small></h2>
+                    <h2>{{ _('Contexts') }} <button class="small" @click="clearContextsFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></small></h2>
 
                     <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="context in allContexts">
