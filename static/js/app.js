@@ -17,7 +17,7 @@ var app = new Vue({
             priorities: [],
             projects: [],
             contexts: []
-        },
+        }
     },
     // When Vue is ready
     mounted: function () {
@@ -195,7 +195,17 @@ var app = new Vue({
                 cache: false,
                 success: function(response, status, xhr) {
                     if (response.status == 'success') {
-                        app.todos = response.data;
+                        app.todos = $.map(response.data, function(todo) {
+                            if (('completion_date' in todo) && todo.completion_date) {
+                                todo.completion_date = moment(todo.completion_date);
+                            }
+
+                            if (('creation_date' in todo) && todo.creation_date) {
+                                todo.creation_date = moment(todo.creation_date);
+                            }
+
+                            return todo;
+                        });
                     } else {
                         alert(response.data.message);
                     }
@@ -219,11 +229,23 @@ var app = new Vue({
         saveTodoTxt: function() {
             this.loading = true;
 
+            var data = $.map(app.todos, function(todo) {
+                if (('completion_date' in todo) && todo.completion_date) {
+                    todo.completion_date = todo.completion_date.format('YYYY-MM-DD');
+                }
+
+                if (('creation_date' in todo) && todo.creation_date) {
+                    todo.creation_date = todo.creation_date.format('YYYY-MM-DD');
+                }
+
+                return todo;
+            });
+
             $.ajax({
                 type: 'POST',
                 url: ROOT_URL + 'todo.txt',
                 contentType: 'application/json',
-                data: JSON.stringify(app.todos),
+                data: JSON.stringify(data),
                 success: function(response, status, xhr) {
                     if (response.status != 'success') {
                         alert(response.data.message);

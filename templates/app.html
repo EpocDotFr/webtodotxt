@@ -88,8 +88,8 @@
                             <div class="metadata">
                                 <template v-for="project in todo.projects">+${ project } </template>
                                 <template v-for="context in todo.contexts">@${ context } </template>
-                                <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date }</template>
-                                <template v-if="todo.completion_date">{{ _('Completed') }} ${ todo.completion_date }</template>
+                                <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date.format('{{ _('DateFormat') }}') }</template>
+                                <template v-if="todo.completion_date">{{ _('Completed') }} ${ todo.completion_date.format('{{ _('DateFormat') }}') }</template>
                             </div>
                         </div>
                     </div>
