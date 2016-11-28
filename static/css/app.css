@@ -43,6 +43,7 @@ a:hover {
     background-color: #DDD;
     color: #000;
     border: 1px solid #CCC;
+    line-height: 1.42857143;
 }
 
 .priority-chip.A {
