@@ -7,8 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-28 17:23+0100\n"
-"PO-Revision-Date: 2016-11-28 17:32+0100\n"
+"POT-Creation-Date: 2016-11-28 17:36+0100\n"
+"PO-Revision-Date: 2016-11-28 17:37+0100\n"
+"Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -16,13 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"Last-Translator: \n"
 "X-Generator: Poedit 1.8.11\n"
 
 #: webtodotxt.py:53
 #, python-format
 msgid "Error while loading or updating the Todo.txt file: %(exception)s"
-msgstr "Erreur lors du chargement ou de la mise à jour du fichier Todo.txt : %(exception)s"
+msgstr ""
+"Erreur lors du chargement ou de la mise à jour du fichier Todo.txt : "
+"%(exception)s"
 
 #: webtodotxt.py:56
 msgid "Invalid request."
@@ -63,6 +65,10 @@ msgstr "Oui"
 #: templates/app.html:40
 msgid "No"
 msgstr "Non"
+
+#: templates/app.html:42
+msgid "Text"
+msgstr "Texte"
 
 #: templates/app.html:43
 msgid "Completion date"

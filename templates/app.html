@@ -39,7 +39,7 @@
                         <label><input type="radio" v-model="filters.completed" value="yes"> {{ _('Yes') }}</label>
                         <label><input type="radio" v-model="filters.completed" value="no"> {{ _('No') }}</label>
                     </div>
-                    <div><input type="text" v-model="filters.text" placeholder="Text"></div>
+                    <div><input type="text" v-model="filters.text" placeholder="{{ _('Text') }}"></div>
                     <div><input type="text" placeholder="{{ _('Completion date') }}" class="date" readonly></div>
                     <div><input type="text" placeholder="{{ _('Creation date') }}" class="date" readonly></div>
                 </div>
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-        <footer class="muted">© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">{{ _('Source code on GitHub') }}</a> • {{ _('Licensed under the %(license)s', license='<a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD Public License</a>') }}</footer>
+        <footer class="muted">© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">{{ _('Source code on GitHub') }}</a> • {{ _('Licensed under the %(license)s', license='<a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD</a>') }}</footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
