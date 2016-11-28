@@ -18,104 +18,104 @@
     <title>Web Todo.txt</title>
 </head>
 <body>
-<div id="app">
-    <header class="row">
-        <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a>
-            <small v-show="loading" class="muted"><i class="fa fa-spinner fa-pulse"></i> Loading...</small>
-        </div>
-        <div class="menu">
-            <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> Add</button>
-            <button @click="loadTodoTxt()" :disabled="loading"><i class="fa fa-refresh"></i> Reload</button>
-            <button @click="saveTodoTxt()" :disabled="loading"><i class="fa fa-floppy-o"></i> Save</button>
-        </div>
-    </header>
-    <div id="page" class="row">
-        <div id="filters">
-            <div>
-                <h2>General filters</h2>
+    <div id="app">
+        <header class="row">
+            <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a>
+                <small v-show="loading" class="muted"><i class="fa fa-spinner fa-pulse"></i> Loading...</small>
+            </div>
+            <div class="menu">
+                <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> Add</button>
+                <button @click="loadTodoTxt()" :disabled="loading"><i class="fa fa-refresh"></i> Reload</button>
+                <button @click="saveTodoTxt()" :disabled="loading"><i class="fa fa-floppy-o"></i> Save</button>
+            </div>
+        </header>
+        <div id="page" class="row">
+            <div id="filters">
+                <div>
+                    <h2>General filters <button class="small" @click="clearGeneralFilters()"><i class="fa fa-eraser"></i></button></h2>
 
-                <div>Completed:
-                    <label><input type="radio" v-model="filters.completed" value="all"> All</label>
-                    <label><input type="radio" v-model="filters.completed" value="yes"> Yes</label>
-                    <label><input type="radio" v-model="filters.completed" value="no"> No</label>
-                </div>
-                <div><input type="text" v-model="filters.text" placeholder="Text"></div>
-                <div><input type="text" placeholder="Completion date" class="date" readonly></div>
-                <div><input type="text" placeholder="Creation date" class="date" readonly></div>
-            </div>
-            <div class="lists">
-                <h2>Priorities</h2>
-
-                <div class="muted" v-show="allPriorities.length == 0">None a this moment.</div>
-                <div v-for="priority in allPriorities">
-                    <label><input type="checkbox" v-model="filters.priorities" :value="priority"> <span :class="['priority-chip', priority]">${ priority }</span></label>
-                </div>
-            </div>
-            <div class="lists">
-                <h2>Projects</h2>
-
-                <div class="muted" v-show="allProjects.length == 0">None a this moment.</div>
-                <div v-for="project in allProjects">
-                    <label><input type="checkbox" v-model="filters.projects" :value="project"> ${ project }</label>
-                </div>
-            </div>
-            <div class="lists">
-                <h2>Contexts</h2>
-
-                <div class="muted" v-show="allContexts.length == 0">None a this moment.</div>
-                <div v-for="context in allContexts">
-                    <label><input type="checkbox" v-model="filters.contexts" :value="context"> ${ context }</label>
-                </div>
-            </div>
-            <div>
-                <button @click="clearFilters()"><i class="fa fa-eraser"></i> Clear all</button>
-            </div>
-        </div>
-        <div id="todos">
-            <div class="muted" v-show="filteredTodos.length == 0">No todos to display <i class="fa fa-smile-o"></i></div>
-            <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
-                <div class="actions">
-                    <a href="#"><i class="fa fa-pencil"></i></a> <a href="#" @click.prevent="removeTodo(todo)"><i class="fa fa-trash"></i></a>
-                </div>
-                <div class="container row">
-                    <div class="completed-checkbox">
-                        <input type="checkbox" v-model="todo.completed">
+                    <div>Completed:
+                        <label><input type="radio" v-model="filters.completed" value="all"> All</label>
+                        <label><input type="radio" v-model="filters.completed" value="yes"> Yes</label>
+                        <label><input type="radio" v-model="filters.completed" value="no"> No</label>
                     </div>
-                    <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
-                    <div class="content">
-                        <div class="text" @dblclick="editTodoText(todo)">${ todo.text }</div>
-                        <div class="text-editing"><input type="text" v-model="todo.text" @blur="doneEditTodoText(todo)" @keyup.enter="doneEditTodoText(todo)" @keyup.esc="cancelEditTodoText(todo)" placeholder="Type some text"></div>
-                        <div class="metadata">
-                            <template v-for="project in todo.projects">+${ project } </template>
-                            <template v-for="context in todo.contexts">@${ context } </template>
-                            <template v-if="todo.creation_date">Created ${ todo.creation_date }</template>
-                            <template v-if="todo.completion_date">Completed ${ todo.completion_date }</template>
+                    <div><input type="text" v-model="filters.text" placeholder="Text"></div>
+                    <div><input type="text" placeholder="Completion date" class="date" readonly></div>
+                    <div><input type="text" placeholder="Creation date" class="date" readonly></div>
+                </div>
+                <div class="lists">
+                    <h2>Priorities <button class="small" @click="clearPrioritiesFilters()"><i class="fa fa-eraser"></i></button></h2>
+
+                    <div class="muted" v-show="allPriorities.length == 0">None a this moment.</div>
+                    <div v-for="priority in allPriorities">
+                        <label><input type="checkbox" v-model="filters.priorities" :value="priority"> <span :class="['priority-chip', priority]">${ priority }</span></label>
+                    </div>
+                </div>
+                <div class="lists">
+                    <h2>Projects <button class="small" @click="clearProjectsFilters()"><i class="fa fa-eraser"></i></small></h2>
+
+                    <div class="muted" v-show="allProjects.length == 0">None a this moment.</div>
+                    <div v-for="project in allProjects">
+                        <label><input type="checkbox" v-model="filters.projects" :value="project"> ${ project }</label>
+                    </div>
+                </div>
+                <div class="lists">
+                    <h2>Contexts <button class="small" @click="clearContextsFilters()"><i class="fa fa-eraser"></i></small></h2>
+
+                    <div class="muted" v-show="allContexts.length == 0">None a this moment.</div>
+                    <div v-for="context in allContexts">
+                        <label><input type="checkbox" v-model="filters.contexts" :value="context"> ${ context }</label>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <button @click="clearAllFilters()" class="small"><i class="fa fa-eraser"></i> Clear all filters</button>
+                </div>
+            </div>
+            <div id="todos">
+                <div class="muted" v-show="filteredTodos.length == 0">No todos to display <i class="fa fa-smile-o"></i></div>
+                <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
+                    <div class="actions">
+                        <a href="#"><i class="fa fa-pencil"></i></a> <a href="#" @click.prevent="removeTodo(todo)"><i class="fa fa-trash"></i></a>
+                    </div>
+                    <div class="container row">
+                        <div class="completed-checkbox">
+                            <input type="checkbox" v-model="todo.completed">
+                        </div>
+                        <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
+                        <div class="content">
+                            <div class="text" @dblclick="editTodoText(todo)">${ todo.text }</div>
+                            <div class="text-editing"><input type="text" v-model="todo.text" @blur="doneEditTodoText(todo)" @keyup.enter="doneEditTodoText(todo)" @keyup.esc="cancelEditTodoText(todo)" placeholder="Type some text"></div>
+                            <div class="metadata">
+                                <template v-for="project in todo.projects">+${ project } </template>
+                                <template v-for="context in todo.contexts">@${ context } </template>
+                                <template v-if="todo.creation_date">Created ${ todo.creation_date }</template>
+                                <template v-if="todo.completion_date">Completed ${ todo.completion_date }</template>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <footer class="muted">© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">Source code on GitHub</a> • Licensed under the <a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD Public License</a></footer>
     </div>
-    <footer class="muted">© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">Source code on GitHub</a> • Licensed under the <a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD Public License</a></footer>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
-<script src="https://unpkg.com/vue@2.1.0/dist/vue.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/pikaday.min.js"></script>
-<script>
-ROOT_URL = '{{ request.url_root }}';
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+    <script src="https://unpkg.com/vue@2.1.0/dist/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/pikaday.min.js"></script>
+    <script>
+    ROOT_URL = '{{ request.url_root }}';
 
-$(function() {
-    $('input[type="text"].date').each(function() {
-        new Pikaday({
-            field: this,
-            firstDay: 1,
-            format: 'YYYY-MM-DD'
+    $(function() {
+        $('input[type="text"].date').each(function() {
+            new Pikaday({
+                field: this,
+                firstDay: 1,
+                format: 'YYYY-MM-DD'
+            });
         });
     });
-});
-</script>
-<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>

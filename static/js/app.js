@@ -1,13 +1,3 @@
-var defaultFilters = {
-    text: '',
-    completed: 'all',
-    completion_date: null,
-    priorities: [],
-    creation_date: '',
-    projects: [],
-    contexts: []
-};
-
 var app = new Vue({
     delimiters: ['${', '}'], // Because Jinja2 already uses double brakets
     el: '#app',
@@ -19,7 +9,15 @@ var app = new Vue({
         todoBeingEdited: null,
 
         todos: [], // List of all todos straight from the Todo.txt
-        filters: defaultFilters // Filters used to filter the todo list above
+        filters: { // Filters used to filter the todo list above
+            completed: 'all',
+            text: '',
+            completion_date: '',
+            creation_date: '',
+            priorities: [],
+            projects: [],
+            contexts: []
+        },
     },
     // When Vue is ready
     mounted: function () {
@@ -130,9 +128,26 @@ var app = new Vue({
         }
     },
     methods: {
-        // Reset all filters
-        clearFilters: function() {
-            this.filters = defaultFilters;
+        clearGeneralFilters: function() {
+            this.filters.text = '';
+            this.filters.completed = 'all';
+            this.filters.completion_date = '';
+            this.filters.creation_date = '';
+        },
+        clearPrioritiesFilters: function() {
+            this.filters.priorities = [];
+        },
+        clearProjectsFilters: function() {
+            this.filters.projects = [];
+        },
+        clearContextsFilters: function() {
+            this.filters.contexts = [];
+        },
+        clearAllFilters: function() {
+            this.clearGeneralFilters();
+            this.clearPrioritiesFilters();
+            this.clearProjectsFilters();
+            this.clearContextsFilters();
         },
         addTodo: function() {
             new_todo = {};

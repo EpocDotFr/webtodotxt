@@ -38,7 +38,7 @@ a:hover {
  * Priorities */
 
 .priority-chip {
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 0 5px;
     background-color: #DDD;
     color: #000;
@@ -79,12 +79,13 @@ a:hover {
  * Buttons */
 
 button, .button {
-    border-radius: 5px;
+    border-radius: 3px;
     cursor: pointer;
     background-color: #DDD;
     border: 1px solid #BBB;
     outline: none;
-    padding: 3px 5px;
+    padding: 5px;
+    color: #000;
     text-decoration: none;
     text-shadow: 1px 1px 0 #FFF;
     font-size: 16px;
@@ -100,6 +101,11 @@ button:disabled {
     background-color: #EEE;
     border-color: #CCC;
     color: #BBB;
+}
+
+button.small,
+.button.small {
+    padding: 2px;
 }
 
 /************************************************************************
@@ -212,6 +218,10 @@ footer a:visited {
     text-shadow: 1px 1px 0 #FFF;
 }
 
+#filters > div h2 > button {
+    float: right;
+}
+
 #filters > div > div {
     margin-top: 5px;
 }
@@ -224,6 +234,10 @@ footer a:visited {
 #filters .lists label {
     width: 100%;
     display: block;
+}
+
+#filters .bottom {
+    text-align: center;
 }
 
 /************************************************************************
