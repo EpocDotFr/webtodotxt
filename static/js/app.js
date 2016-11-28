@@ -32,13 +32,13 @@ var app = new Vue({
         }*/
     },
     computed: {
-        // The todo list, filtered according filters
+        // The todo list, filtered according criteria
         filteredTodos: function () {
             return this.todos.filter(function (todo) {
                 var text = completed = completion_date = priority = creation_date = projects = contexts = true;
 
                 if (('text' in todo) && app.filters.text) {
-                    text= todo.text.indexOf(app.filters.text) !== -1;
+                    text = todo.text.toLowerCase().indexOf(app.filters.text.toLowerCase()) !== -1;
                 }
 
                 if (('completed' in todo) && app.filters.completed == 'yes') {
@@ -71,8 +71,6 @@ var app = new Vue({
                     }).length > 0;
                 }
 
-                console.log(text, completed, completion_date, priority, creation_date, projects, contexts);
-
                 return text && completed && completion_date && priority && creation_date && projects && contexts;
             });
         },
@@ -88,7 +86,7 @@ var app = new Vue({
                 all_priorities.push(todo.priority);
 
                 return todo.priority;
-            });
+            }).sort();
         },
         // All projects extracted from the current todo list
         allProjects: function() {
@@ -108,7 +106,7 @@ var app = new Vue({
 
                     return project;
                 });
-            });
+            }).sort();
         },
         // All contexts extracted from the current todo list
         allContexts: function() {
@@ -128,7 +126,7 @@ var app = new Vue({
 
                     return context;
                 });
-            });
+            }).sort();
         }
     },
     methods: {
