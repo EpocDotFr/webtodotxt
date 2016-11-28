@@ -35,41 +35,45 @@ var app = new Vue({
         // The todo list, filtered according filters
         filteredTodos: function () {
             return this.todos.filter(function (todo) {
+                var text = completed = completion_date = priority = creation_date = projects = contexts = true;
+
                 if (('text' in todo) && app.filters.text) {
-                    return todo.text.indexOf(app.filters.text) !== -1;
+                    text= todo.text.indexOf(app.filters.text) !== -1;
                 }
 
                 if (('completed' in todo) && app.filters.completed == 'yes') {
-                    return todo.completed;
+                    completed = todo.completed;
                 } else if (('completed' in todo) && app.filters.completed == 'no') {
-                    return !todo.completed;
+                    completed = !todo.completed;
                 }
 
                 if (('completion_date' in todo) && app.filters.completion_date) {
-                    return app.filters.completion_date == todo.completion_date;
+                    completion_date = app.filters.completion_date == todo.completion_date;
                 }
 
                 if (('priority' in todo) && app.filters.priorities && app.filters.priorities.length > 0) {
-                    return $.inArray(todo.priority, app.filters.priorities) !== -1;
+                    priority = $.inArray(todo.priority, app.filters.priorities) !== -1;
                 }
 
                 if (('creation_date' in todo) && app.filters.creation_date) {
-                    return app.filters.creation_date == todo.creation_date;
+                    creation_date = app.filters.creation_date == todo.creation_date;
                 }
 
                 if (('projects' in todo) && todo.projects && app.filters.projects && app.filters.projects.length > 0) {
-                    return $.grep(todo.projects, function(project) {
+                    projects = $.grep(todo.projects, function(project) {
                         return $.inArray(project, app.filters.projects) !== -1;
                     }).length > 0;
                 }
 
                 if (('contexts' in todo) && todo.contexts && app.filters.contexts && app.filters.contexts.length > 0) {
-                    return $.grep(todo.contexts, function(context) {
+                    contexts = $.grep(todo.contexts, function(context) {
                         return $.inArray(context, app.filters.contexts) !== -1;
                     }).length > 0;
                 }
 
-                return true;
+                console.log(text, completed, completion_date, priority, creation_date, projects, contexts);
+
+                return text && completed && completion_date && priority && creation_date && projects && contexts;
             });
         },
         // All priorities extracted from the current todo list
