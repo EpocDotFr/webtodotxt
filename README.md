@@ -38,9 +38,17 @@ Run the internal web server, which will be accessible at http://localhost:8080:
 python local.py
 ```
 
+Edit this file and change the interface/port as needed.
+
   - uWSGI
 
 The uWSGI file you'll have to set in your uWSGI configuration is `uwsgi.py`. The callable is `app`.
+
+  - Others
+
+You'll have to hack with this application to make it work with one of the solutions described [here](http://flask.pocoo.org/docs/0.11/deploying/).
+
+Send me a pull request if you make it work.
 
 ## How it works
 

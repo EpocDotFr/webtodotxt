@@ -30,8 +30,18 @@ body {
 /************************************************************************
  * Links */
 
-a:hover {
+a,
+a:visited {
+    border-bottom: 1px dotted;
     text-decoration: none;
+    color: inherit;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+    border-bottom: 1px solid;
+    outline: none;
 }
 
 /************************************************************************
@@ -79,7 +89,7 @@ a:hover {
 /************************************************************************
  * Buttons */
 
-button, .button {
+#app button {
     border-radius: 3px;
     cursor: pointer;
     background-color: #DDD;
@@ -92,20 +102,19 @@ button, .button {
     font-size: 16px;
 }
 
-button:hover, .button:hover,
-button:focus, .button:focus {
+#app button:hover,
+#app button:focus {
     background-color: #EEE;
     outline: none;
 }
 
-button:disabled {
+#app button:disabled {
     background-color: #EEE;
     border-color: #CCC;
     color: #BBB;
 }
 
-button.small,
-.button.small {
+#app button.small {
     padding: 2px;
 }
 
@@ -154,6 +163,7 @@ header .title {
 header .title a {
     text-decoration: none;
     color: inherit;
+    border: none;
 }
 
 header .menu {
@@ -166,7 +176,7 @@ header .menu {
 
 footer {
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     margin: 10px;
     color: #BBB;
 }
@@ -278,6 +288,7 @@ footer a:visited {
 #todos > .todo > .actions a {
     color: inherit;
     text-decoration: none;
+    border: none;
 }
 
 #todos > .todo:hover > .actions {
@@ -343,4 +354,5 @@ footer a:visited {
 #todos .todo .content > div.metadata {
     color: #AAA;
     font-size: 14px;
+    border: none;
 }

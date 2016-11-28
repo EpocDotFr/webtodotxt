@@ -155,7 +155,7 @@ var app = new Vue({
             new_todo = {};
 
             this.todos.unshift(new_todo);
-            this.editTodo(new_todo);
+            this.editTodoText(new_todo);
         },
         editTodoText: function (todo) {
             this.todoTextBackup = todo.text;
