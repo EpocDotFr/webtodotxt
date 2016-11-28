@@ -111,7 +111,43 @@
             new Pikaday({
                 field: this,
                 firstDay: 1,
-                format: 'YYYY-MM-DD'
+                format: 'YYYY-MM-DD',
+                i18n: {
+                    previousMonth : '{{ _('Previous Month') }}',
+                    nextMonth     : '{{ _('Next Month') }}',
+                    months        : [
+                        '{{ _('January') }}',
+                        '{{ _('February') }}',
+                        '{{ _('March') }}',
+                        '{{ _('April') }}',
+                        '{{ _('May') }}',
+                        '{{ _('June') }}',
+                        '{{ _('July') }}',
+                        '{{ _('August') }}',
+                        '{{ _('September') }}',
+                        '{{ _('October') }}',
+                        '{{ _('November') }}',
+                        '{{ _('December') }}'
+                    ],
+                    weekdays      : [
+                        '{{ _('Sunday') }}',
+                        '{{ _('Monday') }}',
+                        '{{ _('Tuesday') }}',
+                        '{{ _('Wednesday') }}',
+                        '{{ _('Thursday') }}',
+                        '{{ _('Friday') }}',
+                        '{{ _('Saturday') }}'
+                    ],
+                    weekdaysShort : [
+                        '{{ _('Sun') }}',
+                        '{{ _('Mon') }}',
+                        '{{ _('Tue') }}',
+                        '{{ _('Wed') }}',
+                        '{{ _('Thu') }}',
+                        '{{ _('Fri') }}',
+                        '{{ _('Sat') }}'
+                    ]
+                }
             });
         });
     });
