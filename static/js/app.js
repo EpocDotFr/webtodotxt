@@ -208,7 +208,7 @@ var app = new Vue({
                         message = error;
                     }
 
-                    alert('Error while loading the Todo.txt file: ' + message);
+                    alert(message);
                 },
                 complete: function() {
                     app.loading = false;
@@ -237,7 +237,7 @@ var app = new Vue({
                         message = error;
                     }
                     
-                    alert('Error while updating the Todo.txt file: ' + message);
+                    alert(message);
                 },
                 complete: function() {
                     app.loading = false;
