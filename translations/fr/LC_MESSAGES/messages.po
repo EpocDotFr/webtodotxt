@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-28 23:43+0100\n"
+"POT-Creation-Date: 2016-11-29 09:57+0100\n"
 "PO-Revision-Date: 2016-11-28 23:44+0100\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"X-Generator: Poedit 1.8.11\n"
 
 #: webtodotxt.py:53
 #, python-format
@@ -115,10 +114,6 @@ msgstr "Tapez du texte ici"
 msgid "Created"
 msgstr "Créé"
 
-#: templates/app.html:91 templates/app.html:92
-msgid "DateFormat"
-msgstr "DD/MM/YYYY"
-
 #: templates/app.html:92
 msgid "Completed"
 msgstr "Complété"
@@ -132,114 +127,118 @@ msgstr "Code source sur GitHub"
 msgid "Licensed under the %(license)s"
 msgstr "Sous licence %(license)s"
 
-#: templates/app.html:116
+#: templates/app.html:118
 msgid "Previous Month"
 msgstr "Mois précédent"
 
-#: templates/app.html:117
+#: templates/app.html:119
 msgid "Next Month"
 msgstr "Mois suivant"
 
-#: templates/app.html:119
+#: templates/app.html:121
 msgid "January"
 msgstr "Janvier"
 
-#: templates/app.html:120
+#: templates/app.html:122
 msgid "February"
 msgstr "Février"
 
-#: templates/app.html:121
+#: templates/app.html:123
 msgid "March"
 msgstr "Mars"
 
-#: templates/app.html:122
+#: templates/app.html:124
 msgid "April"
 msgstr "Avril"
 
-#: templates/app.html:123
+#: templates/app.html:125
 msgid "May"
 msgstr "Mai"
 
-#: templates/app.html:124
+#: templates/app.html:126
 msgid "June"
 msgstr "Juin"
 
-#: templates/app.html:125
+#: templates/app.html:127
 msgid "July"
 msgstr "Juillet"
 
-#: templates/app.html:126
+#: templates/app.html:128
 msgid "August"
 msgstr "Août"
 
-#: templates/app.html:127
+#: templates/app.html:129
 msgid "September"
 msgstr "Septembre"
 
-#: templates/app.html:128
+#: templates/app.html:130
 msgid "October"
 msgstr "Octobre"
 
-#: templates/app.html:129
+#: templates/app.html:131
 msgid "November"
 msgstr "Novembre"
 
-#: templates/app.html:130
+#: templates/app.html:132
 msgid "December"
 msgstr "Décembre"
 
-#: templates/app.html:133
+#: templates/app.html:135
 msgid "Sunday"
 msgstr "Dimanche"
 
-#: templates/app.html:134
+#: templates/app.html:136
 msgid "Monday"
 msgstr "Lundi"
 
-#: templates/app.html:135
+#: templates/app.html:137
 msgid "Tuesday"
 msgstr "Mardi"
 
-#: templates/app.html:136
+#: templates/app.html:138
 msgid "Wednesday"
 msgstr "Mercredi"
 
-#: templates/app.html:137
+#: templates/app.html:139
 msgid "Thursday"
 msgstr "Jeudi"
 
-#: templates/app.html:138
+#: templates/app.html:140
 msgid "Friday"
 msgstr "Vendredi"
 
-#: templates/app.html:139
+#: templates/app.html:141
 msgid "Saturday"
 msgstr "Samedi"
 
-#: templates/app.html:142
+#: templates/app.html:144
 msgid "Sun"
 msgstr "Dim"
 
-#: templates/app.html:143
+#: templates/app.html:145
 msgid "Mon"
 msgstr "Lun"
 
-#: templates/app.html:144
+#: templates/app.html:146
 msgid "Tue"
 msgstr "Mar"
 
-#: templates/app.html:145
+#: templates/app.html:147
 msgid "Wed"
 msgstr "Mer"
 
-#: templates/app.html:146
+#: templates/app.html:148
 msgid "Thu"
 msgstr "Jeu"
 
-#: templates/app.html:147
+#: templates/app.html:149
 msgid "Fri"
 msgstr "Ven"
 
-#: templates/app.html:148
+#: templates/app.html:150
 msgid "Sat"
 msgstr "Sam"
+
+#~ msgid "DateFormat"
+#~ msgstr "DD/MM/YYYY"
+

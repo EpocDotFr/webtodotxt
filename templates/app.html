@@ -88,8 +88,8 @@
                             <div class="metadata">
                                 <template v-for="project in todo.projects">+${ project } </template>
                                 <template v-for="context in todo.contexts">@${ context } </template>
-                                <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date.format('{{ _('DateFormat') }}') }</template>
-                                <template v-if="todo.completion_date">{{ _('Completed') }} ${ todo.completion_date.format('{{ _('DateFormat') }}') }</template>
+                                <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date.format('L') }</template>
+                                <template v-if="todo.completion_date">{{ _('Completed') }} ${ todo.completion_date.format('L') }</template>
                             </div>
                         </div>
                     </div>
@@ -101,10 +101,12 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
     <script src="https://unpkg.com/vue@2.1.0/dist/vue.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/pikaday.min.js"></script>
     <script>
     ROOT_URL = '{{ request.url_root }}';
+
+    moment.locale('{{ g.CURRENT_LOCALE }}');
 
     $(function() {
         $('input[type="text"].date').each(function() {
