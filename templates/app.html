@@ -75,7 +75,10 @@
                 <div class="muted" v-show="filteredTodos.length == 0">{{ _('No todos to display') }} <i class="fa fa-smile-o"></i></div>
                 <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
                     <div class="actions">
-                        <a href="#"><i class="fa fa-pencil"></i></a> <a href="#" @click.prevent="removeTodo(todo)"><i class="fa fa-trash"></i></a>
+                        <a href="#" title="{{ _('Priority') }}"><i class="fa fa-exclamation-circle fa-fw"></i></a> 
+                        <a href="#" title="{{ _('Projects') }}"><i class="fa fa-plus fa-fw"></i></a> 
+                        <a href="#" title="{{ _('Contexts') }}"><i class="fa fa-at fa-fw"></i></a> 
+                        <a href="#" @click.prevent="removeTodo(todo)" title="{{ _('Delete') }}"><i class="fa fa-trash fa-fw"></i></a>
                     </div>
                     <div class="container row">
                         <div class="completed-checkbox">

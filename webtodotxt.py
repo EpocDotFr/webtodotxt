@@ -27,12 +27,13 @@ logging.getLogger().setLevel(logging.INFO)
 # -----------------------------------------------------------
 
 
-@app.route('/')
 @auth.login_required
+@app.route('/')
 def home():
     return render_template('app.html')
 
 
+@auth.login_required
 @app.route('/todo.txt', methods=['GET', 'POST'])
 def todotxt():
     status = 200
@@ -59,6 +60,7 @@ def todotxt():
     return jsonify(result), status
 
 # -----------------------------------------------------------
+
 
 @app.before_request
 def set_locale():

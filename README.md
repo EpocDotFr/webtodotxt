@@ -7,12 +7,6 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Should work on any Python 3.x version. Feel free to test with another Python version and give me feedback
   - A [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/)-capable web server (optional, but recommended)
 
-Note that this web application isn't intended to be used on mobile devices. Instead, use mobile apps to edit
-and sync the Todo.txt file:
-
-  - On Android, [Simpletask Cloudless](https://play.google.com/store/apps/details?id=nl.mpcjanssen.simpletask) along [FolderSync Lite](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite)
-  - On iOS, I don't know. Feel free to share your finds.
-
 ## Installation
 
 Clone this repo, and then the usual `pip install -r requirements.txt`.
@@ -59,6 +53,18 @@ You'll probably have to hack with this application to make it work with one of t
 This project is built on [Vue.js](http://vuejs.org/) 2 for the frontend and [Flask](http://flask.pocoo.org/) (Python) for
 the backend. The [todotxtio](https://github.com/EpocDotFr/todotxtio) PyPI package is used to parse/write the Todo.txt file,
 giving/receiving data through [Ajax](https://en.wikipedia.org/wiki/Ajax_(programming)).
+
+## Gotchas
+
+Be aware that this web application isn't intended to be used on mobile devices. Instead, use mobile apps to edit
+and sync the Todo.txt file:
+
+  - On Android, [Simpletask Cloudless](https://play.google.com/store/apps/details?id=nl.mpcjanssen.simpletask) along [FolderSync Lite](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite)
+  - On iOS, I don't know. Feel free to share your finds.
+
+Also note that this web application wasn't designed to be multi-process compliant, e.g if you sync your Todo.txt
+file via SFTP or something from the mobile apps and at the same time you're modifiying it via this web app, you'll
+probably end with a corrupted file.
 
 ## Contributors
 
