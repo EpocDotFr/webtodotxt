@@ -7,6 +7,12 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Should work on any Python 3.x version. Feel free to test with another Python version and give me feedback
   - A [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/)-capable web server (optional, but recommended)
 
+Note that this web application isn't intended to be used on mobile devices. Instead, use mobile apps to edit
+and sync the Todo.txt file:
+
+  - On Android, [Simpletask Cloudless](https://play.google.com/store/apps/details?id=nl.mpcjanssen.simpletask) along [FolderSync Lite](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite)
+  - On iOS, I don't know. Feel free to share your finds.
+
 ## Installation
 
 Clone this repo, and then the usual `pip install -r requirements.txt`.
@@ -23,7 +29,7 @@ Available configuration parameters are:
 
 More informations on the three above can be found [here](http://flask.pocoo.org/docs/0.11/config/#builtin-configuration-values).
 
-  - `USER` The credentials required to access the app
+  - `USER` The credentials required to access the app. **It is highly recommended to serve this web app through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
   - `TODOTXT_LOCATION` Absolute path to a Todo.txt file
 
 I'll let you search yourself about how to configure a web server along uWSGI.
@@ -46,9 +52,7 @@ The uWSGI file you'll have to set in your uWSGI configuration is `uwsgi.py`. The
 
   - Others
 
-You'll have to hack with this application to make it work with one of the solutions described [here](http://flask.pocoo.org/docs/0.11/deploying/).
-
-Send me a pull request if you make it work.
+You'll probably have to hack with this application to make it work with one of the solutions described [here](http://flask.pocoo.org/docs/0.11/deploying/). Send me a pull request if you make it work.
 
 ## How it works
 
