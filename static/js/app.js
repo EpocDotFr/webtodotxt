@@ -4,8 +4,8 @@ var app = new Vue({
     data: {
         loading: false, // Something is loading
 
-        // New todo creation
-        todoTextBackup: null,
+        // Todo creation/edition
+        todoBackup: null,
         todoBeingEdited: null,
 
         todos: [], // List of all todos straight from the Todo.txt
@@ -130,6 +130,7 @@ var app = new Vue({
         }
     },
     methods: {
+        // Filters
         clearGeneralFilters: function() {
             this.filters.text = '';
             this.filters.completed = 'all';
@@ -155,17 +156,27 @@ var app = new Vue({
             this.clearProjectsFilters();
             this.clearContextsFilters();
         },
+        // Todo creation
         addTodo: function() {
-            new_todo = {};
+            var new_todo = {
+                text: '',
+                completed: false,
+                completion_date: null,
+                priority: '',
+                creation_date: moment(),
+                projects: [],
+                contexts: []
+            };
 
             this.todos.unshift(new_todo);
-            this.editTodoText(new_todo);
+            this.todoBeingEdited = new_todo;
         },
-        editTodoText: function (todo) {
-            this.todoTextBackup = todo.text;
+        // Todo edition
+        editTodo: function (todo) {
+            this.todoBackup = Object.create(todo); // FIXME
             this.todoBeingEdited = todo;
         },
-        doneEditTodoText: function (todo) {
+        doneEditTodo: function (todo) {
             if (!this.todoBeingEdited) {
                 return;
             }
@@ -178,10 +189,10 @@ var app = new Vue({
                 this.removeTodo(todo);
             }
         },
-        cancelEditTodoText: function (todo) {
-            todo.text = this.todoTextBackup;
+        cancelEditTodo: function (todo) {
+            todo = Object.create(this.todoBackup); // FIXME
 
-            this.todoTextBackup = null;
+            this.todoBackup = null;
             this.todoBeingEdited = null;
         },
         // Delete a todo
@@ -280,7 +291,7 @@ $(function() {
         var self = $(this);
         var filter_name = self.data('filter');
 
-        var pikaday = new Pikaday({
+        pikaday_instances[filter_name] = new Pikaday({
             field: this,
             firstDay: 1,
             format: 'L',
@@ -289,7 +300,5 @@ $(function() {
             },
             i18n: PIKADAY_LOCALE
         });
-
-        pikaday_instances[filter_name] = pikaday;
     });
 });

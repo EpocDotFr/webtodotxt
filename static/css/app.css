@@ -13,7 +13,7 @@ body {
     cursor: default;
 }
 
-#page {
+#content {
     border: 1px solid #DDD;
     border-radius: 3px;
 }
@@ -25,6 +25,13 @@ body {
 
 .muted {
     color: #AAA;
+}
+
+/************************************************************************
+ * Pikaday */
+
+.pika-single {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 /************************************************************************
@@ -304,54 +311,68 @@ footer a:visited {
     background-color: #F3F3F3;
 }
 
-#todos .todo .container > div {
+#todos > .todo .container > div {
     padding: 5px;
     border-top: 1px solid #FFF;
 }
 
-#todos .todo .container > div:first-child {
+#todos > .todo .container > div:first-child {
     border-top-left-radius: 3px;
 }
 
-#todos .todo .container > div:last-child {
+#todos > .todo .container > div:last-child {
     border-top-right-radius: 3px;
 }
 
-#todos .todo .container > div.priority {
+#todos > .todo .container > div.priority {
     width: 35px;
 }
 
-#todos .todo .container > div.completed-checkbox,
-#todos .todo .container > div.priority {
+#todos > .todo .container > div.completed-checkbox,
+#todos > .todo .container > div.priority {
     vertical-align: middle;
 }
 
-#todos .todo .container > div.completed-checkbox {
+#todos > .todo .container > div.completed-checkbox {
     width: 25px;
 }
 
-#todos .todo .text-editing input[type="text"] {
-    width: 100%;
-}
-
-#todos .todo.completed .content > div.text  {
+#todos > .todo.completed .content > div.text  {
     text-decoration: line-through;
 }
 
-#todos .todo.editing .content > div.text {
-    display: none;
-}
-
-#todos .todo .content > div.text-editing {
-    display: none;
-}
-
-#todos .todo.editing .content > div.text-editing {
-    display: block;
-}
-
-#todos .todo .content > div.metadata {
+#todos > .todo .content > div.metadata {
     color: #AAA;
     font-size: 14px;
     border: none;
+}
+
+#todos > .todo .actions .apply,
+#todos > .todo .actions .cancel,
+#todos > .todo.editing .actions .edit {
+    display: none;
+}
+
+#todos > .todo.editing .actions .apply,
+#todos > .todo.editing .actions .cancel {
+    display: inline;
+}
+
+#todos > .todo .content.edit,
+#todos > .todo .content.cancel {
+    display: none;
+}
+
+#todos > .todo.editing .content.edit {
+    display: table-cell;
+}
+
+#todos > .todo.editing .content.show,
+#todos > .todo.editing .completed-checkbox,
+#todos > .todo.editing .priority {
+    display: none;
+}
+
+#todos > .todo.editing input[type="text"] {
+    width: 100%;
 }

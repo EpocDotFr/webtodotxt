@@ -29,7 +29,7 @@
                 <button @click="saveTodoTxt()" :disabled="loading"><i class="fa fa-floppy-o"></i> {{ _('Save') }}</button>
             </div>
         </header>
-        <div id="page" class="row">
+        <div id="content" class="row">
             <div id="filters">
                 <div>
                     <h2>{{ _('General filters') }} <button class="small" @click="clearGeneralFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
@@ -75,9 +75,9 @@
                 <div class="muted" v-show="filteredTodos.length == 0">{{ _('No todos to display') }} <i class="fa fa-smile-o"></i></div>
                 <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
                     <div class="actions">
-                        <a href="#" title="{{ _('Priority') }}"><i class="fa fa-exclamation-circle fa-fw"></i></a> 
-                        <a href="#" title="{{ _('Projects') }}"><i class="fa fa-plus fa-fw"></i></a> 
-                        <a href="#" title="{{ _('Contexts') }}"><i class="fa fa-at fa-fw"></i></a> 
+                        <a href="#" @click.prevent="cancelEditTodo(todo)" title="{{ _('Cancel') }}" class="cancel"><i class="fa fa-times fa-fw"></i></a>
+                        <a href="#" @click.prevent="doneEditTodo(todo)" title="{{ _('Done') }}" class="apply"><i class="fa fa-check fa-fw"></i></a>
+                        <a href="#" @click.prevent="editTodo(todo)" title="{{ _('Edit') }}" class="edit"><i class="fa fa-pencil fa-fw"></i></a>
                         <a href="#" @click.prevent="removeTodo(todo)" title="{{ _('Delete') }}"><i class="fa fa-trash fa-fw"></i></a>
                     </div>
                     <div class="container row">
@@ -85,15 +85,18 @@
                             <input type="checkbox" v-model="todo.completed">
                         </div>
                         <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
-                        <div class="content">
-                            <div class="text" @dblclick="editTodoText(todo)">${ todo.text }</div>
-                            <div class="text-editing"><input type="text" v-model="todo.text" @blur="doneEditTodoText(todo)" @keyup.enter="doneEditTodoText(todo)" @keyup.esc="cancelEditTodoText(todo)" placeholder="{{ _('Type some text') }}"></div>
+                        <div class="content show">
+                            <div class="text">${ todo.text }</div>
                             <div class="metadata">
                                 <template v-for="project in todo.projects">+${ project } </template>
                                 <template v-for="context in todo.contexts">@${ context } </template>
                                 <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date.format('L') }</template>
                                 <template v-if="todo.completion_date">{{ _('Completed') }} ${ todo.completion_date.format('L') }</template>
                             </div>
+                        </div>
+                        <div class="content edit">
+                            <div><input type="text" v-model="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="cancelEditTodo(todo)" placeholder="{{ _('Type some text') }}"></div>
+                            <div>Test</div>
                         </div>
                     </div>
                 </div>
@@ -107,46 +110,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/pikaday.min.js"></script>
     <script>
-    ROOT_URL = '{{ request.url_root }}';
+        ROOT_URL = '{{ request.url_root }}';
 
-    moment.locale('{{ g.CURRENT_LOCALE }}');
+        moment.locale('{{ g.CURRENT_LOCALE }}');
 
-    PIKADAY_LOCALE = {
-        previousMonth : '{{ _('Previous Month') }}',
-        nextMonth     : '{{ _('Next Month') }}',
-        months        : [
-            '{{ _('January') }}',
-            '{{ _('February') }}',
-            '{{ _('March') }}',
-            '{{ _('April') }}',
-            '{{ _('May') }}',
-            '{{ _('June') }}',
-            '{{ _('July') }}',
-            '{{ _('August') }}',
-            '{{ _('September') }}',
-            '{{ _('October') }}',
-            '{{ _('November') }}',
-            '{{ _('December') }}'
-        ],
-        weekdays      : [
-            '{{ _('Sunday') }}',
-            '{{ _('Monday') }}',
-            '{{ _('Tuesday') }}',
-            '{{ _('Wednesday') }}',
-            '{{ _('Thursday') }}',
-            '{{ _('Friday') }}',
-            '{{ _('Saturday') }}'
-        ],
-        weekdaysShort : [
-            '{{ _('Sun') }}',
-            '{{ _('Mon') }}',
-            '{{ _('Tue') }}',
-            '{{ _('Wed') }}',
-            '{{ _('Thu') }}',
-            '{{ _('Fri') }}',
-            '{{ _('Sat') }}'
-        ]
-    };
+        PIKADAY_LOCALE = {
+            previousMonth : '{{ _('Previous Month') }}',
+            nextMonth     : '{{ _('Next Month') }}',
+            months        : [
+                '{{ _('January') }}',
+                '{{ _('February') }}',
+                '{{ _('March') }}',
+                '{{ _('April') }}',
+                '{{ _('May') }}',
+                '{{ _('June') }}',
+                '{{ _('July') }}',
+                '{{ _('August') }}',
+                '{{ _('September') }}',
+                '{{ _('October') }}',
+                '{{ _('November') }}',
+                '{{ _('December') }}'
+            ],
+            weekdays      : [
+                '{{ _('Sunday') }}',
+                '{{ _('Monday') }}',
+                '{{ _('Tuesday') }}',
+                '{{ _('Wednesday') }}',
+                '{{ _('Thursday') }}',
+                '{{ _('Friday') }}',
+                '{{ _('Saturday') }}'
+            ],
+            weekdaysShort : [
+                '{{ _('Sun') }}',
+                '{{ _('Mon') }}',
+                '{{ _('Tue') }}',
+                '{{ _('Wed') }}',
+                '{{ _('Thu') }}',
+                '{{ _('Fri') }}',
+                '{{ _('Sat') }}'
+            ]
+        };
     </script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
