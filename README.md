@@ -60,6 +60,13 @@ This project is built on [Vue.js](http://vuejs.org/) 2 for the frontend and [Fla
 the backend. The [todotxtio](https://github.com/EpocDotFr/todotxtio) PyPI package is used to parse/write the Todo.txt file,
 giving/receiving data through [Ajax](https://en.wikipedia.org/wiki/Ajax_(programming)).
 
+## Contributors
+
+Thanks to:
+
+  - [@guitouzid](https://github.com/guitouzid) (Spanish translations)
+  - [@Pepsit36](https://github.com/Pepsit36) (Portuguese translations)
+
 ## End words
 
 If you have questions or problems, you can [submit an issue](https://github.com/EpocDotFr/webtodotxt/issues).
