@@ -48,7 +48,7 @@ var app = new Vue({
                 }
 
                 if (('completion_date' in todo) && app.filters.completion_date) {
-                    completion_date = app.filters.completion_date == todo.completion_date;
+                    completion_date = app.filters.completion_date.isSame(todo.completion_date, 'day');
                 }
 
                 if (('priority' in todo) && app.filters.priorities && app.filters.priorities.length > 0) {
@@ -56,7 +56,7 @@ var app = new Vue({
                 }
 
                 if (('creation_date' in todo) && app.filters.creation_date) {
-                    creation_date = app.filters.creation_date == todo.creation_date;
+                    creation_date = app.filters.creation_date.isSame(todo.creation_date, 'day');
                 }
 
                 if (('projects' in todo) && todo.projects && app.filters.projects && app.filters.projects.length > 0) {
@@ -133,8 +133,12 @@ var app = new Vue({
         clearGeneralFilters: function() {
             this.filters.text = '';
             this.filters.completed = 'all';
+
             this.filters.completion_date = '';
+            pikaday_instances['completion_date'].setDate(null);
+
             this.filters.creation_date = '';
+            pikaday_instances['creation_date'].setDate(null);
         },
         clearPrioritiesFilters: function() {
             this.filters.priorities = [];
@@ -267,4 +271,25 @@ var app = new Vue({
             });
         }
     }
+});
+
+var pikaday_instances = [];
+
+$(function() {
+    $('input[type="text"].date').each(function() {
+        var self = $(this);
+        var filter_name = self.data('filter');
+
+        var pikaday = new Pikaday({
+            field: this,
+            firstDay: 1,
+            format: 'L',
+            onSelect: function() {
+                app.filters[filter_name] = this.getMoment();
+            },
+            i18n: PIKADAY_LOCALE
+        });
+
+        pikaday_instances[filter_name] = pikaday;
+    });
 });
