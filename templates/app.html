@@ -75,7 +75,6 @@
                 <div class="muted" v-show="filteredTodos.length == 0">{{ _('No todos to display') }} <i class="fa fa-smile-o"></i></div>
                 <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
                     <div class="actions">
-                        <a href="#" @click.prevent="cancelEditTodo(todo)" title="{{ _('Cancel') }}" class="cancel"><i class="fa fa-times fa-fw"></i></a>
                         <a href="#" @click.prevent="doneEditTodo(todo)" title="{{ _('Done') }}" class="apply"><i class="fa fa-check fa-fw"></i></a>
                         <a href="#" @click.prevent="editTodo(todo)" title="{{ _('Edit') }}" class="edit"><i class="fa fa-pencil fa-fw"></i></a>
                         <a href="#" @click.prevent="removeTodo(todo)" title="{{ _('Delete') }}"><i class="fa fa-trash fa-fw"></i></a>
@@ -96,8 +95,33 @@
                         </div>
                     </div>
                     <div class="container edit">
-                        <div><input type="text" v-model="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="cancelEditTodo(todo)" placeholder="{{ _('Type some text') }}"></div>
-                        <div>Test</div>
+                        <div><input type="text" v-model="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text') }}"></div>
+                        <div class="row">
+                            <div class="list">
+                                <h3>{{ _('Priority') }} <button class="small" @click="todo.priority = '';" title="{{ _('Clear priority') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <div>
+                                    <div v-for="valid_priority in valid_priorities">
+                                        <label><input type="radio" v-model="todo.priority" :value="valid_priority"> <span :class="['priority-chip', valid_priority]">${ valid_priority }</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <h3>{{ _('Projects') }} <button class="small" @click="todo.projects = [];" title="{{ _('Clear projects') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <div>
+                                    <div v-for="project in allProjects">
+                                        <label><input type="checkbox" :value="project" v-model="todo.projects"> ${ project }</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <h3>{{ _('Contexts') }} <button class="small" @click="todo.contexts = [];" title="{{ _('Clear contexts') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <div>
+                                    <div v-for="context in allContexts">
+                                        <label><input type="checkbox" :value="context" v-model="todo.contexts"> ${ context }</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -294,13 +294,11 @@ a:focus {
 }
 
 #todos > .todo .actions .apply,
-#todos > .todo .actions .cancel,
 #todos > .todo.editing .actions .edit {
     display: none;
 }
 
-#todos > .todo.editing .actions .apply,
-#todos > .todo.editing .actions .cancel {
+#todos > .todo.editing .actions .apply {
     display: inline;
 }
 
@@ -353,14 +351,6 @@ a:focus {
     border: none;
 }
 
-#todos > .todo .container.edit {
-    display: none;
-}
-
-#todos > .todo.editing .container.edit {
-    display: table;
-}
-
 #todos > .todo.editing .container.show,
 #todos > .todo.editing .completed-checkbox,
 #todos > .todo.editing .priority {
@@ -369,4 +359,41 @@ a:focus {
 
 #todos > .todo.editing input[type="text"] {
     width: 100%;
+}
+
+#todos > .todo .container.edit {
+    display: none;
+}
+
+#todos > .todo.editing .container.edit {
+    display: table;
+}
+
+#todos > .todo .container.edit .list {
+    padding: 5px;
+}
+
+#todos > .todo .container.edit .list > h3 {
+    margin: 0;
+    padding: 0 0 10px;
+    font-size: 16px;
+    text-shadow: 1px 1px 0 #FFF;
+}
+
+#todos > .todo .container.edit .list > h3 > button {
+    float: right;
+}
+
+#todos > .todo .container.edit .list > div {
+    border: 1px solid #DDD;
+    height: 120px;
+    overflow-y: scroll;
+    border-radius: 3px;
+    padding: 5px;
+    clear: both;
+}
+
+#todos > .todo .container.edit .list label {
+    width: 100%;
+    display: block;
 }

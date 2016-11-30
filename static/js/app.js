@@ -2,16 +2,6 @@ var valid_priorities = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 var pikaday_instances = [];
 
-var new_todo = {
-    text: '',
-    completed: false,
-    completion_date: null,
-    priority: '',
-    creation_date: moment(),
-    projects: [],
-    contexts: []
-};
-
 var app = new Vue({
     delimiters: ['${', '}'], // Because Jinja2 already uses double brakets
     el: '#app',
@@ -19,7 +9,6 @@ var app = new Vue({
         loading: false, // Something is loading
 
         // Todo creation/edition
-        todoBackup: null,
         todoBeingEdited: null,
 
         todos: [], // List of all todos straight from the Todo.txt
@@ -172,12 +161,29 @@ var app = new Vue({
         },
         // Todo creation
         addTodo: function() {
+            if (this.todoBeingEdited) {
+                return;
+            }
+
+            var new_todo = {
+                text: '',
+                completed: false,
+                completion_date: null,
+                priority: '',
+                creation_date: moment(),
+                projects: [],
+                contexts: []
+            };
+
             this.todos.unshift(new_todo);
             this.todoBeingEdited = new_todo;
         },
         // Todo edition
         editTodo: function (todo) {
-            this.todoBackup = Object.create(todo); // FIXME
+            if (this.todoBeingEdited) {
+                return;
+            }
+
             this.todoBeingEdited = todo;
         },
         doneEditTodo: function (todo) {
@@ -192,12 +198,6 @@ var app = new Vue({
             if (!todo.text) {
                 this.removeTodo(todo);
             }
-        },
-        cancelEditTodo: function (todo) {
-            todo = Object.create(this.todoBackup); // FIXME
-
-            this.todoBackup = null;
-            this.todoBeingEdited = null;
         },
         // Delete a todo
         removeTodo: function (todo) {
