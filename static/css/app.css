@@ -265,7 +265,7 @@ a:focus {
     padding: 10px;
 }
 
-#todos .muted {
+#todos > .muted {
     text-align: center;
     margin-top: 15px;
 }
@@ -351,9 +351,7 @@ a:focus {
     border: none;
 }
 
-#todos > .todo.editing .container.show,
-#todos > .todo.editing .completed-checkbox,
-#todos > .todo.editing .priority {
+#todos > .todo.editing .container.show {
     display: none;
 }
 
@@ -366,11 +364,19 @@ a:focus {
 }
 
 #todos > .todo.editing .container.edit {
-    display: table;
+    display: block;
 }
 
 #todos > .todo .container.edit .list {
     padding: 5px;
+}
+
+#todos > .todo .container.edit .list:first-child {
+    padding-left: 0;
+}
+
+#todos > .todo .container.edit .list:last-child {
+    padding-right: 0;
 }
 
 #todos > .todo .container.edit .list > h3 {
@@ -384,16 +390,42 @@ a:focus {
     float: right;
 }
 
+#todos > .todo .container.edit .list label {
+    width: 100%;
+    display: block;
+}
+
+#todos > .todo .container.edit .list.priority {
+    width: 110px;
+}
+
 #todos > .todo .container.edit .list > div {
     border: 1px solid #DDD;
-    height: 120px;
     overflow-y: scroll;
     border-radius: 3px;
     padding: 5px;
     clear: both;
+    background-color: #FFF;
 }
 
-#todos > .todo .container.edit .list label {
-    width: 100%;
-    display: block;
+#todos > .todo .container.edit .list.priority > div {
+    height: 145px;
+}
+
+#todos > .todo .container.edit .list.priority > div > div {
+    margin-top: 5px;
+}
+
+#todos > .todo .container.edit .list.projects > div,
+#todos > .todo .container.edit .list.contexts > div {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    height: 115px;
+}
+
+#todos > .todo .container.edit .list.projects > input,
+#todos > .todo .container.edit .list.contexts > input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }

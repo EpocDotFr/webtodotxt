@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-29 23:45+0100\n"
-"PO-Revision-Date: 2016-11-29 23:45+0100\n"
+"POT-Creation-Date: 2016-11-30 15:55+0100\n"
+"PO-Revision-Date: 2016-11-30 16:20+0100\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -22,9 +22,7 @@ msgstr ""
 #: webtodotxt.py:54
 #, python-format
 msgid "Error while loading or updating the Todo.txt file: %(exception)s"
-msgstr ""
-"Erreur lors du chargement ou de la mise à jour du fichier Todo.txt : "
-"%(exception)s"
+msgstr "Erreur lors du chargement ou de la mise à jour du fichier Todo.txt : %(exception)s"
 
 #: webtodotxt.py:57
 msgid "Invalid request."
@@ -91,11 +89,11 @@ msgstr "Priorités"
 msgid "None a this moment."
 msgstr "Aucun pour le moment."
 
-#: templates/app.html:55
+#: templates/app.html:55 templates/app.html:109
 msgid "Projects"
 msgstr "Projets"
 
-#: templates/app.html:63
+#: templates/app.html:63 templates/app.html:118
 msgid "Contexts"
 msgstr "Contextes"
 
@@ -108,26 +106,22 @@ msgid "No todos to display"
 msgstr "Aucune tâche à afficher"
 
 #: templates/app.html:78
-msgid "Cancel"
-msgstr "Annuler"
-
-#: templates/app.html:79
 msgid "Done"
 msgstr "Terminé"
 
-#: templates/app.html:80
+#: templates/app.html:79
 msgid "Edit"
 msgstr "Editer"
 
-#: templates/app.html:81
+#: templates/app.html:80
 msgid "Delete"
 msgstr "Supprimer"
 
-#: templates/app.html:93
+#: templates/app.html:92
 msgid "Created"
 msgstr "Créé"
 
-#: templates/app.html:94
+#: templates/app.html:93
 msgid "Completed"
 msgstr "Complété"
 
@@ -135,124 +129,148 @@ msgstr "Complété"
 msgid "Type some text"
 msgstr "Tapez du texte ici"
 
-#: templates/app.html:105
+#: templates/app.html:101
+msgid "Priority"
+msgstr "Priorité"
+
+#: templates/app.html:101
+msgid "Clear priority"
+msgstr "Supprimer la priorité"
+
+#: templates/app.html:109
+msgid "Clear projects"
+msgstr "Réinitialiser les projets"
+
+#: templates/app.html:110
+msgid "Project name"
+msgstr "Nom du projet"
+
+#: templates/app.html:118
+msgid "Clear contexts"
+msgstr "Réinitialiser les contextes"
+
+#: templates/app.html:119
+msgid "Context name"
+msgstr "Nom du contexte"
+
+#: templates/app.html:131
 msgid "Source code on GitHub"
 msgstr "Code source sur GitHub"
 
-#: templates/app.html:105
+#: templates/app.html:131
 #, python-format
 msgid "Licensed under the %(license)s"
 msgstr "Sous licence %(license)s"
 
-#: templates/app.html:118
+#: templates/app.html:144
 msgid "Previous Month"
 msgstr "Mois précédent"
 
-#: templates/app.html:119
+#: templates/app.html:145
 msgid "Next Month"
 msgstr "Mois suivant"
 
-#: templates/app.html:121
+#: templates/app.html:147
 msgid "January"
 msgstr "Janvier"
 
-#: templates/app.html:122
+#: templates/app.html:148
 msgid "February"
 msgstr "Février"
 
-#: templates/app.html:123
+#: templates/app.html:149
 msgid "March"
 msgstr "Mars"
 
-#: templates/app.html:124
+#: templates/app.html:150
 msgid "April"
 msgstr "Avril"
 
-#: templates/app.html:125
+#: templates/app.html:151
 msgid "May"
 msgstr "Mai"
 
-#: templates/app.html:126
+#: templates/app.html:152
 msgid "June"
 msgstr "Juin"
 
-#: templates/app.html:127
+#: templates/app.html:153
 msgid "July"
 msgstr "Juillet"
 
-#: templates/app.html:128
+#: templates/app.html:154
 msgid "August"
 msgstr "Août"
 
-#: templates/app.html:129
+#: templates/app.html:155
 msgid "September"
 msgstr "Septembre"
 
-#: templates/app.html:130
+#: templates/app.html:156
 msgid "October"
 msgstr "Octobre"
 
-#: templates/app.html:131
+#: templates/app.html:157
 msgid "November"
 msgstr "Novembre"
 
-#: templates/app.html:132
+#: templates/app.html:158
 msgid "December"
 msgstr "Décembre"
 
-#: templates/app.html:135
+#: templates/app.html:161
 msgid "Sunday"
 msgstr "Dimanche"
 
-#: templates/app.html:136
+#: templates/app.html:162
 msgid "Monday"
 msgstr "Lundi"
 
-#: templates/app.html:137
+#: templates/app.html:163
 msgid "Tuesday"
 msgstr "Mardi"
 
-#: templates/app.html:138
+#: templates/app.html:164
 msgid "Wednesday"
 msgstr "Mercredi"
 
-#: templates/app.html:139
+#: templates/app.html:165
 msgid "Thursday"
 msgstr "Jeudi"
 
-#: templates/app.html:140
+#: templates/app.html:166
 msgid "Friday"
 msgstr "Vendredi"
 
-#: templates/app.html:141
+#: templates/app.html:167
 msgid "Saturday"
 msgstr "Samedi"
 
-#: templates/app.html:144
+#: templates/app.html:170
 msgid "Sun"
 msgstr "Dim"
 
-#: templates/app.html:145
+#: templates/app.html:171
 msgid "Mon"
 msgstr "Lun"
 
-#: templates/app.html:146
+#: templates/app.html:172
 msgid "Tue"
 msgstr "Mar"
 
-#: templates/app.html:147
+#: templates/app.html:173
 msgid "Wed"
 msgstr "Mer"
 
-#: templates/app.html:148
+#: templates/app.html:174
 msgid "Thu"
 msgstr "Jeu"
 
-#: templates/app.html:149
+#: templates/app.html:175
 msgid "Fri"
 msgstr "Ven"
 
-#: templates/app.html:150
+#: templates/app.html:176
 msgid "Sat"
 msgstr "Sam"
 
@@ -261,3 +279,6 @@ msgstr "Sam"
 
 #~ msgid "Priority"
 #~ msgstr "Priorité"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuler"

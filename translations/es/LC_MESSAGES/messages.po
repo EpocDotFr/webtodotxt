@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-29 23:45+0100\n"
+"POT-Creation-Date: 2016-11-30 15:55+0100\n"
 "PO-Revision-Date: 2016-11-29 13:43+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -88,11 +88,11 @@ msgstr ""
 msgid "None a this moment."
 msgstr ""
 
-#: templates/app.html:55
+#: templates/app.html:55 templates/app.html:109
 msgid "Projects"
 msgstr ""
 
-#: templates/app.html:63
+#: templates/app.html:63 templates/app.html:118
 msgid "Contexts"
 msgstr ""
 
@@ -105,26 +105,22 @@ msgid "No todos to display"
 msgstr ""
 
 #: templates/app.html:78
-msgid "Cancel"
-msgstr ""
-
-#: templates/app.html:79
 msgid "Done"
 msgstr ""
 
-#: templates/app.html:80
+#: templates/app.html:79
 msgid "Edit"
 msgstr ""
 
-#: templates/app.html:81
+#: templates/app.html:80
 msgid "Delete"
 msgstr ""
 
-#: templates/app.html:93
+#: templates/app.html:92
 msgid "Created"
 msgstr ""
 
-#: templates/app.html:94
+#: templates/app.html:93
 msgid "Completed"
 msgstr ""
 
@@ -132,127 +128,154 @@ msgstr ""
 msgid "Type some text"
 msgstr ""
 
-#: templates/app.html:105
+#: templates/app.html:101
+msgid "Priority"
+msgstr ""
+
+#: templates/app.html:101
+msgid "Clear priority"
+msgstr ""
+
+#: templates/app.html:109
+msgid "Clear projects"
+msgstr ""
+
+#: templates/app.html:110
+msgid "Project name"
+msgstr ""
+
+#: templates/app.html:118
+msgid "Clear contexts"
+msgstr ""
+
+#: templates/app.html:119
+msgid "Context name"
+msgstr ""
+
+#: templates/app.html:131
 msgid "Source code on GitHub"
 msgstr ""
 
-#: templates/app.html:105
+#: templates/app.html:131
 #, python-format
 msgid "Licensed under the %(license)s"
 msgstr ""
 
-#: templates/app.html:118
+#: templates/app.html:144
 msgid "Previous Month"
 msgstr ""
 
-#: templates/app.html:119
+#: templates/app.html:145
 msgid "Next Month"
 msgstr ""
 
-#: templates/app.html:121
+#: templates/app.html:147
 msgid "January"
 msgstr ""
 
-#: templates/app.html:122
+#: templates/app.html:148
 msgid "February"
 msgstr ""
 
-#: templates/app.html:123
+#: templates/app.html:149
 msgid "March"
 msgstr ""
 
-#: templates/app.html:124
+#: templates/app.html:150
 msgid "April"
 msgstr ""
 
-#: templates/app.html:125
+#: templates/app.html:151
 msgid "May"
 msgstr ""
 
-#: templates/app.html:126
+#: templates/app.html:152
 msgid "June"
 msgstr ""
 
-#: templates/app.html:127
+#: templates/app.html:153
 msgid "July"
 msgstr ""
 
-#: templates/app.html:128
+#: templates/app.html:154
 msgid "August"
 msgstr ""
 
-#: templates/app.html:129
+#: templates/app.html:155
 msgid "September"
 msgstr ""
 
-#: templates/app.html:130
+#: templates/app.html:156
 msgid "October"
 msgstr ""
 
-#: templates/app.html:131
+#: templates/app.html:157
 msgid "November"
 msgstr ""
 
-#: templates/app.html:132
+#: templates/app.html:158
 msgid "December"
 msgstr ""
 
-#: templates/app.html:135
+#: templates/app.html:161
 msgid "Sunday"
 msgstr ""
 
-#: templates/app.html:136
+#: templates/app.html:162
 msgid "Monday"
 msgstr ""
 
-#: templates/app.html:137
+#: templates/app.html:163
 msgid "Tuesday"
 msgstr ""
 
-#: templates/app.html:138
+#: templates/app.html:164
 msgid "Wednesday"
 msgstr ""
 
-#: templates/app.html:139
+#: templates/app.html:165
 msgid "Thursday"
 msgstr ""
 
-#: templates/app.html:140
+#: templates/app.html:166
 msgid "Friday"
 msgstr ""
 
-#: templates/app.html:141
+#: templates/app.html:167
 msgid "Saturday"
 msgstr ""
 
-#: templates/app.html:144
+#: templates/app.html:170
 msgid "Sun"
 msgstr ""
 
-#: templates/app.html:145
+#: templates/app.html:171
 msgid "Mon"
 msgstr ""
 
-#: templates/app.html:146
+#: templates/app.html:172
 msgid "Tue"
 msgstr ""
 
-#: templates/app.html:147
+#: templates/app.html:173
 msgid "Wed"
 msgstr ""
 
-#: templates/app.html:148
+#: templates/app.html:174
 msgid "Thu"
 msgstr ""
 
-#: templates/app.html:149
+#: templates/app.html:175
 msgid "Fri"
 msgstr ""
 
-#: templates/app.html:150
+#: templates/app.html:176
 msgid "Sat"
 msgstr ""
 
 #~ msgid "Priority"
+#~ msgstr ""
+
+#~ msgid "Cancel"
 #~ msgstr ""
 

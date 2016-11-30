@@ -196,17 +196,29 @@ var app = new Vue({
                 this.removeTodo(todo);
             }
         },
-        // Delete a todo
-        removeTodo: function (todo) {
-            this.todos.splice(this.todos.indexOf(todo), 1);
-        },
         // Called when a todo completion status is set
-        todoCompletedHook: function(todo) {
+        todoCompletedHook: function(todo) { // FIXME Not working
             if (todo.completed) {
                 todo.completion_date = moment();
             } else {
                 todo.completion_date = '';
             }
+        },
+        // Add a new project to a todo
+        addProjectToTodo: function(todo, project) {
+            if (!project) {
+                return;
+            }
+            
+            todo.projects.push(project);
+        },
+        // Add a new context to a todo
+        addContextToTodo: function(todo, context) {
+            if (!context) {
+                return;
+            }
+
+            todo.contexts.push(context);
         },
         // Load all todos from the Todo.txt file in the Vue.js data
         loadTodoTxt: function() {
@@ -254,11 +266,11 @@ var app = new Vue({
             this.loading = true;
 
             var data = $.map(app.todos, function(todo) {
-                if (('completion_date' in todo) && todo.completion_date) {
+                if (('completion_date' in todo) && moment.isMoment(todo.completion_date)) {
                     todo.completion_date = todo.completion_date.format('YYYY-MM-DD');
                 }
 
-                if (('creation_date' in todo) && todo.creation_date) {
+                if (('creation_date' in todo) && moment.isMoment(todo.creation_date)) {
                     todo.creation_date = todo.creation_date.format('YYYY-MM-DD');
                 }
 
@@ -300,10 +312,10 @@ $(function() {
 
         pikaday_instances[filter_name] = new Pikaday({
             field: this,
-            firstDay: 1,
-            format: 'L',
+            firstDay: 1, // TODO localize this
+            format: 'L', // Short date format
             onSelect: function() {
-                app.filters[filter_name] = this.getMoment();
+                app.filters[filter_name] = this.getMoment(); // Update the appropriate filter in the Vue app
             },
             i18n: PIKADAY_LOCALE
         });
