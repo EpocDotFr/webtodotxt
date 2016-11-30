@@ -1,3 +1,17 @@
+var valid_priorities = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+var pikaday_instances = [];
+
+var new_todo = {
+    text: '',
+    completed: false,
+    completion_date: null,
+    priority: '',
+    creation_date: moment(),
+    projects: [],
+    contexts: []
+};
+
 var app = new Vue({
     delimiters: ['${', '}'], // Because Jinja2 already uses double brakets
     el: '#app',
@@ -158,16 +172,6 @@ var app = new Vue({
         },
         // Todo creation
         addTodo: function() {
-            var new_todo = {
-                text: '',
-                completed: false,
-                completion_date: null,
-                priority: '',
-                creation_date: moment(),
-                projects: [],
-                contexts: []
-            };
-
             this.todos.unshift(new_todo);
             this.todoBeingEdited = new_todo;
         },
@@ -283,8 +287,6 @@ var app = new Vue({
         }
     }
 });
-
-var pikaday_instances = [];
 
 $(function() {
     $('input[type="text"].date').each(function() {

@@ -128,9 +128,9 @@ a:focus {
 /************************************************************************
  * Inputs */
 
-input,
-select,
-textarea {
+#app input,
+#app select,
+#app textarea {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-size: 16px;
     background-color: #FFF;
@@ -139,41 +139,41 @@ textarea {
     border-radius: 3px;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+#app input:focus,
+#app select:focus,
+#app textarea:focus {
     border-color: #BBB;
     outline: none;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+#app input[type="checkbox"],
+#app input[type="radio"] {
     margin: 0;
 }
 
-input.date {
+#app input.date {
     cursor: default;
 }
 
 /************************************************************************
  * Header */
 
-header {
+#app header {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-header .title {
+#app header .title {
     font-size: 24px;
 }
 
-header .title a {
+#app header .title a {
     text-decoration: none;
     color: inherit;
     border: none;
 }
 
-header .menu {
+#app header .menu {
     vertical-align: middle;
     text-align: right;
 }
@@ -181,26 +181,26 @@ header .menu {
 /************************************************************************
  * Footer */
 
-footer {
+#app footer {
     text-align: center;
     font-size: 12px;
     margin: 10px;
 }
 
-footer a,
-footer a:visited {
+#app footer a,
+#app footer a:visited {
     color: inherit;
 }
 
 /************************************************************************
  * Rows */
 
-.row {
+#app .row {
     display: table;
     width: 100%;
 }
 
-.row > div {
+#app .row > div {
     display: table-cell;
     vertical-align: top;
 }
@@ -291,6 +291,17 @@ footer a:visited {
     right: 1px;
 }
 
+#todos > .todo .actions .apply,
+#todos > .todo .actions .cancel,
+#todos > .todo.editing .actions .edit {
+    display: none;
+}
+
+#todos > .todo.editing .actions .apply,
+#todos > .todo.editing .actions .cancel {
+    display: inline;
+}
+
 #todos > .todo > .actions a {
     color: inherit;
     text-decoration: none;
@@ -324,50 +335,38 @@ footer a:visited {
     border-top-right-radius: 3px;
 }
 
-#todos > .todo .container > div.priority {
+#todos > .todo .container.show > div.priority {
     width: 35px;
 }
 
-#todos > .todo .container > div.completed-checkbox,
-#todos > .todo .container > div.priority {
+#todos > .todo .container.show > div.completed-checkbox,
+#todos > .todo .container.show > div.priority {
     vertical-align: middle;
 }
 
-#todos > .todo .container > div.completed-checkbox {
+#todos > .todo .container.show > div.completed-checkbox {
     width: 25px;
 }
 
-#todos > .todo.completed .content > div.text  {
+#todos > .todo.completed .container.show div.text  {
     text-decoration: line-through;
 }
 
-#todos > .todo .content > div.metadata {
+#todos > .todo .container.show div.metadata {
     color: #AAA;
     font-size: 14px;
     border: none;
 }
 
-#todos > .todo .actions .apply,
-#todos > .todo .actions .cancel,
-#todos > .todo.editing .actions .edit {
+#todos > .todo .container.edit {
     display: none;
 }
 
-#todos > .todo.editing .actions .apply,
-#todos > .todo.editing .actions .cancel {
-    display: inline;
+#todos > .todo.editing .container.edit {
+    display: table;
 }
 
-#todos > .todo .content.edit,
-#todos > .todo .content.cancel {
-    display: none;
-}
-
-#todos > .todo.editing .content.edit {
-    display: table-cell;
-}
-
-#todos > .todo.editing .content.show,
+#todos > .todo.editing .container.show,
 #todos > .todo.editing .completed-checkbox,
 #todos > .todo.editing .priority {
     display: none;
