@@ -65,7 +65,10 @@ def todotxt():
 @app.before_request
 def set_locale():
     if not hasattr(g, 'current_locale'):
-        g.CURRENT_LOCALE = request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+        if app.config['FORCE_LANGUAGE']:
+            g.CURRENT_LOCALE = app.config['FORCE_LANGUAGE']
+        else:
+            g.CURRENT_LOCALE = request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
 
 @auth.get_password
