@@ -273,6 +273,8 @@ a:focus {
 #todos > .todo {
     position: relative;
     margin-bottom: 10px;
+    border: 1px solid #DDD;
+    border-radius: 3px;
 }
 
 #todos > .todo:last-child {
@@ -313,9 +315,11 @@ a:focus {
 }
 
 #todos > .todo > .container {
-    border: 1px solid #DDD;
-    border-radius: 3px;
     background-color: #EEE;
+    border-top: 1px solid #FFF;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    width: 100%;
 }
 
 #todos > .todo:hover > .container {
@@ -324,15 +328,6 @@ a:focus {
 
 #todos > .todo .container > div {
     padding: 5px;
-    border-top: 1px solid #FFF;
-}
-
-#todos > .todo .container > div:first-child {
-    border-top-left-radius: 3px;
-}
-
-#todos > .todo .container > div:last-child {
-    border-top-right-radius: 3px;
 }
 
 #todos > .todo .container.show > div.priority {
