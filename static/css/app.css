@@ -415,6 +415,10 @@ a:focus {
     margin-top: 5px;
 }
 
+#todos > .todo .container.edit .list.priority > div > div:first-child {
+    margin-top: 0;
+}
+
 #todos > .todo .container.edit .list.projects > div,
 #todos > .todo .container.edit .list.contexts > div {
     border-top: none;

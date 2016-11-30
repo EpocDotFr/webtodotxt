@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-30 15:55+0100\n"
+"POT-Creation-Date: 2016-11-30 22:47+0100\n"
 "PO-Revision-Date: 2016-11-29 13:43+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -85,6 +85,7 @@ msgid "Priorities"
 msgstr ""
 
 #: templates/app.html:49 templates/app.html:57 templates/app.html:65
+#: templates/app.html:112 templates/app.html:122
 msgid "None a this moment."
 msgstr ""
 
@@ -92,7 +93,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: templates/app.html:63 templates/app.html:118
+#: templates/app.html:63 templates/app.html:119
 msgid "Contexts"
 msgstr ""
 
@@ -125,7 +126,7 @@ msgid "Completed"
 msgstr ""
 
 #: templates/app.html:98
-msgid "Type some text"
+msgid "Type some text and hit Enter or Esc"
 msgstr ""
 
 #: templates/app.html:101
@@ -140,136 +141,132 @@ msgstr ""
 msgid "Clear projects"
 msgstr ""
 
-#: templates/app.html:110
-msgid "Project name"
-msgstr ""
-
-#: templates/app.html:118
-msgid "Clear contexts"
+#: templates/app.html:110 templates/app.html:120
+msgid "Type a name and hit Enter"
 msgstr ""
 
 #: templates/app.html:119
-msgid "Context name"
+msgid "Clear contexts"
 msgstr ""
 
-#: templates/app.html:131
+#: templates/app.html:133
 msgid "Source code on GitHub"
 msgstr ""
 
-#: templates/app.html:131
+#: templates/app.html:133
 #, python-format
 msgid "Licensed under the %(license)s"
 msgstr ""
 
-#: templates/app.html:144
+#: templates/app.html:146
 msgid "Previous Month"
 msgstr ""
 
-#: templates/app.html:145
+#: templates/app.html:147
 msgid "Next Month"
 msgstr ""
 
-#: templates/app.html:147
+#: templates/app.html:149
 msgid "January"
 msgstr ""
 
-#: templates/app.html:148
+#: templates/app.html:150
 msgid "February"
 msgstr ""
 
-#: templates/app.html:149
+#: templates/app.html:151
 msgid "March"
 msgstr ""
 
-#: templates/app.html:150
+#: templates/app.html:152
 msgid "April"
 msgstr ""
 
-#: templates/app.html:151
+#: templates/app.html:153
 msgid "May"
 msgstr ""
 
-#: templates/app.html:152
+#: templates/app.html:154
 msgid "June"
 msgstr ""
 
-#: templates/app.html:153
+#: templates/app.html:155
 msgid "July"
 msgstr ""
 
-#: templates/app.html:154
+#: templates/app.html:156
 msgid "August"
 msgstr ""
 
-#: templates/app.html:155
+#: templates/app.html:157
 msgid "September"
 msgstr ""
 
-#: templates/app.html:156
+#: templates/app.html:158
 msgid "October"
 msgstr ""
 
-#: templates/app.html:157
+#: templates/app.html:159
 msgid "November"
 msgstr ""
 
-#: templates/app.html:158
+#: templates/app.html:160
 msgid "December"
 msgstr ""
 
-#: templates/app.html:161
+#: templates/app.html:163
 msgid "Sunday"
 msgstr ""
 
-#: templates/app.html:162
+#: templates/app.html:164
 msgid "Monday"
 msgstr ""
 
-#: templates/app.html:163
+#: templates/app.html:165
 msgid "Tuesday"
 msgstr ""
 
-#: templates/app.html:164
+#: templates/app.html:166
 msgid "Wednesday"
 msgstr ""
 
-#: templates/app.html:165
+#: templates/app.html:167
 msgid "Thursday"
 msgstr ""
 
-#: templates/app.html:166
+#: templates/app.html:168
 msgid "Friday"
 msgstr ""
 
-#: templates/app.html:167
+#: templates/app.html:169
 msgid "Saturday"
 msgstr ""
 
-#: templates/app.html:170
+#: templates/app.html:172
 msgid "Sun"
 msgstr ""
 
-#: templates/app.html:171
+#: templates/app.html:173
 msgid "Mon"
 msgstr ""
 
-#: templates/app.html:172
+#: templates/app.html:174
 msgid "Tue"
 msgstr ""
 
-#: templates/app.html:173
+#: templates/app.html:175
 msgid "Wed"
 msgstr ""
 
-#: templates/app.html:174
+#: templates/app.html:176
 msgid "Thu"
 msgstr ""
 
-#: templates/app.html:175
+#: templates/app.html:177
 msgid "Fri"
 msgstr ""
 
-#: templates/app.html:176
+#: templates/app.html:178
 msgid "Sat"
 msgstr ""
 
@@ -277,5 +274,26 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Cancel"
+#~ msgstr ""
+
+#~ msgid "Type some text"
+#~ msgstr ""
+
+#~ msgid "Project name"
+#~ msgstr ""
+
+#~ msgid "Context name"
+#~ msgstr ""
+
+#~ msgid "Project name and Enter"
+#~ msgstr ""
+
+#~ msgid "Context name and Enter"
+#~ msgstr ""
+
+#~ msgid "Type a project name and hit Enter"
+#~ msgstr ""
+
+#~ msgid "Type a context name and hit Enter"
 #~ msgstr ""
 

@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="container edit">
-                        <div><input type="text" v-model="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text') }}"></div>
+                        <div><input type="text" v-model="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text and hit Enter or Esc') }}"></div>
                         <div class="row">
                             <div class="list priority">
                                 <h3>{{ _('Priority') }} <button class="small" @click="todo.priority = '';" title="{{ _('Clear priority') }}"><i class="fa fa-eraser"></i></button></h3>
@@ -107,7 +107,7 @@
                             </div>
                             <div class="list projects">
                                 <h3>{{ _('Projects') }} <button class="small" @click="todo.projects = [];" title="{{ _('Clear projects') }}"><i class="fa fa-eraser"></i></button></h3>
-                                <input type="text" @keyup.enter="addProjectToTodo(todo, $event.target.value)" placeholder="{{ _('Project name') }}">
+                                <input type="text" @keyup.enter="addProjectToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
                                 <div>
                                     <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
                                     <div v-for="project in allProjects">
@@ -117,7 +117,7 @@
                             </div>
                             <div class="list contexts">
                                 <h3>{{ _('Contexts') }} <button class="small" @click="todo.contexts = [];" title="{{ _('Clear contexts') }}"><i class="fa fa-eraser"></i></button></h3>
-                                <input type="text" @keyup.enter="addContextToTodo(todo, $event.target.value)" placeholder="{{ _('Context name') }}">
+                                <input type="text" @keyup.enter="addContextToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
                                 <div>
                                     <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
                                     <div v-for="context in allContexts">

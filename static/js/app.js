@@ -205,20 +205,24 @@ var app = new Vue({
             }
         },
         // Add a new project to a todo
-        addProjectToTodo: function(todo, project) {
-            if (!project) {
+        addProjectToTodo: function(todo, event) {
+            if (!event.target.value) {
                 return;
             }
             
-            todo.projects.push(project);
+            todo.projects.push(event.target.value);
+
+            event.target.value = '';
         },
         // Add a new context to a todo
-        addContextToTodo: function(todo, context) {
-            if (!context) {
+        addContextToTodo: function(todo, event) {
+            if (!event.target.value) {
                 return;
             }
 
-            todo.contexts.push(context);
+            todo.contexts.push(event.target.value);
+
+            event.target.value = '';
         },
         // Load all todos from the Todo.txt file in the Vue.js data
         loadTodoTxt: function() {
