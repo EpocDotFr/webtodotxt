@@ -12,7 +12,9 @@ var app = new Vue({
         todoBeingEdited: null,
 
         todos: [], // List of all todos straight from the Todo.txt
-        filters: { // Filters used to filter the todo list above
+
+        // Filters used to filter the todo list above
+        filters: {
             completed: 'all',
             text: '',
             completion_date: '',
@@ -25,14 +27,8 @@ var app = new Vue({
     // When Vue is ready
     mounted: function () {
         this.$nextTick(function () {
-            app.loadTodoTxt();
+            app.loadTodoTxt(); // Load the Todo.txt file
         });
-    },
-    watch: {
-        /*todos: function() {
-            // https://vuejs.org/v2/guide/computed.html#Watchers
-            // http://stackoverflow.com/questions/5226578/check-if-a-timeout-has-been-cleared
-        }*/
     },
     computed: {
         // The todo list, filtered according criteria
@@ -186,6 +182,7 @@ var app = new Vue({
 
             this.todoBeingEdited = todo;
         },
+        // Called when todo modification is done
         doneEditTodo: function (todo) {
             if (!this.todoBeingEdited) {
                 return;
@@ -203,7 +200,15 @@ var app = new Vue({
         removeTodo: function (todo) {
             this.todos.splice(this.todos.indexOf(todo), 1);
         },
-        // Load all todos from the Todo.txt file
+        // Called when a todo completion status is set
+        todoCompletedHook: function(todo) {
+            if (todo.completed) {
+                todo.completion_date = moment();
+            } else {
+                todo.completion_date = '';
+            }
+        },
+        // Load all todos from the Todo.txt file in the Vue.js data
         loadTodoTxt: function() {
             this.loading = true;
 
@@ -244,7 +249,7 @@ var app = new Vue({
                 }
             });
         },
-        // Save all todos in the Todo.txt file
+        // Save all todos in the Todo.txt file from the Vue.js data
         saveTodoTxt: function() {
             this.loading = true;
 

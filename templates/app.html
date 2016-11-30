@@ -81,7 +81,7 @@
                     </div>
                     <div class="row container show">
                         <div class="completed-checkbox">
-                            <input type="checkbox" v-model="todo.completed">
+                            <input type="checkbox" v-model="todo.completed" @click="todoCompletedHook(todo)">
                         </div>
                         <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
                         <div class="content">

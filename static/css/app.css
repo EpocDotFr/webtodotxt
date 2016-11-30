@@ -289,8 +289,8 @@ a:focus {
     display: none;
     border-bottom-left-radius: 3px;
     position: absolute;
-    top: 1px;
-    right: 1px;
+    top: 0px;
+    right: 0px;
 }
 
 #todos > .todo .actions .apply,
