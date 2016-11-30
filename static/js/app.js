@@ -197,7 +197,7 @@ var app = new Vue({
             }
         },
         // Called when a todo completion status is set
-        todoCompletedHook: function(todo) { // FIXME Not working
+        todoCompletedHook: function(todo) {
             if (todo.completed) {
                 todo.completion_date = moment();
             } else {
