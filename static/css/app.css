@@ -367,7 +367,7 @@ a:focus {
 }
 
 #todos > .todo .container.edit .list {
-    padding: 5px;
+    padding: 0 5px;
 }
 
 #todos > .todo .container.edit .list:first-child {
