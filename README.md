@@ -2,7 +2,7 @@
 
 A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
 
-![Web Todo.txt screenshot](https://github.com/EpocDotFr/webtodotxt/raw/master/screenshot.png)
+<p align="center">![Web Todo.txt screenshot](https://github.com/EpocDotFr/webtodotxt/raw/master/screenshot.png)</p>
 
 ## Prerequisites
 
