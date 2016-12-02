@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="container edit">
-                        <div><input type="text" v-model="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text and hit Enter or Esc') }}"></div>
+                        <div><input type="text" v-model.trim="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text and hit Enter or Esc') }}"></div>
                         <div class="row">
                             <div class="list priority">
                                 <h3>{{ _('Priority') }} <button class="small" @click="todo.priority = '';" title="{{ _('Clear priority') }}"><i class="fa fa-eraser"></i></button></h3>

@@ -190,8 +190,6 @@ var app = new Vue({
 
             this.todoBeingEdited = null;
 
-            todo.text = $.trim(todo.text);
-
             if (!todo.text) {
                 this.removeTodo(todo);
             }
@@ -269,7 +267,7 @@ var app = new Vue({
         saveTodoTxt: function() {
             this.loading = true;
 
-            var data = $.map(app.todos, function(todo) {
+            var data = $.map($.extend(true, {}, app.todos), function(todo) {
                 if (('completion_date' in todo) && moment.isMoment(todo.completion_date)) {
                     todo.completion_date = todo.completion_date.format('YYYY-MM-DD');
                 }
