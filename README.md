@@ -61,15 +61,21 @@ giving/receiving data through [Ajax](https://en.wikipedia.org/wiki/Ajax_(program
 
 ## Gotchas
 
-Be aware that this web application isn't intended to be used on mobile devices. Instead, use mobile apps to edit
-and sync the Todo.txt file:
+  - Be aware that this web application isn't intended to be used on mobile devices
 
-  - On Android, [Simpletask Cloudless](https://play.google.com/store/apps/details?id=nl.mpcjanssen.simpletask) along [FolderSync Lite](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite)
-  - On iOS, I don't know. Feel free to share your finds.
+Instead, use native mobile apps to edit and sync the Todo.txt file:
 
-Also note that this web application wasn't designed to be multi-process compliant, e.g if you sync your Todo.txt
-file via SFTP or something from the mobile apps and at the same time you're modifiying it via this web app, you'll
-probably end with a corrupted file.
+**On Android**, [Simpletask Cloudless](https://play.google.com/store/apps/details?id=nl.mpcjanssen.simpletask) along [FolderSync Lite](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite)
+
+**On iOS**, I don't know. Feel free to share your finds.
+
+  - This web application wasn't designed to be multi-process compliant
+
+If you sync your Todo.txt file via SFTP or something from the mobile apps and at the same time you're modifiying it via
+this web app, you'll probably end with a loss of data because both sides can't be aware of the latest version of the file
+in realtime: they both erase the file with their data.
+
+So make sure you're modifying it from one location at a time with the latest up-to-date Todo.txt file.
 
 ## Contributors
 
