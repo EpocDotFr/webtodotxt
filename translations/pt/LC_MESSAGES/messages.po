@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-30 22:47+0100\n"
+"POT-Creation-Date: 2016-12-07 09:10+0100\n"
 "PO-Revision-Date: 2016-11-29 13:43+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: pt\n"
@@ -21,89 +21,89 @@ msgstr ""
 #: webtodotxt.py:54
 #, python-format
 msgid "Error while loading or updating the Todo.txt file: %(exception)s"
-msgstr ""
+msgstr "Erro ao carregar ou atualizar o arquivo Todo.txt: %(exception)s"
 
 #: webtodotxt.py:57
 msgid "Invalid request."
-msgstr ""
+msgstr "Pedido inválido."
 
 #: templates/app.html:24
 msgid "Loading..."
-msgstr ""
+msgstr "Carregando..."
 
 #: templates/app.html:27
 msgid "Add"
-msgstr ""
+msgstr "Adicionar"
 
 #: templates/app.html:28
 msgid "Reload"
-msgstr ""
+msgstr "Recarregar"
 
 #: templates/app.html:29
 msgid "Save"
-msgstr ""
+msgstr "Salvar"
 
 #: templates/app.html:35
 msgid "General filters"
-msgstr ""
+msgstr "Filtros gerais"
 
 #: templates/app.html:35 templates/app.html:47 templates/app.html:55
 #: templates/app.html:63
 msgid "Clear these filters"
-msgstr ""
+msgstr "Limpar esses filtros"
 
 #: templates/app.html:37
 msgid "Completed:"
-msgstr ""
+msgstr "Concluído:"
 
 #: templates/app.html:38
 msgid "All"
-msgstr ""
+msgstr "Tudo"
 
 #: templates/app.html:39
 msgid "Yes"
-msgstr ""
+msgstr "Sim"
 
 #: templates/app.html:40
 msgid "No"
-msgstr ""
+msgstr "Não"
 
 #: templates/app.html:42
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: templates/app.html:43
 msgid "Completion date"
-msgstr ""
+msgstr "Data de conclusão"
 
 #: templates/app.html:44
 msgid "Creation date"
-msgstr ""
+msgstr "Data de criação"
 
 #: templates/app.html:47
 msgid "Priorities"
-msgstr ""
+msgstr "Prioridades"
 
 #: templates/app.html:49 templates/app.html:57 templates/app.html:65
 #: templates/app.html:112 templates/app.html:122
 msgid "None a this moment."
-msgstr ""
+msgstr "Nenhum neste momento."
 
 #: templates/app.html:55 templates/app.html:109
 msgid "Projects"
-msgstr ""
+msgstr "Projetos"
 
 #: templates/app.html:63 templates/app.html:119
 msgid "Contexts"
-msgstr ""
+msgstr "Contextos"
 
 #: templates/app.html:71
 msgid "Clear all filters"
-msgstr ""
+msgstr "Limpar todos os filtros"
 
 #: templates/app.html:75
 msgid "No todos to display"
-msgstr ""
+msgstr "Não todos para exibir"
 
 #: templates/app.html:78
 msgid "Done"
@@ -119,11 +119,11 @@ msgstr ""
 
 #: templates/app.html:92
 msgid "Created"
-msgstr ""
+msgstr "Criado"
 
 #: templates/app.html:93
 msgid "Completed"
-msgstr ""
+msgstr "Concluído"
 
 #: templates/app.html:98
 msgid "Type some text and hit Enter or Esc"
@@ -151,149 +151,125 @@ msgstr ""
 
 #: templates/app.html:133
 msgid "Source code on GitHub"
-msgstr ""
+msgstr "Código fonte no GitHub"
 
 #: templates/app.html:133
 #, python-format
 msgid "Licensed under the %(license)s"
-msgstr ""
+msgstr "Licenciado sob o %(license)s"
 
 #: templates/app.html:146
 msgid "Previous Month"
-msgstr ""
+msgstr "Mês anterior"
 
 #: templates/app.html:147
 msgid "Next Month"
-msgstr ""
+msgstr "Próximo mês"
 
 #: templates/app.html:149
 msgid "January"
-msgstr ""
+msgstr "Janeiro"
 
 #: templates/app.html:150
 msgid "February"
-msgstr ""
+msgstr "Fevereiro"
 
 #: templates/app.html:151
 msgid "March"
-msgstr ""
+msgstr "Março"
 
 #: templates/app.html:152
 msgid "April"
-msgstr ""
+msgstr "Abril"
 
 #: templates/app.html:153
 msgid "May"
-msgstr ""
+msgstr "Maio"
 
 #: templates/app.html:154
 msgid "June"
-msgstr ""
+msgstr "Junho"
 
 #: templates/app.html:155
 msgid "July"
-msgstr ""
+msgstr "Julho"
 
 #: templates/app.html:156
 msgid "August"
-msgstr ""
+msgstr "Agosto"
 
 #: templates/app.html:157
 msgid "September"
-msgstr ""
+msgstr "Setembro"
 
 #: templates/app.html:158
 msgid "October"
-msgstr ""
+msgstr "Outubro"
 
 #: templates/app.html:159
 msgid "November"
-msgstr ""
+msgstr "Novembro"
 
 #: templates/app.html:160
 msgid "December"
-msgstr ""
+msgstr "Dezembro"
 
 #: templates/app.html:163
 msgid "Sunday"
-msgstr ""
+msgstr "Domingo"
 
 #: templates/app.html:164
 msgid "Monday"
-msgstr ""
+msgstr "Segunda-feira"
 
 #: templates/app.html:165
 msgid "Tuesday"
-msgstr ""
+msgstr "Terça-feira"
 
 #: templates/app.html:166
 msgid "Wednesday"
-msgstr ""
+msgstr "Quarta-feira"
 
 #: templates/app.html:167
 msgid "Thursday"
-msgstr ""
+msgstr "Quinta-feira"
 
 #: templates/app.html:168
 msgid "Friday"
-msgstr ""
+msgstr "Sexta-feira"
 
 #: templates/app.html:169
 msgid "Saturday"
-msgstr ""
+msgstr "Sábado"
 
 #: templates/app.html:172
 msgid "Sun"
-msgstr ""
+msgstr "Dom"
 
 #: templates/app.html:173
 msgid "Mon"
-msgstr ""
+msgstr "Seg"
 
 #: templates/app.html:174
 msgid "Tue"
-msgstr ""
+msgstr "Ter"
 
 #: templates/app.html:175
 msgid "Wed"
-msgstr ""
+msgstr "Qua"
 
 #: templates/app.html:176
 msgid "Thu"
-msgstr ""
+msgstr "Qui"
 
 #: templates/app.html:177
 msgid "Fri"
-msgstr ""
+msgstr "Sex"
 
 #: templates/app.html:178
 msgid "Sat"
-msgstr ""
-
-#~ msgid "Priority"
-#~ msgstr ""
-
-#~ msgid "Cancel"
-#~ msgstr ""
+msgstr "Sáb"
 
 #~ msgid "Type some text"
-#~ msgstr ""
-
-#~ msgid "Project name"
-#~ msgstr ""
-
-#~ msgid "Context name"
-#~ msgstr ""
-
-#~ msgid "Project name and Enter"
-#~ msgstr ""
-
-#~ msgid "Context name and Enter"
-#~ msgstr ""
-
-#~ msgid "Type a project name and hit Enter"
-#~ msgstr ""
-
-#~ msgid "Type a context name and hit Enter"
-#~ msgstr ""
+#~ msgstr "Digite algum texto"
 
