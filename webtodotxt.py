@@ -9,7 +9,8 @@ app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('config.py')
 app.config['LANGUAGES'] = {
     'en': 'English',
-    'fr': 'Français'
+    'fr': 'Français',
+    'pt': 'Portuguese'
 }
 
 babel = Babel(app)
