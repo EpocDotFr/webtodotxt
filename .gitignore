@@ -1,5 +1,5 @@
 config.py
-storage/todo.txt
+storage/data/todo.txt
 storage/logs/*.log
 
 ### JetBrains template
