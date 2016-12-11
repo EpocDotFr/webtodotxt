@@ -28,29 +28,29 @@ logging.getLogger().setLevel(logging.INFO)
 # -----------------------------------------------------------
 
 
-@auth.login_required
 @app.route('/')
+@auth.login_required
 def home():
     locale = get_locale()
 
     return render_template('app.html', first_week_day=locale.first_week_day + 1)
 
 
-@auth.login_required
 @app.route('/todo.txt', methods=['GET', 'POST'])
+@auth.login_required
 def todotxt():
     status = 200
 
     if request.is_xhr:
         try:
             if request.method == 'GET':
-                todos = todotxtio.from_file(app.config['TODOTXT_LOCATION'])
+                todos = todotxtio.from_file(os.path.abspath(app.config['TODOTXT_LOCATION']))
 
                 result = {'status': 'success', 'data': todotxtio.to_dicts(todos)}
             elif request.method == 'POST':
                 todos = todotxtio.from_dicts(request.get_json())
 
-                todotxtio.to_file(app.config['TODOTXT_LOCATION'], todos)
+                todotxtio.to_file(os.path.abspath(app.config['TODOTXT_LOCATION']), todos)
 
                 result = {'status': 'success', 'data': []}
         except Exception as e:
