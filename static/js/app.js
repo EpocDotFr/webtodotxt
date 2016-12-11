@@ -1,11 +1,46 @@
-var valid_priorities = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
 var pikaday_instances = [];
+
+function todoToString(todo) {
+    ret = [];
+
+    if ('completed' in todo && todo.completed) {
+        ret.push('x');
+    }
+
+    if ('completion_date' in todo && todo.completion_date) {
+        ret.push(todo.completion_date.format('YYYY-MM-DD'));
+    }
+
+    if ('priority' in todo && todo.priority) {
+        ret.push('(' + todo.priority + ')');
+    }
+
+    if ('creation_date' in todo && todo.creation_date) {
+        ret.push(todo.creation_date.format('YYYY-MM-DD'));
+    }
+
+    ret.push(todo.text);
+
+    if (('projects' in todo) && todo.projects) {
+        ret.push($.trim($.map(todo.projects, function(project) {
+            return ' +' + project;
+        }).join()));
+    }
+
+    if (('contexts' in todo) && todo.contexts) {
+        ret.push($.trim($.map(todo.contexts, function(context) {
+            return ' +' + context;
+        }).join()));
+    }
+
+    return ret.join(' ');
+}
 
 var app = new Vue({
     delimiters: ['${', '}'], // Because Jinja2 already uses double brakets
     el: '#app',
     data: {
+        valid_priorities: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         loading: false, // Something is loading
 
         // Todo creation/edition
@@ -71,6 +106,11 @@ var app = new Vue({
                 }
 
                 return text && completed && completion_date && priority && creation_date && projects && contexts;
+            }).sort(function(first, second) {
+                first = todoToString(first);
+                second = todoToString(second);
+
+                return first.localeCompare(second);
             });
         },
         // All priorities extracted from the current todo list
