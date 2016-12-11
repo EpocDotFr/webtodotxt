@@ -107,11 +107,15 @@ var app = new Vue({
                 }
 
                 return text && completed && completion_date && priority && creation_date && projects && contexts;
-            }).sort(function(first, second) {
-                first = todoToString(first);
-                second = todoToString(second);
+            }).sort(function(first_todo, second_todo) {
+                if (('_new' in first_todo) ) {
+                    return -1;
+                }
 
-                return first.localeCompare(second);
+                first_todo = todoToString(first_todo);
+                second_todo = todoToString(second_todo);
+
+                return first_todo.localeCompare(second_todo);
             });
         },
         // All priorities extracted from the current todo list
@@ -209,7 +213,8 @@ var app = new Vue({
                 priority: '',
                 creation_date: moment(),
                 projects: [],
-                contexts: []
+                contexts: [],
+                _new: true
             };
 
             this.todos.unshift(new_todo);
@@ -231,6 +236,10 @@ var app = new Vue({
 
             this.todoBeingEdited = null;
 
+            if ('_new' in todo) {
+                Vue.delete(todo, '_new');
+            }
+
             if (!todo.text) {
                 this.removeTodo(todo);
             }
@@ -245,21 +254,25 @@ var app = new Vue({
         },
         // Add a new project to a todo
         addProjectToTodo: function(todo, event) {
-            if (!event.target.value) {
+            var project_name = $.trim(event.target.value);
+
+            if (!project_name) {
                 return;
             }
             
-            todo.projects.push(event.target.value);
+            todo.projects.push(project_name);
 
             event.target.value = '';
         },
         // Add a new context to a todo
         addContextToTodo: function(todo, event) {
-            if (!event.target.value) {
+            var context_name = $.trim(event.target.value);
+
+            if (!context_name) {
                 return;
             }
 
-            todo.contexts.push(event.target.value);
+            todo.contexts.push(context_name);
 
             event.target.value = '';
         },
