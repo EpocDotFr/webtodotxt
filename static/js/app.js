@@ -7,31 +7,11 @@ function todoToString(todo) {
         ret.push('x');
     }
 
-    if ('completion_date' in todo && todo.completion_date) {
-        ret.push(todo.completion_date.format('YYYY-MM-DD'));
-    }
-
     if ('priority' in todo && todo.priority) {
         ret.push('(' + todo.priority + ')');
     }
 
-    if ('creation_date' in todo && todo.creation_date) {
-        ret.push(todo.creation_date.format('YYYY-MM-DD'));
-    }
-
     ret.push(todo.text);
-
-    if (('projects' in todo) && todo.projects) {
-        ret.push($.trim($.map(todo.projects, function(project) {
-            return ' +' + project;
-        }).join()));
-    }
-
-    if (('contexts' in todo) && todo.contexts) {
-        ret.push($.trim($.map(todo.contexts, function(context) {
-            return ' +' + context;
-        }).join()));
-    }
 
     return ret.join(' ');
 }
@@ -122,55 +102,55 @@ var app = new Vue({
         allPriorities: function() {
             var all_priorities = [];
 
-            return $.map(this.todos, function(todo) {
+            $.each(this.todos, function(index, todo) {
                 if (!('priority' in todo) || !todo.priority || $.inArray(todo.priority, all_priorities) !== -1) {
                     return null;
                 }
 
                 all_priorities.push(todo.priority);
+            });
 
-                return todo.priority;
-            }).sort();
+            return all_priorities.sort();
         },
         // All projects extracted from the current todo list
         allProjects: function() {
             var all_projects = [];
 
-            return $.map(this.todos, function(todo) {
+            $.each(this.todos, function(index, todo) {
                 if (!('projects' in todo) || !todo.projects) {
-                    return null;
+                    return;
                 }
 
-                return $.map(todo.projects, function(project) {
+                $.each(todo.projects, function(index, project) {
                     if ($.inArray(project, all_projects) !== -1) {
-                        return null;
+                        return;
                     }
 
                     all_projects.push(project);
-
-                    return project;
                 });
-            }).sort();
+            });
+
+            return all_projects.sort();
         },
         // All contexts extracted from the current todo list
         allContexts: function() {
             var all_contexts = [];
 
-            return $.map(this.todos, function(todo) {
+            $.each(this.todos, function(index, todo) {
                 if (!('contexts' in todo) || !todo.contexts) {
-                    return null;
+                    return;
                 }
 
-                return $.map(todo.contexts, function(context) {
+                $.each(todo.contexts, function(index, context) {
                     if ($.inArray(context, all_contexts) !== -1) {
-                        return null;
+                        return;
                     }
 
                     all_contexts.push(context);
-
-                    return context;
                 });
-            }).sort();
+            });
+
+            return all_contexts.sort();
         }
     },
     methods: {
