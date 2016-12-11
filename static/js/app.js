@@ -42,6 +42,7 @@ var app = new Vue({
     data: {
         valid_priorities: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         loading: false, // Something is loading
+        is_dirty: false, // A todo was modified but not already saved
 
         // Todo creation/edition
         todoBeingEdited: null,
@@ -353,13 +354,19 @@ $(function() {
         var filter_name = self.data('filter');
 
         pikaday_instances[filter_name] = new Pikaday({
-            field: this,
-            firstDay: 1, // TODO localize this
+            field: self.get(0),
+            firstDay: FIRST_DAY_OF_WEEK,
             format: 'L', // Short date format
             onSelect: function() {
                 app.filters[filter_name] = this.getMoment(); // Update the appropriate filter in the Vue app
             },
             i18n: PIKADAY_LOCALE
         });
+    });
+
+    $(window).on('onbeforeunload', function() {
+        if (app.is_dirty) {
+            return '';
+        }
     });
 });

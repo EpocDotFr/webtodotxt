@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, g
 from flask_httpauth import HTTPBasicAuth
-from flask_babel import Babel, _
+from flask_babel import Babel, get_locale, _
 import logging
 import sys
 import todotxtio
@@ -31,7 +31,9 @@ logging.getLogger().setLevel(logging.INFO)
 @auth.login_required
 @app.route('/')
 def home():
-    return render_template('app.html')
+    locale = get_locale()
+
+    return render_template('app.html', first_week_day=locale.first_week_day + 1)
 
 
 @auth.login_required
@@ -81,5 +83,5 @@ def get_password(username):
 
 
 @babel.localeselector
-def get_locale():
+def get_app_locale():
     return g.CURRENT_LOCALE
