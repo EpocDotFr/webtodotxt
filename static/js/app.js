@@ -56,38 +56,38 @@ var app = new Vue({
                     text = todo.text.toLowerCase().indexOf(app.filters.text.toLowerCase()) !== -1;
                 }
 
-                if (('completed' in todo) && app.filters.completed == 'yes') {
-                    completed = todo.completed;
-                } else if (('completed' in todo) && app.filters.completed == 'no') {
-                    completed = !todo.completed;
+                if (app.filters.completed == 'yes') {
+                    completed = ('completed' in todo) && todo.completed;
+                } else if (app.filters.completed == 'no') {
+                    completed = ('completed' in todo) && !todo.completed;
                 }
 
-                if (('completion_date' in todo) && app.filters.completion_date) {
-                    completion_date = app.filters.completion_date.isSame(todo.completion_date, 'day');
+                if (app.filters.completion_date) {
+                    completion_date = ('completion_date' in todo) && todo.completion_date && app.filters.completion_date.isSame(todo.completion_date, 'day');
                 }
 
-                if (('priority' in todo) && app.filters.priorities && app.filters.priorities.length > 0) {
-                    priority = $.inArray(todo.priority, app.filters.priorities) !== -1;
+                if (app.filters.priorities && app.filters.priorities.length > 0) {
+                    priority = ('priority' in todo) && todo.priority && $.inArray(todo.priority, app.filters.priorities) !== -1;
                 }
 
-                if (('creation_date' in todo) && app.filters.creation_date) {
-                    creation_date = app.filters.creation_date.isSame(todo.creation_date, 'day');
+                if (app.filters.creation_date) {
+                    creation_date = ('creation_date' in todo) && todo.creation_date && app.filters.creation_date.isSame(todo.creation_date, 'day');
                 }
 
-                if (('projects' in todo) && todo.projects && app.filters.projects && app.filters.projects.length > 0) {
-                    projects = $.grep(todo.projects, function(project) {
+                if (app.filters.projects && app.filters.projects.length > 0) {
+                    projects = ('projects' in todo) && todo.projects && $.grep(todo.projects, function(project) {
                         return $.inArray(project, app.filters.projects) !== -1;
                     }).length > 0;
                 }
 
-                if (('contexts' in todo) && todo.contexts && app.filters.contexts && app.filters.contexts.length > 0) {
-                    contexts = $.grep(todo.contexts, function(context) {
+                if (app.filters.contexts && app.filters.contexts.length > 0) {
+                    contexts = ('contexts' in todo) && todo.contexts && $.grep(todo.contexts, function(context) {
                         return $.inArray(context, app.filters.contexts) !== -1;
                     }).length > 0;
                 }
 
-                if (('due' in todo.tags) && app.filters.due_date) {
-                    due_date = app.filters.due_date.isSame(todo.tags.due, 'day');
+                if (app.filters.due_date) {
+                    due_date = ('due' in todo.tags) && todo.tags.due && app.filters.due_date.isSame(todo.tags.due, 'day');
                 }
 
                 return text && completed && completion_date && priority && creation_date && projects && contexts && due_date;
