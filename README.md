@@ -29,7 +29,10 @@ More informations on the three above can be found [here](http://flask.pocoo.org/
 
   - `USER` The credentials required to access the app. **It is highly recommended to serve this web app through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
   - `TODOTXT_LOCATION` Path to a Todo.txt file (may be relative or absolute)
-  - `FORCE_LANGUAGE` Force the lang of the web app to be one of the supported ones (`en`, `fr`) (defaults to `None`: auto-detection from the `Accept-Language` HTTP header)
+  - `FORCE_LANGUAGE` Force the lang of the web app to be one of the supported ones (defaults to `None`: auto-detection from the `Accept-Language` HTTP header)
+    - `en` English
+    - `fr` French
+    - `pt` Portuguese (partial)
 
 I'll let you search yourself about how to configure a web server along uWSGI.
 
@@ -81,7 +84,6 @@ So make sure you're modifying it from one location at a time with the latest up-
 
 Thanks to:
 
-  - [@guitouzid](https://github.com/guitouzid) (Spanish translations)
   - [@Pepsit36](https://github.com/Pepsit36) (Portuguese translations)
 
 ## End words
