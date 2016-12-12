@@ -1,5 +1,11 @@
 var pikaday_instances = [];
 
+var base_pikaday_config = {
+    firstDay: FIRST_DAY_OF_WEEK,
+    format: 'L', // Short date format
+    i18n: PIKADAY_LOCALE
+};
+
 function todoToString(todo) {
     ret = [];
 
@@ -45,6 +51,19 @@ var app = new Vue({
         this.$nextTick(function () {
             app.loadTodoTxt(); // Load the Todo.txt file
         });
+    },
+    directives: {
+        datepicker: {
+            bind: function (el, binding) {
+                new Pikaday($.extend(base_pikaday_config, {
+                    trigger: el,
+                    onSelect: function() {
+                        //Vue.set(binding.expression, this.getMoment())
+                        //app[binding.expression] = this.getMoment();
+                    }
+                }));
+            }
+        }
     },
     computed: {
         // The todo list, filtered according criteria
@@ -359,12 +378,6 @@ var app = new Vue({
     }
 });
 
-var base_pikaday_config = {
-    firstDay: FIRST_DAY_OF_WEEK,
-    format: 'L', // Short date format
-    i18n: PIKADAY_LOCALE
-};
-
 $(function() {
     // Date filters datepicker
     $('#filters .datepicker').each(function() {
@@ -377,26 +390,5 @@ $(function() {
                 app.filters[filter_name] = this.getMoment(); // Update the appropriate filter in the Vue app
             }
         }));
-    });
-
-    // Todo list datepickers (e.g due date)
-    $('#todos > .todo .datepicker').each(function() {
-        var self = $(this);
-
-        console.log($.extend(base_pikaday_config, {
-                field: self.get(0),
-                onSelect: function() {
-                    console.log(this.getMoment());
-                }
-            }));
-
-        self.data('pikaday', new Pikaday(
-            $.extend(base_pikaday_config, {
-                field: self.get(0),
-                onSelect: function() {
-                    console.log(this.getMoment());
-                }
-            })
-        ));
     });
 });
