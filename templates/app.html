@@ -40,8 +40,9 @@
                         <label><input type="radio" v-model="filters.completed" value="no"> {{ _('No') }}</label>
                     </div>
                     <div><input type="text" v-model="filters.text" placeholder="{{ _('Text') }}"></div>
-                    <div><input type="text" placeholder="{{ _('Completion date') }}" class="date" readonly data-filter="completion_date"></div>
-                    <div><input type="text" placeholder="{{ _('Creation date') }}" class="date" readonly data-filter="creation_date"></div>
+                    <div><input type="text" placeholder="{{ _('Completion date') }}" class="datepicker" readonly data-filter="completion_date"></div>
+                    <div><input type="text" placeholder="{{ _('Creation date') }}" class="datepicker" readonly data-filter="creation_date"></div>
+                    <div><input type="text" placeholder="{{ _('Due date') }}" class="datepicker" readonly data-filter="due_date"></div>
                 </div>
                 <div class="lists">
                     <h2>{{ _('Priorities') }} <button class="small" @click="clearPrioritiesFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
@@ -87,6 +88,7 @@
                         <div class="content">
                             <div class="text">${ todo.text }</div>
                             <div class="metadata">
+                                <template v-if="todo.tags.due"><strong>{{ _('Due') }} ${ todo.tags.due.format('L') }</strong></template>
                                 <template v-for="project in todo.projects">+${ project } </template>
                                 <template v-for="context in todo.contexts">@${ context } </template>
                                 <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date.format('L') }</template>
@@ -95,10 +97,16 @@
                         </div>
                     </div>
                     <div class="container edit">
-                        <div><input type="text" v-model.trim="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text and hit Enter or Esc') }}"></div>
+                        <div class="row">
+                            <div class="due-date" :style="{width: todo.tags.due ? '40px' : '20px'}">
+                                <a href="#" title="{{ _('Set due date') }}" class="datepicker"><i class="fa fa-calendar"></i></a>
+                                <a href="#" title="{{ _('Remove due date') }}" v-show="todo.tags.due" @click="removeDueDate(todo)"><i class="fa fa-calendar-times-o"></i></a>
+                            </div>
+                            <div><input type="text" v-model.trim="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text and hit Enter or Esc') }}"></div>
+                        </div>
                         <div class="row">
                             <div class="list priority">
-                                <h3>{{ _('Priority') }} <button class="small" @click="todo.priority = '';" title="{{ _('Clear priority') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <h3>{{ _('Priority') }} <button class="small" @click="todo.priority = ''" title="{{ _('Clear priority') }}"><i class="fa fa-eraser"></i></button></h3>
                                 <div>
                                     <div v-for="valid_priority in valid_priorities">
                                         <label><input type="radio" v-model="todo.priority" :value="valid_priority"> <span :class="['priority-chip', valid_priority]">${ valid_priority }</span></label>
@@ -106,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="list projects">
-                                <h3>{{ _('Projects') }} <button class="small" @click="todo.projects = [];" title="{{ _('Clear projects') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <h3>{{ _('Projects') }} <button class="small" @click="todo.projects = []" title="{{ _('Clear projects') }}"><i class="fa fa-eraser"></i></button></h3>
                                 <input type="text" @keyup.enter="addProjectToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
                                 <div>
                                     <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
@@ -116,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="list contexts">
-                                <h3>{{ _('Contexts') }} <button class="small" @click="todo.contexts = [];" title="{{ _('Clear contexts') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <h3>{{ _('Contexts') }} <button class="small" @click="todo.contexts = []" title="{{ _('Clear contexts') }}"><i class="fa fa-eraser"></i></button></h3>
                                 <input type="text" @keyup.enter="addContextToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
                                 <div>
                                     <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>

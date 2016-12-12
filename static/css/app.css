@@ -151,7 +151,7 @@ a:focus {
     margin: 0;
 }
 
-#app input.date {
+#app .datepicker {
     cursor: default;
 }
 
@@ -277,6 +277,12 @@ a:focus {
     border-radius: 3px;
 }
 
+#todos > .todo a {
+    color: inherit;
+    text-decoration: none;
+    border: none;
+}
+
 #todos > .todo:last-child {
     margin-bottom: 0;
 }
@@ -300,12 +306,6 @@ a:focus {
 
 #todos > .todo.editing .actions .apply {
     display: inline;
-}
-
-#todos > .todo > .actions a {
-    color: inherit;
-    text-decoration: none;
-    border: none;
 }
 
 #todos > .todo:hover > .actions {
@@ -364,6 +364,11 @@ a:focus {
 
 #todos > .todo.editing .container.edit {
     display: block;
+}
+
+#todos > .todo .container.edit .due-date {
+    vertical-align: middle;
+    text-align: left;
 }
 
 #todos > .todo .container.edit .list {
