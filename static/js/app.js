@@ -176,15 +176,22 @@ var app = new Vue({
     methods: {
         // Filters
         clearGeneralFilters: function() {
-            this.filters.text = '';
             this.filters.completed = 'all';
+            this.filters.text = '';
 
+            this.clearCompletionDateFilter();
+            this.clearCreationDateFilter();
+            this.clearDueDateFilter();
+        },
+        clearCompletionDateFilter: function() {
             this.filters.completion_date = '';
             pikaday_instances['completion_date'].setDate(null);
-
+        },
+        clearCreationDateFilter: function() {
             this.filters.creation_date = '';
             pikaday_instances['creation_date'].setDate(null);
-
+        },
+        clearDueDateFilter: function() {
             this.filters.due_date = '';
             pikaday_instances['due_date'].setDate(null);
         },

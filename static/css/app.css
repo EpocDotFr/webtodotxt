@@ -214,6 +214,12 @@ a:focus {
     background-color: #EEE;
 }
 
+#filters a {
+    color: inherit;
+    text-decoration: none;
+    border: none;
+}
+
 #filters > div {
     border-top: 1px solid #FFF;
     border-bottom: 1px solid #DDD;
@@ -226,6 +232,12 @@ a:focus {
 
 #filters > div:last-child {
     border-bottom: none;
+}
+
+#filters > div .clear {
+    vertical-align: middle;
+    text-align: right;
+    padding-left: 5px;
 }
 
 #filters > div h2 {
