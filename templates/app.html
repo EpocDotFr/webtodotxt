@@ -44,20 +44,20 @@
                         <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.text = ''"><i class="fa fa-eraser"></i></a></div>
                     </div>
                     <div class="row">
-                        <div><input type="text" placeholder="{{ _('Completion date') }}" class="datepicker" readonly data-filter="completion_date"></div>
-                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="clearCompletionDateFilter()"><i class="fa fa-eraser"></i></a></div>
+                        <div><input type="text" placeholder="{{ _('Completion date') }}" readonly v-date-filter-datepicker:completion_date></div>
+                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.completion_date = ''"><i class="fa fa-eraser"></i></a></div>
                     </div>
                     <div class="row">
-                        <div><input type="text" placeholder="{{ _('Creation date') }}" class="datepicker" readonly data-filter="creation_date"></div>
-                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="clearCreationDateFilter()"><i class="fa fa-eraser"></i></a></div>
+                        <div><input type="text" placeholder="{{ _('Creation date') }}" readonly v-date-filter-datepicker:creation_date></div>
+                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.creation_date = ''"><i class="fa fa-eraser"></i></a></div>
                     </div>
                     <div class="row">
-                        <div><input type="text" placeholder="{{ _('Due date') }}" class="datepicker" readonly data-filter="due_date"></div>
-                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="clearDueDateFilter()"><i class="fa fa-eraser"></i></a></div>
+                        <div><input type="text" placeholder="{{ _('Due date') }}" readonly v-date-filter-datepicker:due_date></div>
+                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.due_date = ''"><i class="fa fa-eraser"></i></a></div>
                     </div>
                 </div>
                 <div class="lists">
-                    <h2>{{ _('Priorities') }} <button class="small" @click="clearPrioritiesFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
+                    <h2>{{ _('Priorities') }} <button class="small" @click="filters.priorities = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div class="muted" v-show="allPriorities.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="priority in allPriorities">
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="lists">
-                    <h2>{{ _('Projects') }} <button class="small" @click="clearProjectsFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
+                    <h2>{{ _('Projects') }} <button class="small" @click="filters.projects = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="project in allProjects">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="lists">
-                    <h2>{{ _('Contexts') }} <button class="small" @click="clearContextsFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
+                    <h2>{{ _('Contexts') }} <button class="small" @click="filters.contexts = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="context in allContexts">

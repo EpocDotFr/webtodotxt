@@ -1,4 +1,4 @@
-var pikaday_instances = [];
+var localStorage_supported = 'localStorage' in window;
 
 function todoToString(todo) {
     ret = [];
@@ -47,20 +47,25 @@ var app = new Vue({
         });
     },
     directives: {
-        /*'todo-due-datepicker': {
-            bind: function (el, binding) {
-                var pikaday = new Pikaday({
+        'date-filter-datepicker': {
+            inserted: function (el, binding) {
+                new Pikaday({
                     firstDay: FIRST_DAY_OF_WEEK,
+                    format: 'L', // Short date format
                     i18n: PIKADAY_LOCALE,
-                    trigger: el,
+                    field: el,
                     onSelect: function() {
-                        Vue.set(binding.expression, 'due', this.getMoment());
+                        app.filters[binding.arg] = this.getMoment(); // Update the appropriate filter
                     }
                 });
-
-                document.body.appendChild(pikaday.el);
+            },
+            update: function(el, binding) { // FIXME this hook is fired more times than necessary for EACH directives when filter value change
+                if (!app.filters[binding.arg]) { // Filter has been reinitialized
+                    // TODO set Pikaday date to null using instance.setDate(null)
+                    el.value = '';
+                }
             }
-        }*/
+        }
     },
     computed: {
         // The todo list, filtered according criteria
@@ -178,37 +183,16 @@ var app = new Vue({
         clearGeneralFilters: function() {
             this.filters.completed = 'all';
             this.filters.text = '';
-
-            this.clearCompletionDateFilter();
-            this.clearCreationDateFilter();
-            this.clearDueDateFilter();
-        },
-        clearCompletionDateFilter: function() {
             this.filters.completion_date = '';
-            pikaday_instances['completion_date'].setDate(null);
-        },
-        clearCreationDateFilter: function() {
             this.filters.creation_date = '';
-            pikaday_instances['creation_date'].setDate(null);
-        },
-        clearDueDateFilter: function() {
             this.filters.due_date = '';
-            pikaday_instances['due_date'].setDate(null);
-        },
-        clearPrioritiesFilters: function() {
-            this.filters.priorities = [];
-        },
-        clearProjectsFilters: function() {
-            this.filters.projects = [];
-        },
-        clearContextsFilters: function() {
-            this.filters.contexts = [];
         },
         clearAllFilters: function() {
             this.clearGeneralFilters();
-            this.clearPrioritiesFilters();
-            this.clearProjectsFilters();
-            this.clearContextsFilters();
+
+            this.filters.priorities = [];
+            this.filters.projects = [];
+            this.filters.contexts = [];
         },
         // Todo creation
         addTodo: function() {
@@ -380,22 +364,4 @@ var app = new Vue({
             });
         }
     }
-});
-
-$(function() {
-    // Date filters datepicker
-    $('#filters .datepicker').each(function() {
-        var self = $(this);
-        var filter_name = self.data('filter');
-
-        pikaday_instances[filter_name] = new Pikaday({
-            firstDay: FIRST_DAY_OF_WEEK,
-            format: 'L', // Short date format
-            i18n: PIKADAY_LOCALE,
-            field: self.get(0),
-            onSelect: function() {
-                app.filters[filter_name] = this.getMoment(); // Update the appropriate filter in the Vue app
-            }
-        });
-    });
 });
