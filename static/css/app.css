@@ -369,6 +369,7 @@ a:focus {
 #todos > .todo .container.edit .due-date {
     vertical-align: middle;
     text-align: left;
+    width: 20px;
 }
 
 #todos > .todo .container.edit .list {

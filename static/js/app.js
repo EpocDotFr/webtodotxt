@@ -47,19 +47,20 @@ var app = new Vue({
         });
     },
     directives: {
-        'todo-due-datepicker': {
+        /*'todo-due-datepicker': {
             bind: function (el, binding) {
-                new Pikaday({
+                var pikaday = new Pikaday({
                     firstDay: FIRST_DAY_OF_WEEK,
-                    format: 'L', // Short date format
                     i18n: PIKADAY_LOCALE,
                     trigger: el,
                     onSelect: function() {
                         Vue.set(binding.expression, 'due', this.getMoment());
                     }
                 });
+
+                document.body.appendChild(pikaday.el);
             }
-        }
+        }*/
     },
     computed: {
         // The todo list, filtered according criteria
