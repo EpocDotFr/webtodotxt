@@ -99,7 +99,7 @@
                     <div class="container edit">
                         <div class="row">
                             <div class="due-date" :style="{width: todo.tags.due ? '40px' : '20px'}">
-                                <a href="#" title="{{ _('Set due date') }}" v-datepicker="todo.tags.due"><i class="fa fa-calendar"></i></a>
+                                <a href="#" title="{{ _('Set due date') }}" v-todo-due-datepicker="todo.tags"><i class="fa fa-calendar"></i></a>
                                 <a href="#" title="{{ _('Remove due date') }}" v-show="todo.tags.due" @click="removeDueDate(todo)"><i class="fa fa-calendar-times-o"></i></a>
                             </div>
                             <div><input type="text" v-model.trim="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text and hit Enter or Esc') }}"></div>

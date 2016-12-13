@@ -1,11 +1,5 @@
 var pikaday_instances = [];
 
-var base_pikaday_config = {
-    firstDay: FIRST_DAY_OF_WEEK,
-    format: 'L', // Short date format
-    i18n: PIKADAY_LOCALE
-};
-
 function todoToString(todo) {
     ret = [];
 
@@ -53,15 +47,17 @@ var app = new Vue({
         });
     },
     directives: {
-        datepicker: {
+        'todo-due-datepicker': {
             bind: function (el, binding) {
-                new Pikaday($.extend(base_pikaday_config, {
+                new Pikaday({
+                    firstDay: FIRST_DAY_OF_WEEK,
+                    format: 'L', // Short date format
+                    i18n: PIKADAY_LOCALE,
                     trigger: el,
                     onSelect: function() {
-                        //Vue.set(binding.expression, this.getMoment())
-                        //app[binding.expression] = this.getMoment();
+                        Vue.set(binding.expression, 'due', this.getMoment());
                     }
-                }));
+                });
             }
         }
     },
@@ -111,7 +107,7 @@ var app = new Vue({
 
                 return text && completed && completion_date && priority && creation_date && projects && contexts && due_date;
             }).sort(function(first_todo, second_todo) {
-                if (('_new' in first_todo) ) { // New todo always on top of all others
+                if (('_new' in first_todo)) { // New todo always on top of all others
                     return -1;
                 }
 
@@ -384,11 +380,14 @@ $(function() {
         var self = $(this);
         var filter_name = self.data('filter');
 
-        pikaday_instances[filter_name] = new Pikaday($.extend(base_pikaday_config, {
+        pikaday_instances[filter_name] = new Pikaday({
+            firstDay: FIRST_DAY_OF_WEEK,
+            format: 'L', // Short date format
+            i18n: PIKADAY_LOCALE,
             field: self.get(0),
             onSelect: function() {
                 app.filters[filter_name] = this.getMoment(); // Update the appropriate filter in the Vue app
             }
-        }));
+        });
     });
 });
