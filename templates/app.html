@@ -68,16 +68,18 @@
                     <h2>{{ _('Projects') }} <button class="small" @click="filters.projects = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
-                    <div v-for="project in allProjects">
-                        <label><input type="checkbox" v-model="filters.projects" :value="project"> ${ project }</label>
+                    <div v-for="project in allProjects" class="row">
+                        <div><label><input type="checkbox" v-model="filters.projects" :value="project"> ${ project }</label></div>
+                        <div class="actions"><a href="#" title="{{ _('Delete this project') }}"><i class="fa fa-trash"></i></a></div>
                     </div>
                 </div>
                 <div class="lists">
                     <h2>{{ _('Contexts') }} <button class="small" @click="filters.contexts = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
                     <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
-                    <div v-for="context in allContexts">
-                        <label><input type="checkbox" v-model="filters.contexts" :value="context"> ${ context }</label>
+                    <div v-for="context in allContexts" class="row">
+                        <div><label><input type="checkbox" v-model="filters.contexts" :value="context"> ${ context }</label></div>
+                        <div class="actions"><a href="#" title="{{ _('Delete this context') }}"><i class="fa fa-trash"></i></a></div>
                     </div>
                 </div>
                 <div class="bottom">

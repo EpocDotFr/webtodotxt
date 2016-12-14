@@ -1,5 +1,3 @@
-var localStorage_supported = 'localStorage' in window;
-
 function todoToString(todo) {
     ret = [];
 
@@ -138,8 +136,8 @@ var app = new Vue({
             return all_priorities.sort();
         },
         // All projects extracted from the current todo list
-        allProjects: function() {
-            var all_projects = [];
+        currentProjects: function() {
+            var current_projects = [];
 
             $.each(this.todos, function(index, todo) {
                 if (!('projects' in todo) || !todo.projects) {
@@ -147,19 +145,51 @@ var app = new Vue({
                 }
 
                 $.each(todo.projects, function(index, project) {
-                    if ($.inArray(project, all_projects) !== -1) {
+                    if ($.inArray(project, current_projects) !== -1) {
                         return;
                     }
 
-                    all_projects.push(project);
+                    current_projects.push(project);
                 });
             });
 
-            return all_projects.sort();
+            return current_projects.sort();
+        },
+        // Sum of all projects in the current todo list and the ones stored in the localStorage
+        allProjects: function() {
+            var all_projects = this.currentProjects;
+            var stored_projects = this.storedProjects;
+
+            $.each(stored_projects, function(index, project) { // Merge the stored projects in the current ones
+                if ($.inArray(project, all_projects) !== -1) {
+                    return;
+                }
+
+                all_projects.push(project);
+
+                if ($.inArray(project, stored_projects) === -1) {
+                    stored_projects.push(project);
+                }
+            });
+
+            all_projects = all_projects.sort();
+
+            this.storedProjects = all_projects;
+
+            return all_projects;
+        },
+        // All projects stored in the localStorage
+        storedProjects: {
+            get: function () {
+                return JSON.parse(localStorage.getItem('projects')) || [];
+            },
+            set: function (projects) {
+                localStorage.setItem('projects', JSON.stringify(projects));
+            }
         },
         // All contexts extracted from the current todo list
-        allContexts: function() {
-            var all_contexts = [];
+        currentContexts: function() {
+            var current_contexts = [];
 
             $.each(this.todos, function(index, todo) {
                 if (!('contexts' in todo) || !todo.contexts) {
@@ -167,15 +197,47 @@ var app = new Vue({
                 }
 
                 $.each(todo.contexts, function(index, context) {
-                    if ($.inArray(context, all_contexts) !== -1) {
+                    if ($.inArray(context, current_contexts) !== -1) {
                         return;
                     }
 
-                    all_contexts.push(context);
+                    current_contexts.push(context);
                 });
             });
 
-            return all_contexts.sort();
+            return current_contexts.sort();
+        },
+        // Sum of all contexts in the current todo list and the ones stored in the localStorage
+        allContexts: function() {
+            var all_contexts = this.currentContexts;
+            var stored_contexts = this.storedContexts;
+
+            $.each(stored_contexts, function(index, context) { // Merge the stored contexts in the current ones
+                if ($.inArray(context, all_contexts) !== -1) {
+                    return;
+                }
+
+                all_contexts.push(context);
+
+                if ($.inArray(context, stored_contexts) === -1) {
+                    stored_contexts.push(context);
+                }
+            });
+
+            all_contexts = all_contexts.sort();
+
+            this.storedContexts = all_contexts;
+
+            return all_contexts;
+        },
+        // All contexts stored in the localStorage
+        storedContexts: {
+            get: function () {
+                return JSON.parse(localStorage.getItem('contexts')) || [];
+            },
+            set: function (contexts) {
+                localStorage.setItem('contexts', JSON.stringify(contexts));
+            }
         }
     },
     methods: {
@@ -208,6 +270,7 @@ var app = new Vue({
                 creation_date: moment(),
                 projects: [],
                 contexts: [],
+                tags: {},
                 _new: true
             };
 

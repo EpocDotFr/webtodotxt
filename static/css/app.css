@@ -216,10 +216,6 @@ a:focus {
     border: none;
 }
 
-#filters input {
-    cursor: default;
-}
-
 #filters > div {
     border-top: 1px solid #FFF;
     border-bottom: 1px solid #DDD;
@@ -263,6 +259,11 @@ a:focus {
 #filters .lists label {
     width: 100%;
     display: block;
+}
+
+#filters .lists .actions {
+    width: 15px;
+    text-align: right;
 }
 
 #filters .bottom {
