@@ -425,6 +425,9 @@ var app = new Vue({
                     app.loading = false;
                 }
             });
+        },
+        markdownToHTML: function(string) {
+            return marked(string);
         }
     }
 });

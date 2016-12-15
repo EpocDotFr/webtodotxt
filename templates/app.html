@@ -100,7 +100,7 @@
                         </div>
                         <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
                         <div class="content">
-                            <div class="text">${ todo.text }</div>
+                            <div class="text" v-html="markdownToHTML(todo.text)"></div>
                             <div class="metadata">
                                 <template v-if="todo.tags.due"><strong>{{ _('Due') }} ${ todo.tags.due.format('L') }</strong></template>
                                 <template v-for="project in todo.projects">+${ project } </template>
@@ -158,6 +158,7 @@
     <script src="https://unpkg.com/vue@2.1.0/dist/vue{% if not config['DEBUG'] %}.min{% endif %}.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/pikaday.min.js"></script>
+    <script src="https://unpkg.com/marked@0.3.6/marked.min.js"></script>
     <script>
         ROOT_URL = '{{ request.url_root }}';
 

@@ -290,12 +290,6 @@ a:focus {
     border-radius: 3px;
 }
 
-#todos > .todo a {
-    color: inherit;
-    text-decoration: none;
-    border: none;
-}
-
 #todos > .todo:last-child {
     margin-bottom: 0;
 }
@@ -310,6 +304,13 @@ a:focus {
     position: absolute;
     top: 0px;
     right: 0px;
+}
+
+#todos > .todo > .actions a,
+#todos > .todo .edit a {
+    color: inherit;
+    text-decoration: none;
+    border: none;
 }
 
 #todos > .todo .actions .apply,

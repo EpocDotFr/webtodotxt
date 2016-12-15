@@ -16,7 +16,7 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Save and reload the task list
   - Clear displaying of the task priority and completion
   - Automatic task creation date and completion date setting
-  - Basic Markdown support (WIP)
+  - Basic Markdown support for inline formatting (strong, emphasis, code, deleted, link) (WIP)
   - Automatic saving (WIP)
   - Internationalized & localized in 3 languages:
     - English (`en`)
@@ -54,7 +54,7 @@ I'll let you search yourself about how to configure a web server along uWSGI.
 
   - Standalone
 
-Run the internal web server, which will be accessible at http://localhost:8080:
+Run the internal web server, which will be accessible at `http://localhost:8080`:
 
 ```
 python local.py
