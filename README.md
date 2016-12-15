@@ -6,6 +6,23 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   <img src="https://github.com/EpocDotFr/webtodotxt/raw/master/screenshot.png">
 </p>
 
+## Features
+
+  - Add / edit / remove tasks
+  - Tasks due date (WIP)
+  - Filters on all possible task data
+  - Projects and contexts are cached locally for future use
+  - Automatic sorting
+  - Save and reload the task list
+  - Clear displaying of the task priority and completion
+  - Automatic task creation date and completion date setting
+  - Basic Markdown support (WIP)
+  - Automatic saving (WIP)
+  - Internationalized & localized in 3 languages:
+    - English (`en`)
+    - French (`fr`)
+    - Portuguese (WIP) (`pt`)
+
 ## Prerequisites
 
   - Should work on any Python 3.x version. Feel free to test with another Python version and give me feedback
@@ -29,10 +46,7 @@ More informations on the three above can be found [here](http://flask.pocoo.org/
 
   - `USER` The credentials required to access the app. **It is highly recommended to serve this web app through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
   - `TODOTXT_LOCATION` Path to a Todo.txt file (may be relative or absolute)
-  - `FORCE_LANGUAGE` Force the lang of the web app to be one of the supported ones (defaults to `None`: auto-detection from the `Accept-Language` HTTP header)
-    - `en` English
-    - `fr` French
-    - `pt` Portuguese (partial)
+  - `FORCE_LANGUAGE` Force the lang of the web app to be one of the supported ones (defaults to `None`: auto-detection from the `Accept-Language` HTTP header). See in the features section above for a list of available lang keys
 
 I'll let you search yourself about how to configure a web server along uWSGI.
 
