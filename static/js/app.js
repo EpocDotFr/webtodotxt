@@ -1,4 +1,4 @@
-function todoToString(todo) {
+function todoForSorting(todo) {
     ret = [];
 
     if ('completed' in todo && todo.completed) {
@@ -120,8 +120,8 @@ var app = new Vue({
                     return -1;
                 }
 
-                first_todo = todoToString(first_todo);
-                second_todo = todoToString(second_todo);
+                first_todo = todoForSorting(first_todo);
+                second_todo = todoForSorting(second_todo);
 
                 return first_todo.localeCompare(second_todo);
             });
