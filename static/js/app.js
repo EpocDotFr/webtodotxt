@@ -14,6 +14,11 @@ function todoToString(todo) {
     return ret.join(' ');
 }
 
+md = window.markdownit({
+    linkify: true,
+    html: false
+});
+
 var app = new Vue({
     delimiters: ['${', '}'], // Because Jinja2 already uses double brakets
     el: '#app',
@@ -427,7 +432,7 @@ var app = new Vue({
             });
         },
         markdownToHTML: function(string) {
-            return marked(string);
+            return md.renderInline(string);
         }
     }
 });

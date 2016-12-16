@@ -137,6 +137,7 @@ a:focus {
     padding: 5px;
     border: 1px solid #DDD;
     border-radius: 3px;
+    line-height: 1.2;
 }
 
 #app input:focus,
@@ -362,6 +363,7 @@ a:focus {
     color: #AAA;
     font-size: 14px;
     border: none;
+    margin-top: 3px;
 }
 
 #todos > .todo.editing .container.show {

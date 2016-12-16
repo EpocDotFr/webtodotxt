@@ -11,7 +11,7 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Add / edit / remove tasks
   - Tasks due date (WIP)
   - Filters on all possible task data
-  - Projects and contexts are cached locally for future use
+  - Projects and contexts are cached locally for future use (WIP)
   - Automatic sorting
   - Save and reload the task list
   - Clear displaying of the task priority and completion
