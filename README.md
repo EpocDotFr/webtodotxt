@@ -16,7 +16,7 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Save and reload the task list
   - Clear displaying of the task priority and completion
   - Automatic task creation date and completion date setting
-  - Basic Markdown support for inline formatting (strong, emphasis, code, deleted, link, autolink)
+  - Basic Markdown support for inline formatting (strong, emphasis, code, deleted, link. Text links and emails are also auto-linked)
   - Automatic saving (WIP)
   - Internationalized & localized in 3 languages:
     - English (`en`)
