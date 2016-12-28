@@ -9,29 +9,60 @@ function todoForSorting(todo) {
         ret.push('(' + todo.priority + ')');
     }
 
-    ret.push(todo.text);
+    ret.push(removeMarkdown(todo.text));
 
     return ret.join(' ');
+}
+
+function removeMarkdown(str) {
+    try {
+        str = str
+        // Remove HTML tags
+        .replace(/<(.*?)>/g, '$1')
+        // Remove setext-style header
+        .replace(/^[=\-]{2,}\s*$/g, '')
+        // Remove footnotes?
+        .replace(/\[\^.+?\](\: .*?$)?/g, '')
+        .replace(/\s{0,2}\[.*?\]: .*?$/g, '')
+        // Remove images
+        .replace(/\!\[.*?\][\[\(].*?[\]\)]/g, '')
+        // Remove inline links
+        .replace(/\[(.*?)\][\[\(].*?[\]\)]/g, '$1')
+        // Remove reference-style links?
+        .replace(/^\s{1,2}\[(.*?)\]: (\S+)( ".*?")?\s*$/g, '')
+        // Remove atx-style headers
+        .replace(/^\#{1,6}\s*([^#]*)\s*(\#{1,6})?/gm, '$1')
+        .replace(/([\*_]{1,3})(\S.*?\S)\1/g, '$2')
+        .replace(/(`{3,})(.*?)\1/gm, '$2')
+        .replace(/^-{3,}\s*$/g, '')
+        .replace(/`(.+?)`/g, '$1')
+        .replace(/\n{2,}/g, '\n\n');
+    } catch(e) {
+        console.error(e);
+    }
+
+    return str;
 }
 
 md = window.markdownit({
     linkify: true,
     html: false
+    // TODO Disable everything but inline styles (for better perfs)
 });
 
 var app = new Vue({
-    delimiters: ['${', '}'], // Because Jinja2 already uses double brakets
+    delimiters: ['${', '}'], // Because Jinja2 already uses double brackets
     el: '#app',
     data: {
         valid_priorities: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-        loading: false, // Something is loading
+        loading: false, // Network activity indicator
 
-        // Todo creation/edition
+        // The doto that is being edited (also used when creating a new todo)
         todoBeingEdited: null,
 
-        todos: [], // List of all todos straight from the Todo.txt
+        todos: [], // The list of all todos
 
-        // Filters used to filter the todo list above
+        // Criteria used to filter the todo list above
         filters: {
             completed: 'all',
             text: '',
@@ -50,6 +81,7 @@ var app = new Vue({
         });
     },
     directives: {
+        // Datepicker on the date fields in filters
         'date-filter-datepicker': {
             inserted: function (el, binding) {
                 new Pikaday({
@@ -58,11 +90,11 @@ var app = new Vue({
                     i18n: PIKADAY_LOCALE,
                     field: el,
                     onSelect: function() {
-                        app.filters[binding.arg] = this.getMoment(); // Update the appropriate filter
+                        app.filters[binding.arg] = this.getMoment(); // Update the filter accordingly
                     }
                 });
             },
-            update: function(el, binding) { // FIXME this hook is fired more times than necessary for EACH directives when filter value change
+            update: function(el, binding) { // FIXME this hook is fired more times than necessary for EACH directives when the filter value change, which is counter-performant
                 if (!app.filters[binding.arg]) { // Filter has been reinitialized
                     // TODO set Pikaday date to null using instance.setDate(null)
                     el.value = '';
@@ -132,7 +164,7 @@ var app = new Vue({
 
             $.each(this.todos, function(index, todo) {
                 if (!('priority' in todo) || !todo.priority || $.inArray(todo.priority, all_priorities) !== -1) {
-                    return null;
+                    return;
                 }
 
                 all_priorities.push(todo.priority);
@@ -246,7 +278,7 @@ var app = new Vue({
         }
     },
     methods: {
-        // Filters
+        // Clear general filters
         clearGeneralFilters: function() {
             this.filters.completed = 'all';
             this.filters.text = '';
@@ -254,6 +286,7 @@ var app = new Vue({
             this.filters.creation_date = '';
             this.filters.due_date = '';
         },
+        // Clear all filters
         clearAllFilters: function() {
             this.clearGeneralFilters();
 
@@ -261,9 +294,9 @@ var app = new Vue({
             this.filters.projects = [];
             this.filters.contexts = [];
         },
-        // Todo creation
+        // Create a new todo and make it the todo being edited
         addTodo: function() {
-            if (this.todoBeingEdited) {
+            if (this.todoBeingEdited) { // A todo is already being edited
                 return;
             }
 
@@ -282,7 +315,7 @@ var app = new Vue({
             this.todos.unshift(new_todo);
             this.todoBeingEdited = new_todo;
         },
-        // Todo edition
+        // Enter a todo in edit mode
         editTodo: function (todo) {
             if (this.todoBeingEdited) {
                 return;
@@ -290,9 +323,9 @@ var app = new Vue({
 
             this.todoBeingEdited = todo;
         },
-        // Called when todo modification is done
+        // Called when todo edition is done
         doneEditTodo: function (todo) {
-            if (!this.todoBeingEdited) {
+            if (!this.todoBeingEdited) { // No todo being edited
                 return;
             }
 
@@ -308,7 +341,7 @@ var app = new Vue({
         },
         // Called when a todo completion status is set
         todoCompletedHook: function(todo) {
-            if (todo.completed) {
+            if (todo.completed) { // Todo was set as completed
                 todo.completion_date = moment();
             } else {
                 todo.completion_date = '';
