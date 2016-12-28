@@ -294,6 +294,12 @@ var app = new Vue({
             this.filters.projects = [];
             this.filters.contexts = [];
         },
+        isStoredProjectOnly: function(project) {
+            return $.inArray(this.currentProjects, project) === -1 && $.inArray(this.storedProjects, project) !== -1;
+        },
+        isStoredContextOnly: function(context) {
+            return $.inArray(this.currentContexts, context) === -1 && $.inArray(this.storedContexts, context) !== -1;
+        },
         // Create a new todo and make it the todo being edited
         addTodo: function() {
             if (this.todoBeingEdited) { // A todo is already being edited
