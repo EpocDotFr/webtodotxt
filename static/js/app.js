@@ -195,18 +195,13 @@ var app = new Vue({
         // Sum of all projects in the current todo list and the ones stored in the localStorage
         allProjects: function() {
             var all_projects = $.extend(true, [], this.currentProjects);
-            var stored_projects = this.storedProjects;
 
-            $.each(stored_projects, function(index, project) { // Merge the stored projects in the current ones
+            $.each(this.storedProjects, function(index, project) { // Merge the stored projects in the current ones
                 if ($.inArray(project, all_projects) !== -1) {
                     return;
                 }
 
                 all_projects.push(project);
-
-                if ($.inArray(project, stored_projects) === -1) {
-                    stored_projects.push(project);
-                }
             });
 
             all_projects = all_projects.sort();
@@ -247,18 +242,13 @@ var app = new Vue({
         // Sum of all contexts in the current todo list and the ones stored in the localStorage
         allContexts: function() {
             var all_contexts = $.extend(true, [], this.currentContexts);
-            var stored_contexts = this.storedContexts;
 
-            $.each(stored_contexts, function(index, context) { // Merge the stored contexts in the current ones
+            $.each(this.storedContexts, function(index, context) { // Merge the stored contexts in the current ones
                 if ($.inArray(context, all_contexts) !== -1) {
                     return;
                 }
 
                 all_contexts.push(context);
-
-                if ($.inArray(context, stored_contexts) === -1) {
-                    stored_contexts.push(context);
-                }
             });
 
             all_contexts = all_contexts.sort();
