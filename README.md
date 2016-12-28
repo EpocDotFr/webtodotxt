@@ -16,7 +16,7 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Save and reload the task list
   - Clear displaying of the task priority and completion
   - Automatic task creation date and completion date setting
-  - Basic Markdown support for inline formatting (strong, emphasis, code, deleted, link) (WIP)
+  - Basic Markdown support for inline formatting (strong, emphasis, code, deleted, link, autolink)
   - Automatic saving (WIP)
   - Internationalized & localized in 3 languages:
     - English (`en`)
@@ -30,7 +30,9 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
 
 ## Installation
 
-Clone this repo, and then the usual `pip install -r requirements.txt`.
+  1. Clone this repo somewhere
+  2. `pip install -r requirements.txt`
+  3. `pybabel compile -d translations`
 
 ## Configuration
 
