@@ -194,7 +194,7 @@ var app = new Vue({
         },
         // Sum of all projects in the current todo list and the ones stored in the localStorage
         allProjects: function() {
-            var all_projects = this.currentProjects;
+            var all_projects = $.extend(true, [], this.currentProjects);
             var stored_projects = this.storedProjects;
 
             $.each(stored_projects, function(index, project) { // Merge the stored projects in the current ones
@@ -246,7 +246,7 @@ var app = new Vue({
         },
         // Sum of all contexts in the current todo list and the ones stored in the localStorage
         allContexts: function() {
-            var all_contexts = this.currentContexts;
+            var all_contexts = $.extend(true, [], this.currentContexts);
             var stored_contexts = this.storedContexts;
 
             $.each(stored_contexts, function(index, context) { // Merge the stored contexts in the current ones
@@ -295,10 +295,24 @@ var app = new Vue({
             this.filters.contexts = [];
         },
         isStoredProjectOnly: function(project) {
-            return $.inArray(this.currentProjects, project) === -1 && $.inArray(this.storedProjects, project) !== -1;
+            return $.inArray(project, this.currentProjects) === -1 && $.inArray(project, this.storedProjects) !== -1;
         },
         isStoredContextOnly: function(context) {
-            return $.inArray(this.currentContexts, context) === -1 && $.inArray(this.storedContexts, context) !== -1;
+            return $.inArray(context, this.currentContexts) === -1 && $.inArray(context, this.storedContexts) !== -1;
+        },
+        removeStoredProject: function(project) {
+            var stored_projects = $.extend(true, [], this.storedProjects);
+
+            stored_projects.splice(stored_projects.indexOf(project), 1);
+
+            this.storedProjects = stored_projects;
+        },
+        removeStoredContext: function(context) {
+            var stored_contexts = $.extend(true, [], this.storedContexts);
+
+            stored_contexts.splice(stored_contexts.indexOf(context), 1);
+
+            this.storedContexts = stored_contexts;
         },
         // Create a new todo and make it the todo being edited
         addTodo: function() {
