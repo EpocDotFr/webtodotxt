@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-12-28 17:22+0100\n"
-"PO-Revision-Date: 2016-12-28 17:26+0100\n"
+"POT-Creation-Date: 2017-01-05 12:01+0100\n"
+"PO-Revision-Date: 2017-01-05 12:02+0100\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -19,12 +19,17 @@ msgstr ""
 "Generated-By: Babel 2.3.4\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: webtodotxt.py:58
+#: webtodotxt.py:60
+#, python-format
+msgid "The Todo.txt file can't be found at the specified location: %(location)s"
+msgstr "Le fichier Todo.txt ne peut pas être trouvé à l'endroit spécifié : %(location)s"
+
+#: webtodotxt.py:63
 #, python-format
 msgid "Error while loading or updating the Todo.txt file: %(exception)s"
 msgstr "Erreur lors du chargement ou de la mise à jour du fichier Todo.txt : %(exception)s"
 
-#: webtodotxt.py:61
+#: webtodotxt.py:66
 msgid "Invalid request."
 msgstr "Requête invalide."
 

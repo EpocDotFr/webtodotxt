@@ -43,17 +43,22 @@ def todotxt():
     status = 200
 
     if request.is_xhr:
+        todotxt_location = os.path.abspath(app.config['TODOTXT_LOCATION'])
+
         try:
             if request.method == 'GET':
-                todos = todotxtio.from_file(os.path.abspath(app.config['TODOTXT_LOCATION']))
+                todos = todotxtio.from_file(todotxt_location)
 
                 result = {'status': 'success', 'data': todotxtio.to_dicts(todos)}
             elif request.method == 'POST':
                 todos = todotxtio.from_dicts(request.get_json())
 
-                todotxtio.to_file(os.path.abspath(app.config['TODOTXT_LOCATION']), todos)
+                todotxtio.to_file(todotxt_location, todos)
 
                 result = {'status': 'success', 'data': []}
+        except FileNotFoundError:
+            result = {'status': 'failure', 'data': {'message': _('The Todo.txt file can\'t be found at the specified location: %(location)s', location=todotxt_location)}}
+            status = 404
         except Exception as e:
             result = {'status': 'failure', 'data': {'message': _('Error while loading or updating the Todo.txt file: %(exception)s', exception=str(e))}}
             status = 500
