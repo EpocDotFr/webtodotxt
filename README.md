@@ -16,8 +16,9 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Save and reload the task list
   - Clear displaying of the task priority and completion
   - Automatic task creation date and completion date setting
-  - Basic Markdown support for inline formatting (strong, emphasis, code, deleted, link. Text links and emails are also auto-linked)
+  - Basic Markdown support for inline formatting styles (strong, emphasis, code, deleted, link. Text links and emails are also auto-linked)
   - Automatic saving (WIP)
+  - Possible to integrate with other system using a very basic "API" (I put API in quotes because it isn't really an API). See below for more information
   - Internationalized & localized in 3 languages:
     - English (`en`)
     - French (`fr`)
@@ -46,7 +47,7 @@ Available configuration parameters are:
 
 More informations on the three above can be found [here](http://flask.pocoo.org/docs/0.11/config/#builtin-configuration-values).
 
-  - `USER` The credentials required to access the app. **It is highly recommended to serve this web app through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
+  - `USER` The credentials required to access the app. **It is highly recommended to serve Web Todo.txt through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
   - `TODOTXT_LOCATION` Path to a Todo.txt file (may be relative or absolute)
   - `FORCE_LANGUAGE` Force the lang of the web app to be one of the supported ones (defaults to `None`: auto-detection from the `Accept-Language` HTTP header). See in the features section above for a list of available lang keys
 
@@ -77,6 +78,60 @@ You'll probably have to hack with this application to make it work with one of t
 This project is built on [Vue.js](http://vuejs.org/) 2 for the frontend and [Flask](http://flask.pocoo.org/) (Python) for
 the backend. The [todotxtio](https://github.com/EpocDotFr/todotxtio) PyPI package is used to parse/write the Todo.txt file,
 giving/receiving data through [Ajax](https://en.wikipedia.org/wiki/Ajax_(programming)).
+
+## "API"
+
+Web Todo.txt provide some sort of "API" (read: a single endpoint both used for reading/writing the Todo.txt file also used by Web Todo.txt itself) so you'll be able to integrate it in other system.
+
+URL to this endpoint is `/todo.txt`.
+
+### Authentication
+
+You'll need to be authenticated to use this endpoint. Simply use a [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication) header. Provide the same credentials as the ones in your `USER` configuration parameter.
+
+Again, **it is highly recommended to serve Web Todo.txt through HTTPS** because HTTP basic auth isn't secure on unencrypted HTTP.
+
+### Data format
+
+Everything is [JSON](https://en.wikipedia.org/wiki/JSON).
+
+**Example of response in case of success:**
+
+```json
+{
+   "status": "success",
+   "data": /* The data to consume */
+}
+```
+
+**Example of response in case of failure:**
+
+```json
+{
+   "status": "failure",
+   "data": {
+      "message": "The error message"
+   }
+}
+```
+
+### Possible HTTP status codes
+
+  - 200: Everything is OK
+  - 404: The Todo.txt file wasn't found
+  - 500: Server error (see the `message` attribute in the JSON body for more information)
+
+### Getting the Todo.txt content: `GET /todo.txt`
+
+If successful, you'll find an array of todo objects in the `data` attribute in the JSON body.
+
+### Updating the Todo.txt content: `POST /todo.txt`
+
+Simply post the exact same format as the `data` attribute you get when GETing the Todo.txt file.
+
+**Caution:** partial update isn't supported (you'll always need to POST all the todos along the ones you modified/created).
+
+This endpoint do not return any content in `data`.
 
 ## Gotchas
 
