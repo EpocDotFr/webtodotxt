@@ -125,6 +125,19 @@ Everything is [JSON](https://en.wikipedia.org/wiki/JSON).
 
 If successful, you'll find an array of todo objects in the `data` attribute in the JSON body.
 
+#### Filtering result
+
+You can filter the resulting todos by using one or many of the following query string parameters:
+
+  - `text` (`string`) Text part of the todo
+  - `completed` (`int`: `1` or `0`) Whether the todo is respectively completed or not
+  - `completion_date` (`string`: `YYYY-MM-DD`) Todo completion date
+  - `priority` (`string`) Comma-separated list of priorities. Each of them are one letter from A to Z
+  - `creation_date` (`string`: `YYYY-MM-DD`) Todo creation date
+  - `projects` (`string`) Comma-separated list of projects name
+  - `contexts` (`string`) Comma-separated list of contexts name
+  - `tags` (`string`) Comma-separated list of tags. Tag key/value is separated by a colon
+
 ### Updating the Todo.txt content: `POST /todo.txt`
 
 Simply post the exact same format as the `data` attribute you get when GETing the Todo.txt file.

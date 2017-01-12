@@ -48,6 +48,12 @@ def todotxt():
         if request.method == 'GET':
             todos = todotxtio.from_file(todotxt_location)
 
+            allowed_query_string_params = ['text', 'completed', 'completion_date', 'priority', 'creation_date', 'projects', 'contexts', 'tags']
+
+            if True:
+                pass
+                # todos = todotxtio.search(todos, **criteria)
+
             result = {'status': 'success', 'data': todotxtio.to_dicts(todos)}
         elif request.method == 'POST':
             todos = todotxtio.from_dicts(request.get_json())
