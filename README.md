@@ -125,7 +125,7 @@ Everything is [JSON](https://en.wikipedia.org/wiki/JSON).
 
 If successful, you'll find an array of todo objects in the `data` attribute in the JSON body.
 
-#### Filtering result
+#### Filtering results
 
 You can filter the resulting todos by using one or many of the following query string parameters:
 
@@ -136,7 +136,7 @@ You can filter the resulting todos by using one or many of the following query s
   - `creation_date` (`string`: `YYYY-MM-DD`) Todo creation date
   - `projects` (`array`) List of projects name (i.e `projects=hey&projects=one`)
   - `contexts` (`array`) List of contexts name (i.e `contexts=woah&contexts=two`)
-  - `tags` (`array`) List of tags name. Tags key/value are separated by a colon (i.e `tags=key:value&tags=due:2016-12-01`)
+  - `tags` (`array`) List of tags. Tags key/value are separated by a colon (i.e `tags=key:value&tags=due:2016-12-01`)
 
 ### Updating the Todo.txt content: `POST /todo.txt`
 
