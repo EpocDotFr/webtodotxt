@@ -50,9 +50,21 @@ def todotxt():
 
             allowed_query_string_params = ['text', 'completed', 'completion_date', 'priority', 'creation_date', 'projects', 'contexts', 'tags']
 
-            if True:
-                pass
-                # todos = todotxtio.search(todos, **criteria)
+            criteria = {}
+
+            for allowed_query_string_param in allowed_query_string_params:
+                if allowed_query_string_param in request.args:
+                    if allowed_query_string_param == 'completed':
+                        criteria[allowed_query_string_param] = request.args.get(allowed_query_string_param, type=bool)
+                    elif allowed_query_string_param in ['priority', 'projects', 'contexts']:
+                        criteria[allowed_query_string_param] = request.args.getlist(allowed_query_string_param, type=str)
+                    elif allowed_query_string_param == 'tags':
+                        criteria[allowed_query_string_param] = request.args.getlist(allowed_query_string_param, type=str) # TODO
+                    else:
+                        criteria[allowed_query_string_param] = request.args.get(allowed_query_string_param, type=str)
+
+            if criteria: # There are criteria provided, filter the todos list
+                todos = todotxtio.search(todos, **criteria)
 
             result = {'status': 'success', 'data': todotxtio.to_dicts(todos)}
         elif request.method == 'POST':
