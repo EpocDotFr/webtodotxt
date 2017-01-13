@@ -132,11 +132,11 @@ You can filter the resulting todos by using one or many of the following query s
   - `text` (`string`) Text part of the todo
   - `completed` (`int`: `1` or `0`) Whether the todo is respectively completed or not
   - `completion_date` (`string`: `YYYY-MM-DD`) Todo completion date
-  - `priority` (`string`) Comma-separated list of priorities. Each of them are one letter from A to Z
+  - `priority` (`array`) List of priorities. Each of them are one letter from A to Z (i.e `priority[]=A&priority[]=C`)
   - `creation_date` (`string`: `YYYY-MM-DD`) Todo creation date
-  - `projects` (`string`) Comma-separated list of projects name
-  - `contexts` (`string`) Comma-separated list of contexts name
-  - `tags` (`string`) Comma-separated list of tags. Tag key/value is separated by a colon
+  - `projects` (`array`) List of projects name (i.e `projects[]=hey&projects[]=one`)
+  - `contexts` (`array`) List of contexts name (i.e `contexts[]=woah&contexts[]=two`)
+  - `tags` (`array`) List of tags name. Tags key/value are separated by a colon (i.e `tags[]=key:value&tags[]=due:2016-12-01`)
 
 ### Updating the Todo.txt content: `POST /todo.txt`
 
