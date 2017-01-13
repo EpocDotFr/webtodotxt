@@ -48,20 +48,22 @@ def todotxt():
         if request.method == 'GET':
             todos = todotxtio.from_file(todotxt_location)
 
-            allowed_query_string_params = ['text', 'completed', 'completion_date', 'priority', 'creation_date', 'projects', 'contexts', 'tags']
+            allowed_params = ['text', 'completed', 'completion_date', 'priority', 'creation_date', 'projects', 'contexts', 'tags']
 
             criteria = {}
 
-            for allowed_query_string_param in allowed_query_string_params:
-                if allowed_query_string_param in request.args:
-                    if allowed_query_string_param == 'completed':
-                        criteria[allowed_query_string_param] = request.args.get(allowed_query_string_param, type=bool)
-                    elif allowed_query_string_param in ['priority', 'projects', 'contexts']:
-                        criteria[allowed_query_string_param] = request.args.getlist(allowed_query_string_param, type=str)
-                    elif allowed_query_string_param == 'tags':
-                        criteria[allowed_query_string_param] = request.args.getlist(allowed_query_string_param, type=str) # TODO
+            for allowed_param in allowed_params:
+                if allowed_param in request.args:
+                    if allowed_param == 'completed':
+                        criteria[allowed_param] = bool(request.args.get(allowed_param, type=int))
+                    elif allowed_param in ['priority', 'projects', 'contexts']:
+                        criteria[allowed_param] = request.args.getlist(allowed_param, type=str)
+                    elif allowed_param == 'tags':
+                        criteria[allowed_param] = dict([(tag.split(':')[0], tag.split(':')[1]) for tag in request.args.getlist(allowed_param, type=str)])
                     else:
-                        criteria[allowed_query_string_param] = request.args.get(allowed_query_string_param, type=str)
+                        criteria[allowed_param] = request.args.get(allowed_param, type=str)
+
+            print(criteria)
 
             if criteria: # There are criteria provided, filter the todos list
                 todos = todotxtio.search(todos, **criteria)
