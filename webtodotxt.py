@@ -63,8 +63,6 @@ def todotxt():
                     else:
                         criteria[allowed_param] = request.args.get(allowed_param, type=str)
 
-            print(criteria)
-
             if criteria: # There are criteria provided, filter the todos list
                 todos = todotxtio.search(todos, **criteria)
 
