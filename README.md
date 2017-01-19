@@ -47,7 +47,7 @@ Available configuration parameters are:
 
 More informations on the three above can be found [here](http://flask.pocoo.org/docs/0.11/config/#builtin-configuration-values).
 
-  - `USER` The credentials required to access the app. **It is highly recommended to serve Web Todo.txt through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
+  - `USERS` The credentials required to access the app. You can specify multiple ones. **It is highly recommended to serve Web Todo.txt through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
   - `TODOTXT_LOCATION` Path to a Todo.txt file (may be relative or absolute)
   - `FORCE_LANGUAGE` Force the lang of the web app to be one of the supported ones (defaults to `None`: auto-detection from the `Accept-Language` HTTP header). See in the features section above for a list of available lang keys
 
@@ -87,7 +87,7 @@ URL to this endpoint is `/todo.txt`.
 
 ### Authentication
 
-You'll need to be authenticated to use this endpoint. Simply use a [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication) header. Provide the same credentials as the ones in your `USER` configuration parameter.
+You'll need to be authenticated to use this endpoint. Simply use a [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication) header. Provide the same credentials as the ones in your `USERS` configuration parameter.
 
 Again, **it is highly recommended to serve Web Todo.txt through HTTPS** because HTTP basic auth isn't secure on unencrypted HTTP.
 

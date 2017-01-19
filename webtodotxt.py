@@ -96,8 +96,8 @@ def set_locale():
 
 @auth.get_password
 def get_password(username):
-    if username in app.config['USER']:
-        return app.config['USER'].get(username)
+    if username in app.config['USERS']:
+        return app.config['USERS'].get(username)
 
     return None
 
