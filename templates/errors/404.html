@@ -1,0 +1,8 @@
+{% extends 'errors/error.html' %}
+
+{% block meta_title %}{{ _('Not found') }}{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div class="alert error">{{ _('Sorry, there\'s nothing here.') }}</div>
+{% endblock %}

@@ -1,10 +1,16 @@
-from flask import Flask, render_template, jsonify, request, g
+from flask import Flask, render_template, jsonify, request, g, make_response
 from flask_httpauth import HTTPBasicAuth
 from flask_babel import Babel, get_locale, _
+from werkzeug.exceptions import HTTPException
 import logging
 import sys
 import todotxtio
 import os
+
+
+# -----------------------------------------------------------
+# Boot
+
 
 app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('config.py')
@@ -15,7 +21,6 @@ app.config['LANGUAGES'] = {
 }
 
 babel = Babel(app)
-
 auth = HTTPBasicAuth()
 
 logging.basicConfig(
@@ -26,7 +31,9 @@ logging.basicConfig(
 
 logging.getLogger().setLevel(logging.INFO)
 
+
 # -----------------------------------------------------------
+# Routes
 
 
 @app.route('/')
@@ -82,7 +89,9 @@ def todotxt():
 
     return jsonify(result), status
 
+
 # -----------------------------------------------------------
+# Hooks
 
 
 @app.before_request
@@ -102,6 +111,34 @@ def get_password(username):
     return None
 
 
+@auth.error_handler
+def auth_error():
+    return http_error_handler(403, without_code=True)
+
+
 @babel.localeselector
 def get_app_locale():
     return g.CURRENT_LOCALE
+
+
+# -----------------------------------------------------------
+# HTTP errors handler
+
+
+@app.errorhandler(401)
+@app.errorhandler(403)
+@app.errorhandler(404)
+@app.errorhandler(500)
+@app.errorhandler(503)
+def http_error_handler(error, without_code=False):
+    if isinstance(error, HTTPException):
+        error = error.code
+    elif not isinstance(error, int):
+        error = 500
+
+    body = render_template('errors/{}.html'.format(error))
+
+    if not without_code:
+        return make_response(body, error)
+    else:
+        return make_response(body)

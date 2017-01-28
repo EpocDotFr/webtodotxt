@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <header>
+        <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a></div>
+    </header>
+{% endblock %}

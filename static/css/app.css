@@ -94,6 +94,47 @@ a:focus {
 }
 
 /************************************************************************
+ * Alerts */
+
+p.alert,
+div.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+span.alert,
+small.alert {
+    padding: 3px;
+}
+
+.alert {
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.alert a,
+.alert a:visited,
+.alert a:hover,
+.alert a:focus {
+    color: inherit;
+}
+
+.alert.success {
+    background-color: #e9fce0;
+    border-color: #A7EF8B;
+}
+
+.alert.error {
+    background-color: #fff0d1;
+    border-color: #FBCC7C;
+}
+
+.alert.info {
+    background-color: #E1F0FF;
+    border-color: #9fd8f8;
+}
+
+/************************************************************************
  * Buttons */
 
 #app button {

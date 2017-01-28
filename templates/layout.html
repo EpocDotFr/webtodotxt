@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ g.CURRENT_LOCALE }}">
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow,noarchive"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.5.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
+    <title>{% block meta_title %}{% endblock %}{% if self.meta_title() | trim %} • {% endif %}Web Todo.txt</title>
+</head>
+<body>
+    <div id="app">
+        {% block content %} {% endblock %}
+
+        <footer class="muted">© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">{{ _('Source code on GitHub') }}</a> • {{ _('Licensed under the %(license)s', license='<a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD</a>'|safe) }}</footer>
+    </div>
+</body>
+</html>

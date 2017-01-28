@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-01-05 12:01+0100\n"
-"PO-Revision-Date: 2017-01-05 12:02+0100\n"
+"POT-Creation-Date: 2017-01-28 11:04+0100\n"
+"PO-Revision-Date: 2017-01-28 11:07+0100\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -19,287 +19,315 @@ msgstr ""
 "Generated-By: Babel 2.3.4\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: webtodotxt.py:60
+#: webtodotxt.py:84
 #, python-format
 msgid "The Todo.txt file can't be found at the specified location: %(location)s"
 msgstr "Le fichier Todo.txt ne peut pas être trouvé à l'endroit spécifié : %(location)s"
 
-#: webtodotxt.py:63
+#: webtodotxt.py:87
 #, python-format
 msgid "Error while loading or updating the Todo.txt file: %(exception)s"
 msgstr "Erreur lors du chargement ou de la mise à jour du fichier Todo.txt : %(exception)s"
 
-#: webtodotxt.py:66
-msgid "Invalid request."
-msgstr "Requête invalide."
-
-#: templates/app.html:24
+#: templates/app.html:6
 msgid "Loading..."
 msgstr "Chargement..."
 
-#: templates/app.html:27
+#: templates/app.html:9
 msgid "Add"
 msgstr "Ajouter"
 
-#: templates/app.html:28
+#: templates/app.html:10
 msgid "Reload"
 msgstr "Recharger"
 
-#: templates/app.html:29
+#: templates/app.html:11
 msgid "Save"
 msgstr "Enregistrer"
 
-#: templates/app.html:35
+#: templates/app.html:17
 msgid "General filters"
 msgstr "Filtres généraux"
 
-#: templates/app.html:35 templates/app.html:60 templates/app.html:68
-#: templates/app.html:77
+#: templates/app.html:17 templates/app.html:42 templates/app.html:50
+#: templates/app.html:59
 msgid "Clear these filters"
 msgstr "Réinitialiser ces filtres"
 
-#: templates/app.html:37
+#: templates/app.html:19
 msgid "Completed:"
 msgstr "Complété :"
 
-#: templates/app.html:38
+#: templates/app.html:20
 msgid "All"
 msgstr "Tout"
 
-#: templates/app.html:39
+#: templates/app.html:21
 msgid "Yes"
 msgstr "Oui"
 
-#: templates/app.html:40
+#: templates/app.html:22
 msgid "No"
 msgstr "Non"
 
-#: templates/app.html:43
+#: templates/app.html:25
 msgid "Text"
 msgstr "Texte"
 
-#: templates/app.html:44 templates/app.html:48 templates/app.html:52
-#: templates/app.html:56
+#: templates/app.html:26 templates/app.html:30 templates/app.html:34
+#: templates/app.html:38
 msgid "Clear this filter"
 msgstr "Réinitialiser ce filtre"
 
-#: templates/app.html:47
+#: templates/app.html:29
 msgid "Completion date"
 msgstr "Date de complétion"
 
-#: templates/app.html:51
+#: templates/app.html:33
 msgid "Creation date"
 msgstr "Date de création"
 
-#: templates/app.html:55
+#: templates/app.html:37
 msgid "Due date"
 msgstr "Date d'échéance"
 
-#: templates/app.html:60
+#: templates/app.html:42
 msgid "Priorities"
 msgstr "Priorités"
 
-#: templates/app.html:62 templates/app.html:70 templates/app.html:79
-#: templates/app.html:133 templates/app.html:143
+#: templates/app.html:44 templates/app.html:52 templates/app.html:61
+#: templates/app.html:115 templates/app.html:125
 msgid "None a this moment."
 msgstr "Aucun pour le moment."
 
-#: templates/app.html:68 templates/app.html:130
+#: templates/app.html:50 templates/app.html:112
 msgid "Projects"
 msgstr "Projets"
 
-#: templates/app.html:73
+#: templates/app.html:55
 msgid "Delete this project"
 msgstr "Supprimer ce projet"
 
-#: templates/app.html:77 templates/app.html:140
+#: templates/app.html:59 templates/app.html:122
 msgid "Contexts"
 msgstr "Contextes"
 
-#: templates/app.html:82
+#: templates/app.html:64
 msgid "Delete this context"
 msgstr "Supprimer ce contexte"
 
-#: templates/app.html:86
+#: templates/app.html:68
 msgid "Clear all filters"
 msgstr "Réinitialiser tous les filtres"
 
-#: templates/app.html:90
+#: templates/app.html:72
 msgid "No todos to display"
 msgstr "Aucune tâche à afficher"
 
-#: templates/app.html:93
+#: templates/app.html:75
 msgid "Done"
 msgstr "Terminé"
 
-#: templates/app.html:94
+#: templates/app.html:76
 msgid "Edit"
 msgstr "Editer"
 
-#: templates/app.html:95
+#: templates/app.html:77
 msgid "Delete"
 msgstr "Supprimer"
 
-#: templates/app.html:105
+#: templates/app.html:87
 msgid "Due"
 msgstr "Echéance"
 
-#: templates/app.html:108
+#: templates/app.html:90
 msgid "Created"
 msgstr "Créé"
 
-#: templates/app.html:109
+#: templates/app.html:91
 msgid "Completed"
 msgstr "Complété"
 
-#: templates/app.html:116
+#: templates/app.html:98
 msgid "Remove due date"
 msgstr "Supprimer la date d'échéance"
 
-#: templates/app.html:118
+#: templates/app.html:100
 msgid "Type some text and hit Enter or Esc"
 msgstr "Tapez du texte et appuyez sur Entrée ou Echap"
 
-#: templates/app.html:122
+#: templates/app.html:104
 msgid "Priority"
 msgstr "Priorité"
 
-#: templates/app.html:122
+#: templates/app.html:104
 msgid "Clear priority"
 msgstr "Supprimer la priorité"
 
-#: templates/app.html:130
+#: templates/app.html:112
 msgid "Clear projects"
 msgstr "Réinitialiser les projets"
 
-#: templates/app.html:131 templates/app.html:141
+#: templates/app.html:113 templates/app.html:123
 msgid "Type a name and hit Enter"
 msgstr "Tapez un nom et appuyez sur Entrée"
 
-#: templates/app.html:140
+#: templates/app.html:122
 msgid "Clear contexts"
 msgstr "Réinitialiser les contextes"
 
+#: templates/app.html:148
+msgid "Previous Month"
+msgstr "Mois précédent"
+
+#: templates/app.html:149
+msgid "Next Month"
+msgstr "Mois suivant"
+
+#: templates/app.html:151
+msgid "January"
+msgstr "Janvier"
+
+#: templates/app.html:152
+msgid "February"
+msgstr "Février"
+
+#: templates/app.html:153
+msgid "March"
+msgstr "Mars"
+
 #: templates/app.html:154
+msgid "April"
+msgstr "Avril"
+
+#: templates/app.html:155
+msgid "May"
+msgstr "Mai"
+
+#: templates/app.html:156
+msgid "June"
+msgstr "Juin"
+
+#: templates/app.html:157
+msgid "July"
+msgstr "Juillet"
+
+#: templates/app.html:158
+msgid "August"
+msgstr "Août"
+
+#: templates/app.html:159
+msgid "September"
+msgstr "Septembre"
+
+#: templates/app.html:160
+msgid "October"
+msgstr "Octobre"
+
+#: templates/app.html:161
+msgid "November"
+msgstr "Novembre"
+
+#: templates/app.html:162
+msgid "December"
+msgstr "Décembre"
+
+#: templates/app.html:165
+msgid "Sunday"
+msgstr "Dimanche"
+
+#: templates/app.html:166
+msgid "Monday"
+msgstr "Lundi"
+
+#: templates/app.html:167
+msgid "Tuesday"
+msgstr "Mardi"
+
+#: templates/app.html:168
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#: templates/app.html:169
+msgid "Thursday"
+msgstr "Jeudi"
+
+#: templates/app.html:170
+msgid "Friday"
+msgstr "Vendredi"
+
+#: templates/app.html:171
+msgid "Saturday"
+msgstr "Samedi"
+
+#: templates/app.html:174
+msgid "Sun"
+msgstr "Dim"
+
+#: templates/app.html:175
+msgid "Mon"
+msgstr "Lun"
+
+#: templates/app.html:176
+msgid "Tue"
+msgstr "Mar"
+
+#: templates/app.html:177
+msgid "Wed"
+msgstr "Mer"
+
+#: templates/app.html:178
+msgid "Thu"
+msgstr "Jeu"
+
+#: templates/app.html:179
+msgid "Fri"
+msgstr "Ven"
+
+#: templates/app.html:180
+msgid "Sat"
+msgstr "Sam"
+
+#: templates/layout.html:24
 msgid "Source code on GitHub"
 msgstr "Code source sur GitHub"
 
-#: templates/app.html:154
+#: templates/layout.html:24
 #, python-format
 msgid "Licensed under the %(license)s"
 msgstr "Sous licence %(license)s"
 
-#: templates/app.html:168
-msgid "Previous Month"
-msgstr "Mois précédent"
+#: templates/errors/401.html:3
+msgid "Unauthorized"
+msgstr "Accès non authorisé"
 
-#: templates/app.html:169
-msgid "Next Month"
-msgstr "Mois suivant"
+#: templates/errors/401.html:7
+msgid "It seems you're not authorized to go here."
+msgstr "Vous n'avez pas l'authorisation d'accèder à ceci."
 
-#: templates/app.html:171
-msgid "January"
-msgstr "Janvier"
+#: templates/errors/403.html:3
+msgid "Forbidden"
+msgstr "Accès interdit"
 
-#: templates/app.html:172
-msgid "February"
-msgstr "Février"
+#: templates/errors/403.html:7
+msgid "Access to this resource is forbidden."
+msgstr "L'accès à cette ressource vous a été interdit."
 
-#: templates/app.html:173
-msgid "March"
-msgstr "Mars"
+#: templates/errors/404.html:3
+msgid "Not found"
+msgstr "Non trouvé"
 
-#: templates/app.html:174
-msgid "April"
-msgstr "Avril"
+#: templates/errors/404.html:7
+msgid "Sorry, there's nothing here."
+msgstr "Désolé, il n'y a rien ici."
 
-#: templates/app.html:175
-msgid "May"
-msgstr "Mai"
+#: templates/errors/500.html:3
+msgid "Server error"
+msgstr "Erreur serveur"
 
-#: templates/app.html:176
-msgid "June"
-msgstr "Juin"
-
-#: templates/app.html:177
-msgid "July"
-msgstr "Juillet"
-
-#: templates/app.html:178
-msgid "August"
-msgstr "Août"
-
-#: templates/app.html:179
-msgid "September"
-msgstr "Septembre"
-
-#: templates/app.html:180
-msgid "October"
-msgstr "Octobre"
-
-#: templates/app.html:181
-msgid "November"
-msgstr "Novembre"
-
-#: templates/app.html:182
-msgid "December"
-msgstr "Décembre"
-
-#: templates/app.html:185
-msgid "Sunday"
-msgstr "Dimanche"
-
-#: templates/app.html:186
-msgid "Monday"
-msgstr "Lundi"
-
-#: templates/app.html:187
-msgid "Tuesday"
-msgstr "Mardi"
-
-#: templates/app.html:188
-msgid "Wednesday"
-msgstr "Mercredi"
-
-#: templates/app.html:189
-msgid "Thursday"
-msgstr "Jeudi"
-
-#: templates/app.html:190
-msgid "Friday"
-msgstr "Vendredi"
-
-#: templates/app.html:191
-msgid "Saturday"
-msgstr "Samedi"
-
-#: templates/app.html:194
-msgid "Sun"
-msgstr "Dim"
-
-#: templates/app.html:195
-msgid "Mon"
-msgstr "Lun"
-
-#: templates/app.html:196
-msgid "Tue"
-msgstr "Mar"
-
-#: templates/app.html:197
-msgid "Wed"
-msgstr "Mer"
-
-#: templates/app.html:198
-msgid "Thu"
-msgstr "Jeu"
-
-#: templates/app.html:199
-msgid "Fri"
-msgstr "Ven"
-
-#: templates/app.html:200
-msgid "Sat"
-msgstr "Sam"
+#: templates/errors/500.html:7
+msgid "A server error occured! Please retry. If the error persists, please report an issue <a href=\"https://github.com/EpocDotFr/webtodotxt/issues\">here</a>."
+msgstr "Une erreur serveur est survenue ! Veuillez rééssayer. Si le problème persiste, merci de rapporter un bug <a href=\"https://github.com/EpocDotFr/webtodotxt/issues\">ici</a>."
 
 #~ msgid "DateFormat"
 #~ msgstr "DD/MM/YYYY"
@@ -330,3 +358,6 @@ msgstr "Sam"
 
 #~ msgid "Type a context name and hit Enter"
 #~ msgstr "Entrez un nom et appuyez sur Entrée"
+
+#~ msgid "Invalid request."
+#~ msgstr "Requête invalide."

@@ -1,0 +1,8 @@
+{% extends 'errors/error.html' %}
+
+{% block meta_title %}{{ _('Server error') }}{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div class="alert error">{{ _('A server error occured! Please retry. If the error persists, please report an issue <a href="https://github.com/EpocDotFr/webtodotxt/issues">here</a>.') }}</div>
+{% endblock %}
