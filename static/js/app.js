@@ -1,4 +1,16 @@
-function todoForSorting(todo) {
+function isLocalStorageSupported() {
+    var test = 'test';
+
+    try {
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch(e) {
+        return false;
+    }
+}
+
+function getTodoStringForSorting(todo) {
     ret = [];
 
     if ('completed' in todo && todo.completed) {
@@ -50,6 +62,8 @@ md = window.markdownit({
     // TODO Disable everything but inline styles (for better perfs)
 });
 
+local_storage_supported = isLocalStorageSupported();
+
 var app = new Vue({
     delimiters: ['${', '}'], // Because Jinja2 already uses double brackets
     el: '#app',
@@ -57,7 +71,7 @@ var app = new Vue({
         valid_priorities: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         loading: false, // Network activity indicator
 
-        // The doto that is being edited (also used when creating a new todo)
+        // The todo that is being edited (also used when creating a new todo)
         todoBeingEdited: null,
 
         todos: [], // The list of all todos
@@ -152,8 +166,8 @@ var app = new Vue({
                     return -1;
                 }
 
-                first_todo = todoForSorting(first_todo);
-                second_todo = todoForSorting(second_todo);
+                first_todo = getTodoStringForSorting(first_todo);
+                second_todo = getTodoStringForSorting(second_todo);
 
                 return first_todo.localeCompare(second_todo);
             });
@@ -196,17 +210,21 @@ var app = new Vue({
         allProjects: function() {
             var all_projects = $.extend(true, [], this.currentProjects);
 
-            $.each(this.storedProjects, function(index, project) { // Merge the stored projects in the current ones
-                if ($.inArray(project, all_projects) !== -1) {
-                    return;
-                }
+            if (local_storage_supported) {
+                $.each(this.storedProjects, function(index, project) { // Merge the stored projects in the current ones
+                    if ($.inArray(project, all_projects) !== -1) {
+                        return;
+                    }
 
-                all_projects.push(project);
-            });
+                    all_projects.push(project);
+                });
+            }
 
             all_projects = all_projects.sort();
 
-            this.storedProjects = all_projects;
+            if (local_storage_supported) {
+                this.storedProjects = all_projects;
+            }
 
             return all_projects;
         },
@@ -243,17 +261,21 @@ var app = new Vue({
         allContexts: function() {
             var all_contexts = $.extend(true, [], this.currentContexts);
 
-            $.each(this.storedContexts, function(index, context) { // Merge the stored contexts in the current ones
-                if ($.inArray(context, all_contexts) !== -1) {
-                    return;
-                }
+            if (local_storage_supported) {
+                $.each(this.storedContexts, function(index, context) { // Merge the stored contexts in the current ones
+                    if ($.inArray(context, all_contexts) !== -1) {
+                        return;
+                    }
 
-                all_contexts.push(context);
-            });
+                    all_contexts.push(context);
+                });
+            }
 
             all_contexts = all_contexts.sort();
 
-            this.storedContexts = all_contexts;
+            if (local_storage_supported) {
+                this.storedContexts = all_contexts;
+            }
 
             return all_contexts;
         },
@@ -285,9 +307,17 @@ var app = new Vue({
             this.filters.contexts = [];
         },
         isStoredProjectOnly: function(project) {
+            if (!local_storage_supported) {
+                return false;
+            }
+
             return $.inArray(project, this.currentProjects) === -1 && $.inArray(project, this.storedProjects) !== -1;
         },
         isStoredContextOnly: function(context) {
+            if (!local_storage_supported) {
+                return false;
+            }
+
             return $.inArray(context, this.currentContexts) === -1 && $.inArray(context, this.storedContexts) !== -1;
         },
         removeStoredProject: function(project) {
