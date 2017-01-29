@@ -1,8 +1,12 @@
-{% extends 'errors/error.html' %}
+{% extends 'layout.html' %}
 
 {% block meta_title %}{{ _('Forbidden') }}{% endblock %}
 
 {% block content %}
-    {{ super() }}
-    <div class="alert error">{{ _('Access to this resource is forbidden.') }}</div>
+    <div id="app">
+        <header>
+            <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a></div>
+        </header>
+        <div class="alert error">{{ _('Access to this resource is forbidden.') }}</div>
+    </div>
 {% endblock %}

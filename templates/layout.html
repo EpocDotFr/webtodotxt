@@ -18,10 +18,8 @@
     <title>{% block meta_title %}{% endblock %}{% if self.meta_title() | trim %} • {% endif %}Web Todo.txt</title>
 </head>
 <body>
-    <div id="app">
-        {% block content %} {% endblock %}
+    {% block content %} {% endblock %}
 
-        <footer class="muted">© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">{{ _('Source code on GitHub') }}</a> • {{ _('Licensed under the %(license)s', license='<a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD</a>'|safe) }}</footer>
-    </div>
+    <footer class="muted">© 2016 <a href="https://epoc.fr">Maxime "Epoc" G.</a> • <a href="https://github.com/EpocDotFr/webtodotxt">{{ _('Source code on GitHub') }}</a> • {{ _('Licensed under the %(license)s', license='<a href="https://github.com/EpocDotFr/webtodotxt/blob/master/LICENSE.md">DBAD</a>'|safe) }}</footer>
 </body>
 </html>

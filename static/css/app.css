@@ -219,14 +219,14 @@ small.alert {
 /************************************************************************
  * Footer */
 
-#app footer {
+footer {
     text-align: center;
     font-size: 12px;
     margin: 10px;
 }
 
-#app footer a,
-#app footer a:visited {
+footer a,
+footer a:visited {
     color: inherit;
 }
 

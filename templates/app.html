@@ -1,130 +1,132 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <header class="row">
-        <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a>
-            <small v-show="loading" class="muted"><i class="fa fa-spinner fa-pulse"></i> {{ _('Loading...') }}</small>
-        </div>
-        <div class="menu">
-            <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> {{ _('Add') }}</button>
-            <button @click="loadTodoTxt()" :disabled="loading"><i class="fa fa-refresh"></i> {{ _('Reload') }}</button>
-            <button @click="saveTodoTxt()" :disabled="loading"><i class="fa fa-floppy-o"></i> {{ _('Save') }}</button>
-        </div>
-    </header>
-    <div id="content" class="row">
-        <div id="filters">
-            <div>
-                <h2>{{ _('General filters') }} <button class="small" @click="clearGeneralFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
+    <div id="app">
+        <header class="row">
+            <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a>
+                <small v-show="loading" class="muted"><i class="fa fa-spinner fa-pulse"></i> {{ _('Loading...') }}</small>
+            </div>
+            <div class="menu">
+                <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> {{ _('Add') }}</button>
+                <button @click="loadTodoTxt()" :disabled="loading"><i class="fa fa-refresh"></i> {{ _('Reload') }}</button>
+                <button @click="saveTodoTxt()" :disabled="loading"><i class="fa fa-floppy-o"></i> {{ _('Save') }}</button>
+            </div>
+        </header>
+        <div id="content" class="row">
+            <div id="filters">
+                <div>
+                    <h2>{{ _('General filters') }} <button class="small" @click="clearGeneralFilters()" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
-                <div>{{ _('Completed:') }}
-                    <label><input type="radio" v-model="filters.completed" value="all"> {{ _('All') }}</label>
-                    <label><input type="radio" v-model="filters.completed" value="yes"> {{ _('Yes') }}</label>
-                    <label><input type="radio" v-model="filters.completed" value="no"> {{ _('No') }}</label>
-                </div>
-                <div class="row">
-                    <div><input type="text" v-model="filters.text" placeholder="{{ _('Text') }}"></div>
-                    <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.text = ''"><i class="fa fa-eraser"></i></a></div>
-                </div>
-                <div class="row">
-                    <div><input type="text" placeholder="{{ _('Completion date') }}" readonly v-date-filter-datepicker:completion_date></div>
-                    <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.completion_date = ''"><i class="fa fa-eraser"></i></a></div>
-                </div>
-                <div class="row">
-                    <div><input type="text" placeholder="{{ _('Creation date') }}" readonly v-date-filter-datepicker:creation_date></div>
-                    <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.creation_date = ''"><i class="fa fa-eraser"></i></a></div>
-                </div>
-                <div class="row">
-                    <div><input type="text" placeholder="{{ _('Due date') }}" readonly v-date-filter-datepicker:due_date></div>
-                    <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.due_date = ''"><i class="fa fa-eraser"></i></a></div>
-                </div>
-            </div>
-            <div class="lists">
-                <h2>{{ _('Priorities') }} <button class="small" @click="filters.priorities = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
-
-                <div class="muted" v-show="allPriorities.length == 0">{{ _('None a this moment.') }}</div>
-                <div v-for="priority in allPriorities">
-                    <label><input type="checkbox" v-model="filters.priorities" :value="priority"> <span :class="['priority-chip', priority]">${ priority }</span></label>
-                </div>
-            </div>
-            <div class="lists">
-                <h2>{{ _('Projects') }} <button class="small" @click="filters.projects = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
-
-                <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
-                <div v-for="project in allProjects" class="row">
-                    <div><label><input type="checkbox" v-model="filters.projects" :value="project"> ${ project }</label></div>
-                    <div class="actions" v-show="isStoredProjectOnly(project)"><a href="#" title="{{ _('Delete this project') }}" @click.prevent="removeStoredProject(project)"><i class="fa fa-trash"></i></a></div>
-                </div>
-            </div>
-            <div class="lists">
-                <h2>{{ _('Contexts') }} <button class="small" @click="filters.contexts = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
-
-                <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
-                <div v-for="context in allContexts" class="row">
-                    <div><label><input type="checkbox" v-model="filters.contexts" :value="context"> ${ context }</label></div>
-                    <div class="actions" v-show="isStoredContextOnly(context)"><a href="#" title="{{ _('Delete this context') }}" @click.prevent="removeStoredContext(context)"><i class="fa fa-trash"></i></a></div>
-                </div>
-            </div>
-            <div class="bottom">
-                <button @click="clearAllFilters()"><i class="fa fa-eraser"></i> {{ _('Clear all filters') }}</button>
-            </div>
-        </div>
-        <div id="todos">
-            <div class="muted" v-show="filteredTodos.length == 0">{{ _('No todos to display') }} <i class="fa fa-smile-o"></i></div>
-            <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
-                <div class="actions">
-                    <a href="#" @click.prevent="doneEditTodo(todo)" title="{{ _('Done') }}" class="apply"><i class="fa fa-check fa-fw"></i></a>
-                    <a href="#" @click.prevent="editTodo(todo)" title="{{ _('Edit') }}" class="edit"><i class="fa fa-pencil fa-fw"></i></a>
-                    <a href="#" @click.prevent="todos.splice(todos.indexOf(todo), 1)" title="{{ _('Delete') }}"><i class="fa fa-trash fa-fw"></i></a>
-                </div>
-                <div class="row container show">
-                    <div class="completed-checkbox">
-                        <input type="checkbox" v-model="todo.completed" v-on:change="todoCompletedHook(todo)">
-                    </div>
-                    <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
-                    <div class="content">
-                        <div class="text" v-html="markdownToHTML(todo.text)"></div>
-                        <div class="metadata">
-                            <template v-if="todo.tags.due"><strong>{{ _('Due') }} ${ todo.tags.due.format('L') }</strong></template>
-                            <template v-for="project in todo.projects">+${ project } </template>
-                            <template v-for="context in todo.contexts">@${ context } </template>
-                            <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date.format('L') }</template>
-                            <template v-if="todo.completion_date">{{ _('Completed') }} ${ todo.completion_date.format('L') }</template>
-                        </div>
-                    </div>
-                </div>
-                <div class="container edit">
-                    <div class="row">
-                        <div class="due-date" v-show="todo.tags.due">
-                            <a href="#" title="{{ _('Remove due date') }}" @click.prevent="removeDueDate(todo)"><i class="fa fa-calendar-times-o"></i></a>
-                        </div>
-                        <div><input type="text" v-model.trim="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text and hit Enter or Esc') }}"></div>
+                    <div>{{ _('Completed:') }}
+                        <label><input type="radio" v-model="filters.completed" value="all"> {{ _('All') }}</label>
+                        <label><input type="radio" v-model="filters.completed" value="yes"> {{ _('Yes') }}</label>
+                        <label><input type="radio" v-model="filters.completed" value="no"> {{ _('No') }}</label>
                     </div>
                     <div class="row">
-                        <div class="list priority">
-                            <h3>{{ _('Priority') }} <button class="small" @click="todo.priority = ''" title="{{ _('Clear priority') }}"><i class="fa fa-eraser"></i></button></h3>
-                            <div>
-                                <div v-for="valid_priority in valid_priorities">
-                                    <label><input type="radio" v-model="todo.priority" :value="valid_priority"> <span :class="['priority-chip', valid_priority]">${ valid_priority }</span></label>
-                                </div>
+                        <div><input type="text" v-model="filters.text" placeholder="{{ _('Text') }}"></div>
+                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.text = ''"><i class="fa fa-eraser"></i></a></div>
+                    </div>
+                    <div class="row">
+                        <div><input type="text" placeholder="{{ _('Completion date') }}" readonly v-date-filter-datepicker:completion_date></div>
+                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.completion_date = ''"><i class="fa fa-eraser"></i></a></div>
+                    </div>
+                    <div class="row">
+                        <div><input type="text" placeholder="{{ _('Creation date') }}" readonly v-date-filter-datepicker:creation_date></div>
+                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.creation_date = ''"><i class="fa fa-eraser"></i></a></div>
+                    </div>
+                    <div class="row">
+                        <div><input type="text" placeholder="{{ _('Due date') }}" readonly v-date-filter-datepicker:due_date></div>
+                        <div class="clear"><a href="#" title="{{ _('Clear this filter') }}" @click.prevent="filters.due_date = ''"><i class="fa fa-eraser"></i></a></div>
+                    </div>
+                </div>
+                <div class="lists">
+                    <h2>{{ _('Priorities') }} <button class="small" @click="filters.priorities = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
+
+                    <div class="muted" v-show="allPriorities.length == 0">{{ _('None a this moment.') }}</div>
+                    <div v-for="priority in allPriorities">
+                        <label><input type="checkbox" v-model="filters.priorities" :value="priority"> <span :class="['priority-chip', priority]">${ priority }</span></label>
+                    </div>
+                </div>
+                <div class="lists">
+                    <h2>{{ _('Projects') }} <button class="small" @click="filters.projects = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
+
+                    <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
+                    <div v-for="project in allProjects" class="row">
+                        <div><label><input type="checkbox" v-model="filters.projects" :value="project"> ${ project }</label></div>
+                        <div class="actions" v-show="isStoredProjectOnly(project)"><a href="#" title="{{ _('Delete this project') }}" @click.prevent="removeStoredProject(project)"><i class="fa fa-trash"></i></a></div>
+                    </div>
+                </div>
+                <div class="lists">
+                    <h2>{{ _('Contexts') }} <button class="small" @click="filters.contexts = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
+
+                    <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
+                    <div v-for="context in allContexts" class="row">
+                        <div><label><input type="checkbox" v-model="filters.contexts" :value="context"> ${ context }</label></div>
+                        <div class="actions" v-show="isStoredContextOnly(context)"><a href="#" title="{{ _('Delete this context') }}" @click.prevent="removeStoredContext(context)"><i class="fa fa-trash"></i></a></div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <button @click="clearAllFilters()"><i class="fa fa-eraser"></i> {{ _('Clear all filters') }}</button>
+                </div>
+            </div>
+            <div id="todos">
+                <div class="muted" v-show="filteredTodos.length == 0">{{ _('No todos to display') }} <i class="fa fa-smile-o"></i></div>
+                <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
+                    <div class="actions">
+                        <a href="#" @click.prevent="doneEditTodo(todo)" title="{{ _('Done') }}" class="apply"><i class="fa fa-check fa-fw"></i></a>
+                        <a href="#" @click.prevent="editTodo(todo)" title="{{ _('Edit') }}" class="edit"><i class="fa fa-pencil fa-fw"></i></a>
+                        <a href="#" @click.prevent="todos.splice(todos.indexOf(todo), 1)" title="{{ _('Delete') }}"><i class="fa fa-trash fa-fw"></i></a>
+                    </div>
+                    <div class="row container show">
+                        <div class="completed-checkbox">
+                            <input type="checkbox" v-model="todo.completed" v-on:change="todoCompletedHook(todo)">
+                        </div>
+                        <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
+                        <div class="content">
+                            <div class="text" v-html="markdownToHTML(todo.text)"></div>
+                            <div class="metadata">
+                                <template v-if="todo.tags.due"><strong>{{ _('Due') }} ${ todo.tags.due.format('L') }</strong></template>
+                                <template v-for="project in todo.projects">+${ project } </template>
+                                <template v-for="context in todo.contexts">@${ context } </template>
+                                <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date.format('L') }</template>
+                                <template v-if="todo.completion_date">{{ _('Completed') }} ${ todo.completion_date.format('L') }</template>
                             </div>
                         </div>
-                        <div class="list projects">
-                            <h3>{{ _('Projects') }} <button class="small" @click="todo.projects = []" title="{{ _('Clear projects') }}"><i class="fa fa-eraser"></i></button></h3>
-                            <input type="text" @keyup.enter="addProjectToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
-                            <div>
-                                <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
-                                <div v-for="project in allProjects">
-                                    <label><input type="checkbox" :value="project" v-model="todo.projects"> ${ project }</label>
+                    </div>
+                    <div class="container edit">
+                        <div class="row">
+                            <div class="due-date" v-show="todo.tags.due">
+                                <a href="#" title="{{ _('Remove due date') }}" @click.prevent="removeDueDate(todo)"><i class="fa fa-calendar-times-o"></i></a>
+                            </div>
+                            <div><input type="text" v-model.trim="todo.text" @keyup.enter="doneEditTodo(todo)" @keyup.esc="doneEditTodo(todo)" placeholder="{{ _('Type some text and hit Enter or Esc') }}"></div>
+                        </div>
+                        <div class="row">
+                            <div class="list priority">
+                                <h3>{{ _('Priority') }} <button class="small" @click="todo.priority = ''" title="{{ _('Clear priority') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <div>
+                                    <div v-for="valid_priority in valid_priorities">
+                                        <label><input type="radio" v-model="todo.priority" :value="valid_priority"> <span :class="['priority-chip', valid_priority]">${ valid_priority }</span></label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="list contexts">
-                            <h3>{{ _('Contexts') }} <button class="small" @click="todo.contexts = []" title="{{ _('Clear contexts') }}"><i class="fa fa-eraser"></i></button></h3>
-                            <input type="text" @keyup.enter="addContextToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
-                            <div>
-                                <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
-                                <div v-for="context in allContexts">
-                                    <label><input type="checkbox" :value="context" v-model="todo.contexts"> ${ context }</label>
+                            <div class="list projects">
+                                <h3>{{ _('Projects') }} <button class="small" @click="todo.projects = []" title="{{ _('Clear projects') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <input type="text" @keyup.enter="addProjectToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
+                                <div>
+                                    <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
+                                    <div v-for="project in allProjects">
+                                        <label><input type="checkbox" :value="project" v-model="todo.projects"> ${ project }</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list contexts">
+                                <h3>{{ _('Contexts') }} <button class="small" @click="todo.contexts = []" title="{{ _('Clear contexts') }}"><i class="fa fa-eraser"></i></button></h3>
+                                <input type="text" @keyup.enter="addContextToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
+                                <div>
+                                    <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
+                                    <div v-for="context in allContexts">
+                                        <label><input type="checkbox" :value="context" v-model="todo.contexts"> ${ context }</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
