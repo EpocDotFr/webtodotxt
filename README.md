@@ -113,7 +113,9 @@ Everything is [JSON](https://en.wikipedia.org/wiki/JSON).
             "python",
             "awesomeproject"
          ],
-         "tags": {},
+         "tags": {
+            "due": "2017-01-29"
+         },
          "text": "Todo.txt rocks"
       }
    ]
