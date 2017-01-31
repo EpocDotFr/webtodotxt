@@ -100,7 +100,23 @@ Everything is [JSON](https://en.wikipedia.org/wiki/JSON).
 ```json
 {
    "status": "success",
-   "data": /* The data to consume */
+   "data": [
+      {
+         "completed": false,
+         "completion_date": null,
+         "contexts": [
+            "ftw"
+         ],
+         "creation_date": null,
+         "priority": "A",
+         "projects": [
+            "python",
+            "awesomeproject"
+         ],
+         "tags": {},
+         "text": "Todo.txt rocks"
+      }
+   ]
 }
 ```
 
