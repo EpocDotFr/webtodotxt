@@ -45,7 +45,7 @@ Available configuration parameters are:
   - `DEBUG` Enable/disable debug mode
   - `LOGGER_HANDLER_POLICY` Policy of the default logging handler
 
-More informations on the three above can be found [here](http://flask.pocoo.org/docs/0.11/config/#builtin-configuration-values).
+More informations on the three above can be found [here](http://flask.pocoo.org/docs/0.12/config/#builtin-configuration-values).
 
   - `USERS` The credentials required to access the app. You can specify multiple ones. **It is highly recommended to serve Web Todo.txt through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
   - `TODOTXT_LOCATION` Path to a Todo.txt file (may be relative or absolute)
@@ -71,7 +71,7 @@ The uWSGI file you'll have to set in your uWSGI configuration is `uwsgi.py`. The
 
   - Others
 
-You'll probably have to hack with this application to make it work with one of the solutions described [here](http://flask.pocoo.org/docs/0.11/deploying/). Send me a pull request if you make it work.
+You'll probably have to hack with this application to make it work with one of the solutions described [here](http://flask.pocoo.org/docs/0.12/deploying/). Send me a pull request if you make it work.
 
 ## How it works
 
