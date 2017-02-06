@@ -14,6 +14,7 @@ import os
 
 app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('config.py')
+
 app.config['LANGUAGES'] = {
     'en': 'English',
     'fr': 'Français',
@@ -23,6 +24,7 @@ app.config['LANGUAGES'] = {
 babel = Babel(app)
 auth = HTTPBasicAuth()
 
+# Default Python logger
 logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%d/%m/%Y %H:%M:%S',
@@ -30,6 +32,10 @@ logging.basicConfig(
 )
 
 logging.getLogger().setLevel(logging.INFO)
+
+# Default Flask loggers
+for handler in app.logger.handlers:
+    handler.setFormatter(logging.Formatter(fmt='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d/%m/%Y %H:%M:%S'))
 
 
 # -----------------------------------------------------------
