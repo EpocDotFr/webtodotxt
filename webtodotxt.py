@@ -124,7 +124,10 @@ def auth_error():
 
 @babel.localeselector
 def get_app_locale():
-    return g.CURRENT_LOCALE
+    if not hasattr(g, 'CURRENT_LOCALE'):
+        return app.config['DEFAULT_LANGUAGE']
+    else:
+        return g.CURRENT_LOCALE
 
 
 # -----------------------------------------------------------
