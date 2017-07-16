@@ -376,7 +376,7 @@ var app = new Vue({
             }
 
             if (!todo.text) {
-                this.removeTodo(todo);
+                this.todos.splice(todos.indexOf(todo), 1);
             }
         },
         // Called when a todo completion status is set
@@ -394,7 +394,7 @@ var app = new Vue({
             if (!project_name) {
                 return;
             }
-            
+
             todo.projects.push(project_name);
 
             event.target.value = '';
@@ -496,7 +496,7 @@ var app = new Vue({
                     } catch (e) {
                         message = error;
                     }
-                    
+
                     alert(message);
                 },
                 complete: function() {
