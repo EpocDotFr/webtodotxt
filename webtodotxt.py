@@ -2,9 +2,10 @@ from flask import Flask, render_template, jsonify, request, g, make_response
 from flask_httpauth import HTTPBasicAuth
 from flask_babel import Babel, get_locale, _
 from werkzeug.exceptions import HTTPException
+import storage_backends
+import todotxtio
 import logging
 import sys
-import todotxtio
 import os
 
 
@@ -55,11 +56,11 @@ def home():
 def todotxt():
     status = 200
 
-    todotxt_location = os.path.abspath(app.config['TODOTXT_LOCATION'])
-
     try:
+        storage_backend = get_current_storage_backend_instance()
+
         if request.method == 'GET':
-            todos = todotxtio.from_file(todotxt_location)
+            todos = storage_backend.retrieve()
 
             allowed_params = ['text', 'completed', 'completion_date', 'priority', 'creation_date', 'projects', 'contexts', 'tags']
 
@@ -83,12 +84,9 @@ def todotxt():
         elif request.method == 'POST':
             todos = todotxtio.from_dicts(request.get_json())
 
-            todotxtio.to_file(todotxt_location, todos)
+            storage_backend.store(todos)
 
             result = {'status': 'success', 'data': []}
-    except FileNotFoundError:
-        result = {'status': 'failure', 'data': {'message': _('The Todo.txt file can\'t be found at the specified location: %(location)s', location=todotxt_location)}}
-        status = 404
     except Exception as e:
         result = {'status': 'failure', 'data': {'message': _('Error while loading or updating the Todo.txt file: %(exception)s', exception=str(e))}}
         status = 500
@@ -151,3 +149,21 @@ def http_error_handler(error, without_code=False):
         return make_response(body, error)
     else:
         return make_response(body)
+
+
+# -----------------------------------------------------------
+# Helpers
+
+
+def get_current_storage_backend_instance():
+    name = app.config['STORAGE_BACKEND_TO_USE']
+
+    if name not in storage_backends.__all__:
+        raise ValueError('{} isn\'t a valid storage backend name'.format(name))
+
+    config = {}
+
+    if name in app.config['STORAGE_BACKENDS']:
+        config = app.config['STORAGE_BACKENDS'][name]
+
+    return getattr(storage_backends, name)(config)

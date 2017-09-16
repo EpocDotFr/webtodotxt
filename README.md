@@ -17,8 +17,8 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Clear displaying of the task priority and completion
   - Automatic task creation date and completion date setting
   - Basic Markdown support for inline formatting styles (strong, emphasis, code, deleted, link. Text links and emails are also auto-linked)
-  - Automatic saving (WIP)
   - Possible to integrate with other system using a very basic "API" (I put API in quotes because it isn't really an API). See below for more information
+  - Support 2 storage backends (see below in the **Supported storage backends** section for the list)
   - Internationalized & localized in 3 languages:
     - English (`en`)
     - French (`fr`)
@@ -34,6 +34,7 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   1. Clone this repo somewhere
   2. `pip install -r requirements.txt`
   3. `pybabel compile -d translations`
+  4. **IMPORTANT:** Other dependencies are needed regarding the storage backend you'll use. Please refer to the table in the **Supported storage backends** section below and install them accordingly using `pip install <package>` before continuing
 
 ## Configuration
 
@@ -48,9 +49,10 @@ Available configuration parameters are:
 More informations on the three above can be found [here](http://flask.pocoo.org/docs/0.12/config/#builtin-configuration-values).
 
   - `USERS` The credentials required to access the app. You can specify multiple ones. **It is highly recommended to serve Web Todo.txt through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
-  - `TODOTXT_LOCATION` Path to a Todo.txt file (may be relative or absolute)
   - `FORCE_LANGUAGE` Force the lang to be one of the supported ones (defaults to `None`: auto-detection from the `Accept-Language` HTTP header). See in the features section above for a list of available lang keys
   - `DEFAULT_LANGUAGE` Default language if it cannot be determined automatically. Not taken into account if `FORCE_LANGUAGE` is defined. See in the features section above for a list of available lang keys
+  - `STORAGE_BACKEND_TO_USE` The storage backend to use. Can be one of the ones in the table below, in the **Supported storage backends** section
+  - `STORAGE_BACKENDS` Self-explanatory storage backends-specific configuration values. Don't forget to change them before using your desired storage backend
 
 I'll let you search yourself about how to configure a web server along uWSGI.
 
@@ -90,17 +92,25 @@ Please navigate [here](https://github.com/EpocDotFr/webtodotxt/blob/master/api.m
 
 Instead, use native mobile apps to edit and sync the Todo.txt file:
 
-**On Android**, [Simpletask Cloudless](https://play.google.com/store/apps/details?id=nl.mpcjanssen.simpletask) along [FolderSync Lite](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite)
+**On Android**, you can use [Simpletask](https://play.google.com/store/apps/details?id=nl.mpcjanssen.todotxtholo&hl=en)
+which can natively sync tasks with your Dropbox account.
 
 **On iOS**, I don't know. Feel free to share your finds.
 
   - This web application wasn't designed to be multi-process compliant
 
-If you sync your Todo.txt file via SFTP or something from the mobile apps and at the same time you're modifiying it via
+If you sync your Todo.txt file via Dropbox or something from the mobile apps and at the same time you're modifiying it via
 this web app, you'll probably end with a loss of data because both sides can't be aware of the latest version of the file
 in realtime: they both erase the file with their data.
 
 So make sure you're modifying it from one location at a time with the latest up-to-date Todo.txt file.
+
+## Supported storage backends
+
+| Name | Configuration value | Additional PyPI dependencies |
+|------|---------------------|------------------------------|
+| Local file system | `FileSystem` |  |
+| [Dropbox](https://www.dropbox.com/) | `Dropbox` | `dropbox` |
 
 ## Contributors
 
