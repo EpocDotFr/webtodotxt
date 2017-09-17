@@ -80,7 +80,8 @@ You'll probably have to hack with this application to make it work with one of t
 
 This project is built on [Vue.js](http://vuejs.org/) 2 for the frontend and [Flask](http://flask.pocoo.org/) (Python) for
 the backend. The [todotxtio](https://github.com/EpocDotFr/todotxtio) PyPI package is used to parse/write the Todo.txt file,
-giving/receiving data through [Ajax](https://en.wikipedia.org/wiki/Ajax_(programming)).
+giving/receiving data through [Ajax](https://en.wikipedia.org/wiki/Ajax_(programming)). Several storage backends
+are available so one can choose to save its Todo.txt file locally on the filesystem or on its Dropbox.
 
 ## "API"
 
