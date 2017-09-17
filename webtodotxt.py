@@ -6,7 +6,6 @@ import storage_backends
 import todotxtio
 import logging
 import sys
-import os
 
 
 # -----------------------------------------------------------
