@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-02-18 10:46+0100\n"
+"POT-Creation-Date: 2017-09-17 10:27+0200\n"
 "PO-Revision-Date: 2017-01-28 11:07+0100\n"
 "Last-Translator: \n"
 "Language: fr\n"
@@ -16,16 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.3.4\n"
+"Generated-By: Babel 2.4.0\n"
 
-#: webtodotxt.py:90
-#, python-format
-msgid "The Todo.txt file can't be found at the specified location: %(location)s"
-msgstr ""
-"Le fichier Todo.txt ne peut pas être trouvé à l'endroit spécifié : "
-"%(location)s"
-
-#: webtodotxt.py:93
+#: webtodotxt.py:91
 #, python-format
 msgid "Error while loading or updating the Todo.txt file: %(exception)s"
 msgstr ""
@@ -337,3 +330,12 @@ msgstr ""
 "Une erreur serveur est survenue ! Veuillez rééssayer. Si le problème "
 "persiste, merci de rapporter un bug <a "
 "href=\"https://github.com/EpocDotFr/webtodotxt/issues\">ici</a>."
+
+#~ msgid ""
+#~ "The Todo.txt file can't be found "
+#~ "at the specified location: %(location)s"
+#~ msgstr ""
+#~ "Le fichier Todo.txt ne peut pas "
+#~ "être trouvé à l'endroit spécifié : "
+#~ "%(location)s"
+

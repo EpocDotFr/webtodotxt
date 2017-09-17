@@ -93,7 +93,12 @@ Please navigate [here](https://github.com/EpocDotFr/webtodotxt/blob/master/api.m
 Instead, use native mobile apps to edit and sync the Todo.txt file:
 
 **On Android**, you can use [Simpletask](https://play.google.com/store/apps/details?id=nl.mpcjanssen.todotxtholo&hl=en)
-which can natively sync tasks with your Dropbox account.
+(free) which can natively sync your tasks with your Dropbox. If you're using another storage provider (third-party or
+self-hosted), you can use a modified version of this app called [Simpletask Cloudless](https://play.google.com/store/apps/details?id=nl.mpcjanssen.simpletask&hl=en)
+(also free, from the same author) which comes with no sync at all, but instead saves all your tasks in a file on your
+device. You can then do whatever you want with this file like syncing it via SFTP or many other providers / protocols
+with [FolderSync](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite&hl=en) (free, but a
+[pro version](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.full&hl=en) is available).
 
 **On iOS**, I don't know. Feel free to share your finds.
 

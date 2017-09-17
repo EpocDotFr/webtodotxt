@@ -55,7 +55,6 @@ Everything is [JSON](https://en.wikipedia.org/wiki/JSON).
 ## Possible HTTP status codes
 
   - 200: Everything is OK
-  - 404: The Todo.txt file wasn't found
   - 500: Server error (see the `message` attribute in the JSON body for more information)
 
 ## Getting the Todo.txt content: `GET /todo.txt`
