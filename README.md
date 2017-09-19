@@ -11,13 +11,14 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
   - Add / edit / remove tasks
   - Tasks due date (WIP)
   - Filters on all possible task data
-  - Projects and contexts are cached locally for future use (using [localStorage](https://en.wikipedia.org/wiki/Web_storage#localStorage))
+  - Projects and contexts are cached locally for future use (using [localStorage](https://en.wikipedia.org/wiki/Web_storage#localStorage)) (WIP)
   - Automatic sorting
   - Save and reload the task list
   - Clear displaying of the task priority and completion
   - Automatic task creation date and completion date setting
   - Links are automatically created for URLs and email addresses
   - Possible to integrate with other system using a very basic "API" (I put API in quotes because it isn't really an API). See below for more information
+  - Warns before quitting if your task list wasn't saved to prevent data loss
   - Support 2 storage backends (see below in the **Supported storage backends** section for the list)
   - Internationalized & localized in 3 languages:
     - English (`en`)
