@@ -373,6 +373,7 @@ var app = new Vue({
 
             event.target.value = '';
         },
+        // Remove the due date of a todo
         removeDueDate: function(todo) {
             Vue.delete(todo.tags, 'due');
         },
@@ -466,8 +467,22 @@ var app = new Vue({
                 }
             });
         },
+        // Convert all text that looks like links/email addresses to HTML links
         anchorme: function(string) {
             return anchorme(string, {ips: false, files: false});
+        },
+        // Humanize a date if its difference from/to now is more that 4 days
+        humanizeDate: function(date) {
+            var now = moment();
+            var days_diff = date.diff(now, 'days');
+
+            console.log(days_diff);
+
+            if (days_diff >= 4 || days_diff <= -4) {
+                return date.format('L');
+            } else {
+                return date.from(now);
+            }
         }
     }
 });

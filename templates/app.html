@@ -85,11 +85,11 @@
                         <div class="content">
                             <div class="text" v-html="anchorme(todo.text)"></div>
                             <div class="metadata">
-                                <template v-if="todo.tags.due"><strong>{{ _('Due') }} ${ todo.tags.due.format('L') }</strong></template>
+                                <template v-if="todo.tags.due"><strong>{{ _('Due') }} ${ humanizeDate(todo.tags.due) }</strong></template>
                                 <template v-for="project in todo.projects">+${ project } </template>
                                 <template v-for="context in todo.contexts">@${ context } </template>
-                                <template v-if="todo.creation_date">{{ _('Created') }} ${ todo.creation_date.format('L') }</template>
-                                <template v-if="todo.completion_date">{{ _('Completed') }} ${ todo.completion_date.format('L') }</template>
+                                <template v-if="todo.creation_date">{{ _('Created') }} ${ humanizeDate(todo.creation_date) }</template>
+                                <template v-if="todo.completion_date">{{ _('Completed') }} ${ humanizeDate(todo.completion_date) }</template>
                             </div>
                         </div>
                     </div>
