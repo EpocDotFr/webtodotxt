@@ -4,7 +4,7 @@
     <div id="app">
         <header class="row">
             <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a>
-                <small v-show="loading" class="muted"><i class="fa fa-spinner fa-pulse"></i> {{ _('Loading...') }}</small>
+                <small v-show="loading" class="txtmuted"><i class="fa fa-spinner fa-pulse"></i> {{ _('Loading...') }}</small>
             </div>
             <div class="menu">
                 <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> {{ _('Add') }}</button>
@@ -42,7 +42,7 @@
                 <div class="lists">
                     <h2>{{ _('Priorities') }} <button class="small" @click="filters.priorities = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
-                    <div class="muted" v-show="allPriorities.length == 0">{{ _('None a this moment.') }}</div>
+                    <div class="txtmuted" v-show="allPriorities.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="priority in allPriorities">
                         <label><input type="checkbox" v-model="filters.priorities" :value="priority"> <span :class="['priority-chip', priority]">${ priority }</span></label>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="lists">
                     <h2>{{ _('Projects') }} <button class="small" @click="filters.projects = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
-                    <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
+                    <div class="txtmuted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="project in allProjects" class="row">
                         <div><label><input type="checkbox" v-model="filters.projects" :value="project"> ${ project }</label></div>
                         <div class="actions" v-show="isStoredProjectOnly(project)"><a href="#" title="{{ _('Delete this project') }}" @click.prevent="removeStoredProject(project)"><i class="fa fa-trash"></i></a></div>
@@ -59,7 +59,7 @@
                 <div class="lists">
                     <h2>{{ _('Contexts') }} <button class="small" @click="filters.contexts = []" title="{{ _('Clear these filters') }}"><i class="fa fa-eraser"></i></button></h2>
 
-                    <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
+                    <div class="txtmuted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
                     <div v-for="context in allContexts" class="row">
                         <div><label><input type="checkbox" v-model="filters.contexts" :value="context"> ${ context }</label></div>
                         <div class="actions" v-show="isStoredContextOnly(context)"><a href="#" title="{{ _('Delete this context') }}" @click.prevent="removeStoredContext(context)"><i class="fa fa-trash"></i></a></div>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div id="todos">
-                <div class="muted" v-show="filteredTodos.length == 0">{{ _('No todos to display') }} <i class="fa fa-smile-o"></i></div>
+                <div class="txtmuted" v-show="filteredTodos.length == 0">{{ _('No todos to display') }} <i class="fa fa-smile-o"></i></div>
                 <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
                     <div class="actions">
                         <a href="#" @click.prevent="doneEditTodo(todo)" title="{{ _('Done') }}" class="apply"><i class="fa fa-check fa-fw"></i></a>
@@ -85,7 +85,7 @@
                         <div class="content">
                             <div class="text" v-html="anchorme(todo.text)"></div>
                             <div class="metadata">
-                                <template v-if="todo.tags.due"><strong>{{ _('Due') }} ${ humanizeDate(todo.tags.due) }</strong></template>
+                                <template v-if="todo.tags.due"><span :class="[isDueDateImminent(todo.tags.due) ? 'txtred' : '']">{{ _('Due') }} ${ humanizeDate(todo.tags.due) }</span></template>
                                 <template v-for="project in todo.projects">+${ project } </template>
                                 <template v-for="context in todo.contexts">@${ context } </template>
                                 <template v-if="todo.creation_date">{{ _('Created') }} ${ humanizeDate(todo.creation_date) }</template>
@@ -113,7 +113,7 @@
                                 <h3>{{ _('Projects') }} <button class="small" @click="todo.projects = []" title="{{ _('Clear projects') }}"><i class="fa fa-eraser"></i></button></h3>
                                 <input type="text" @keyup.enter="addProjectToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
                                 <div>
-                                    <div class="muted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
+                                    <div class="txtmuted" v-show="allProjects.length == 0">{{ _('None a this moment.') }}</div>
                                     <div v-for="project in allProjects">
                                         <label><input type="checkbox" :value="project" v-model="todo.projects"> ${ project }</label>
                                     </div>
@@ -123,7 +123,7 @@
                                 <h3>{{ _('Contexts') }} <button class="small" @click="todo.contexts = []" title="{{ _('Clear contexts') }}"><i class="fa fa-eraser"></i></button></h3>
                                 <input type="text" @keyup.enter="addContextToTodo(todo, $event)" placeholder="{{ _('Type a name and hit Enter') }}">
                                 <div>
-                                    <div class="muted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
+                                    <div class="txtmuted" v-show="allContexts.length == 0">{{ _('None a this moment.') }}</div>
                                     <div v-for="context in allContexts">
                                         <label><input type="checkbox" :value="context" v-model="todo.contexts"> ${ context }</label>
                                     </div>

@@ -30,12 +30,18 @@ var app = new Vue({
     delimiters: ['${', '}'], // Because Jinja2 already uses double brackets
     el: '#app',
     data: {
+        // --------------------------------------------------------
+        // Constants
+
         valid_priorities: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+        humanize_data_timespan: 3, // If the todo dates are within -3 or +3 days from today: convert dates to relative ones
+        due_date_highlight_timespan: 1,
+
+        // --------------------------------------------------------
+        // Variables
+
         loading: false, // Network activity indicator
-
-        // The todo that is being edited (also used when creating a new todo)
-        todoBeingEdited: null,
-
+        todoBeingEdited: null, // The todo that is being edited (also used when creating a new todo)
         todos: [], // The list of all todos
 
         // Criteria used to filter the todo list above
@@ -471,18 +477,20 @@ var app = new Vue({
         anchorme: function(string) {
             return anchorme(string, {ips: false, files: false});
         },
-        // Humanize a date if its difference from/to now is more that 4 days
+        // Convert a date to a relative one if it is within -3 or +3 days from today
         humanizeDate: function(date) {
             var now = moment();
             var days_diff = date.diff(now, 'days');
 
-            console.log(days_diff);
-
-            if (days_diff >= 4 || days_diff <= -4) {
+            if (days_diff >= this.humanize_data_timespan || days_diff <= -this.humanize_data_timespan) {
                 return date.format('L');
             } else {
                 return date.from(now);
             }
+        },
+        // Determine if the due date of a todo is for tomorrow or earlier
+        isDueDateImminent: function(due_date) {
+            return due_date.diff(moment(), 'days') <= this.due_date_highlight_timespan;
         }
     }
 });
