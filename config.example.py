@@ -11,6 +11,6 @@ STORAGE_BACKENDS = {
     },
     'Dropbox': {
         'access_token': '',
-        'path': ''
+        'path': '/todo.txt'
     }
 }
