@@ -347,14 +347,14 @@ var app = new Vue({
                 return;
             }
 
+            if (!todo.text) {
+                return;
+            }
+
             this.todo_being_edited = null;
 
             if ('_new' in todo) {
                 Vue.delete(todo, '_new');
-            }
-
-            if (!todo.text) {
-                this.todos.splice(todos.indexOf(todo), 1);
             }
 
             this.is_dirty = true;
@@ -366,6 +366,12 @@ var app = new Vue({
             } else {
                 todo.completion_date = '';
             }
+
+            this.is_dirty = true;
+        },
+        // Delete a todo
+        deleteTodo: function(todo) {
+            this.todos.splice(this.todos.indexOf(todo), 1);
 
             this.is_dirty = true;
         },

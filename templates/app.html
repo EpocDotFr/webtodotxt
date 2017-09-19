@@ -75,7 +75,7 @@
                     <div class="actions">
                         <a href="#" @click.prevent="doneEditTodo(todo)" title="{{ _('Done') }}" class="apply"><i class="fa fa-check fa-fw"></i></a>
                         <a href="#" @click.prevent="editTodo(todo)" title="{{ _('Edit') }}" class="edit"><i class="fa fa-pencil fa-fw"></i></a>
-                        <a href="#" @click.prevent="todos.splice(todos.indexOf(todo), 1)" title="{{ _('Delete') }}"><i class="fa fa-trash fa-fw"></i></a>
+                        <a href="#" @click.prevent="deleteTodo(todo)" title="{{ _('Delete') }}"><i class="fa fa-trash fa-fw"></i></a>
                     </div>
                     <div class="row container show">
                         <div class="completed-checkbox">
