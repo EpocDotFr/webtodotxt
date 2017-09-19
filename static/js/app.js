@@ -1,9 +1,7 @@
 function isLocalStorageSupported() {
-    var test = 'test';
-
     try {
-        localStorage.setItem(test, test);
-        localStorage.removeItem(test);
+        localStorage.setItem('test', 'test');
+        localStorage.removeItem('test');
         return true;
     } catch(e) {
         return false;
@@ -21,46 +19,10 @@ function getTodoStringForSorting(todo) {
         ret.push('(' + todo.priority + ')');
     }
 
-    ret.push(removeMarkdown(todo.text));
+    ret.push(todo.text);
 
     return ret.join(' ');
 }
-
-function removeMarkdown(str) {
-    try {
-        str = str
-        // Remove HTML tags
-        .replace(/<(.*?)>/g, '$1')
-        // Remove setext-style header
-        .replace(/^[=\-]{2,}\s*$/g, '')
-        // Remove footnotes?
-        .replace(/\[\^.+?\](\: .*?$)?/g, '')
-        .replace(/\s{0,2}\[.*?\]: .*?$/g, '')
-        // Remove images
-        .replace(/\!\[.*?\][\[\(].*?[\]\)]/g, '')
-        // Remove inline links
-        .replace(/\[(.*?)\][\[\(].*?[\]\)]/g, '$1')
-        // Remove reference-style links?
-        .replace(/^\s{1,2}\[(.*?)\]: (\S+)( ".*?")?\s*$/g, '')
-        // Remove atx-style headers
-        .replace(/^\#{1,6}\s*([^#]*)\s*(\#{1,6})?/gm, '$1')
-        .replace(/([\*_]{1,3})(\S.*?\S)\1/g, '$2')
-        .replace(/(`{3,})(.*?)\1/gm, '$2')
-        .replace(/^-{3,}\s*$/g, '')
-        .replace(/`(.+?)`/g, '$1')
-        .replace(/\n{2,}/g, '\n\n');
-    } catch(e) {
-        console.error(e);
-    }
-
-    return str;
-}
-
-md = window.markdownit({
-    linkify: true,
-    html: false
-    // TODO Disable everything but inline styles (for better perfs)
-});
 
 local_storage_supported = isLocalStorageSupported();
 
@@ -504,8 +466,8 @@ var app = new Vue({
                 }
             });
         },
-        markdownToHTML: function(string) {
-            return md.renderInline(string);
+        anchorme: function(string) {
+            return anchorme(string, {ips: false, files: false});
         }
     }
 });
