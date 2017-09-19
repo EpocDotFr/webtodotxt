@@ -35,13 +35,14 @@ var app = new Vue({
 
         valid_priorities: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         humanize_data_timespan: 3, // If the todo dates are within -3 or +3 days from today: convert dates to relative ones
-        due_date_highlight_timespan: 1,
+        due_date_highlight_timespan: 1, // Highlight the due date of a todo if it is for tomorrow or earlier
 
         // --------------------------------------------------------
         // Variables
 
         loading: false, // Network activity indicator
-        todoBeingEdited: null, // The todo that is being edited (also used when creating a new todo)
+        is_dirty: false, // Did the user made changes and didn't saved them?
+        todo_being_edited: null, // The todo that is being edited (also used when creating a new todo)
         todos: [], // The list of all todos
 
         // Criteria used to filter the todo list above
@@ -57,15 +58,24 @@ var app = new Vue({
         }
     },
     // When Vue is ready
-    mounted: function () {
-        this.$nextTick(function () {
+    mounted: function() {
+        this.$nextTick(function() {
+            window.addEventListener('beforeunload', function(e) {
+                if (!app.is_dirty) {
+                    return undefined;
+                }
+
+                (e || window.event).returnValue = dirty_state_message;
+                return dirty_state_message;
+            });
+
             app.loadTodoTxt(); // Load the Todo.txt file
         });
     },
     directives: {
         // Datepicker on the date fields in filters
         'date-filter-datepicker': {
-            inserted: function (el, binding) {
+            inserted: function(el, binding) {
                 new Pikaday({
                     firstDay: FIRST_DAY_OF_WEEK,
                     format: 'L', // Short date format
@@ -86,8 +96,8 @@ var app = new Vue({
     },
     computed: {
         // The todo list, filtered according criteria
-        filteredTodos: function () {
-            return this.todos.filter(function (todo) {
+        filteredTodos: function() {
+            return this.todos.filter(function(todo) {
                 var text = completed = completion_date = priority = creation_date = projects = contexts = due_date = true;
 
                 if (('text' in todo) && app.filters.text) {
@@ -198,10 +208,10 @@ var app = new Vue({
         },
         // All projects stored in the localStorage
         storedProjects: {
-            get: function () {
+            get: function() {
                 return JSON.parse(localStorage.getItem('projects')) || [];
             },
-            set: function (projects) {
+            set: function(projects) {
                 localStorage.setItem('projects', JSON.stringify(projects));
             }
         },
@@ -249,10 +259,10 @@ var app = new Vue({
         },
         // All contexts stored in the localStorage
         storedContexts: {
-            get: function () {
+            get: function() {
                 return JSON.parse(localStorage.getItem('contexts')) || [];
             },
-            set: function (contexts) {
+            set: function(contexts) {
                 localStorage.setItem('contexts', JSON.stringify(contexts));
             }
         }
@@ -304,7 +314,7 @@ var app = new Vue({
         },
         // Create a new todo and make it the todo being edited
         addTodo: function() {
-            if (this.todoBeingEdited) { // A todo is already being edited
+            if (this.todo_being_edited) { // A todo is already being edited
                 return;
             }
 
@@ -321,23 +331,23 @@ var app = new Vue({
             };
 
             this.todos.unshift(new_todo);
-            this.todoBeingEdited = new_todo;
+            this.todo_being_edited = new_todo;
         },
         // Enter a todo in edit mode
-        editTodo: function (todo) {
-            if (this.todoBeingEdited) {
+        editTodo: function(todo) {
+            if (this.todo_being_edited) {
                 return;
             }
 
-            this.todoBeingEdited = todo;
+            this.todo_being_edited = todo;
         },
         // Called when todo edition is done
-        doneEditTodo: function (todo) {
-            if (!this.todoBeingEdited) { // No todo being edited
+        doneEditTodo: function(todo) {
+            if (!this.todo_being_edited) { // No todo being edited
                 return;
             }
 
-            this.todoBeingEdited = null;
+            this.todo_being_edited = null;
 
             if ('_new' in todo) {
                 Vue.delete(todo, '_new');
@@ -346,6 +356,8 @@ var app = new Vue({
             if (!todo.text) {
                 this.todos.splice(todos.indexOf(todo), 1);
             }
+
+            this.is_dirty = true;
         },
         // Called when a todo completion status is set
         todoCompletedHook: function(todo) {
@@ -354,6 +366,8 @@ var app = new Vue({
             } else {
                 todo.completion_date = '';
             }
+
+            this.is_dirty = true;
         },
         // Add a new project to a todo
         addProjectToTodo: function(todo, event) {
@@ -366,6 +380,8 @@ var app = new Vue({
             todo.projects.push(project_name);
 
             event.target.value = '';
+
+            this.is_dirty = true;
         },
         // Add a new context to a todo
         addContextToTodo: function(todo, event) {
@@ -378,13 +394,21 @@ var app = new Vue({
             todo.contexts.push(context_name);
 
             event.target.value = '';
+
+            this.is_dirty = true;
         },
         // Remove the due date of a todo
         removeDueDate: function(todo) {
             Vue.delete(todo.tags, 'due');
+
+            this.is_dirty = true;
         },
         // Load all todos from the Todo.txt file in the Vue.js data
         loadTodoTxt: function() {
+            if (this.is_dirty && !confirm(dirty_state_message)) {
+                return;
+            }
+
             this.loading = true;
 
             $.ajax({
@@ -409,6 +433,8 @@ var app = new Vue({
 
                             return todo;
                         });
+
+                        app.is_dirty = false;
                     } else {
                         alert(response.data.message);
                     }
@@ -456,6 +482,8 @@ var app = new Vue({
                 success: function(response, status, xhr) {
                     if (response.status != 'success') {
                         alert(response.data.message);
+                    } else {
+                        app.is_dirty = false;
                     }
                 },
                 error: function(xhr, errorType, error) {

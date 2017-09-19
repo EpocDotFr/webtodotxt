@@ -9,7 +9,7 @@
             <div class="menu">
                 <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> {{ _('Add') }}</button>
                 <button @click="loadTodoTxt()" :disabled="loading"><i class="fa fa-refresh"></i> {{ _('Reload') }}</button>
-                <button @click="saveTodoTxt()" :disabled="loading"><i class="fa fa-floppy-o"></i> {{ _('Save') }}</button>
+                <button @click="saveTodoTxt()" :disabled="loading":class="[is_dirty ? 'strong' : '']"><i class="fa fa-floppy-o"></i> {{ _('Save') }}</button>
             </div>
         </header>
         <div id="content" class="row">
@@ -71,7 +71,7 @@
             </div>
             <div id="todos">
                 <div class="txtmuted" v-show="filteredTodos.length == 0">{{ _('No todos to display') }} <i class="fa fa-smile-o"></i></div>
-                <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todoBeingEdited == todo ? 'editing' : '']">
+                <div v-for="todo in filteredTodos" :class="['todo', todo.completed ? 'completed' : '', todo_being_edited == todo ? 'editing' : '']">
                     <div class="actions">
                         <a href="#" @click.prevent="doneEditTodo(todo)" title="{{ _('Done') }}" class="apply"><i class="fa fa-check fa-fw"></i></a>
                         <a href="#" @click.prevent="editTodo(todo)" title="{{ _('Edit') }}" class="edit"><i class="fa fa-pencil fa-fw"></i></a>
@@ -184,6 +184,8 @@
         };
 
         FIRST_DAY_OF_WEEK = {{ first_week_day }};
+
+        dirty_state_message = '{{ _('You have unsaved changes. Are you sure to continue without saving?') }}';
 
         Vue.config.silent = {{ 'false' if config['DEBUG'] else 'true' }};
     </script>
