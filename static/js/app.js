@@ -58,8 +58,10 @@ var app = new Vue({
     },
     // When Vue is ready
     mounted: function() {
+        var self = this;
+
         window.addEventListener('beforeunload', function(e) {
-            if (!app.is_dirty) {
+            if (!self.is_dirty) {
                 return undefined;
             }
 
@@ -71,12 +73,12 @@ var app = new Vue({
 
         // Load stored filters values and merge them
         if (this.is_local_storage_supported) {
-            stored_filters = JSON.parse(localStorage.getItem('filters')) || [];
+            stored_filters = JSON.parse(localStorage.getItem('filters')) || {};
             $.extend(this.filters, stored_filters);
         }
 
         this.$nextTick(function() {
-            app.loadTodoTxt(); // Load the Todo.txt file
+            self.loadTodoTxt(); // Load the Todo.txt file
         });
     },
     directives: {
@@ -104,45 +106,47 @@ var app = new Vue({
     computed: {
         // The todo list, filtered according criteria
         filteredTodos: function() {
+            var self = this;
+
             return this.todos.filter(function(todo) {
                 var text = completed = completion_date = priority = creation_date = projects = contexts = due_date = true;
 
-                if (('text' in todo) && app.filters.text) {
-                    text = todo.text.toLowerCase().indexOf(app.filters.text.toLowerCase()) !== -1;
+                if (('text' in todo) && self.filters.text) {
+                    text = todo.text.toLowerCase().indexOf(self.filters.text.toLowerCase()) !== -1;
                 }
 
-                if (app.filters.completed == 'yes') {
+                if (self.filters.completed == 'yes') {
                     completed = ('completed' in todo) && todo.completed;
-                } else if (app.filters.completed == 'no') {
+                } else if (self.filters.completed == 'no') {
                     completed = ('completed' in todo) && !todo.completed;
                 }
 
-                if (app.filters.completion_date) {
-                    completion_date = ('completion_date' in todo) && todo.completion_date && app.filters.completion_date.isSame(todo.completion_date, 'day');
+                if (self.filters.completion_date) {
+                    completion_date = ('completion_date' in todo) && todo.completion_date && self.filters.completion_date.isSame(todo.completion_date, 'day');
                 }
 
-                if (app.filters.priorities && app.filters.priorities.length > 0) {
-                    priority = ('priority' in todo) && todo.priority && $.inArray(todo.priority, app.filters.priorities) !== -1;
+                if (self.filters.priorities && self.filters.priorities.length > 0) {
+                    priority = ('priority' in todo) && todo.priority && $.inArray(todo.priority, self.filters.priorities) !== -1;
                 }
 
-                if (app.filters.creation_date) {
-                    creation_date = ('creation_date' in todo) && todo.creation_date && app.filters.creation_date.isSame(todo.creation_date, 'day');
+                if (self.filters.creation_date) {
+                    creation_date = ('creation_date' in todo) && todo.creation_date && self.filters.creation_date.isSame(todo.creation_date, 'day');
                 }
 
-                if (app.filters.projects && app.filters.projects.length > 0) {
+                if (self.filters.projects && self.filters.projects.length > 0) {
                     projects = ('projects' in todo) && todo.projects && $.grep(todo.projects, function(project) {
-                        return $.inArray(project, app.filters.projects) !== -1;
+                        return $.inArray(project, self.filters.projects) !== -1;
                     }).length > 0;
                 }
 
-                if (app.filters.contexts && app.filters.contexts.length > 0) {
+                if (self.filters.contexts && self.filters.contexts.length > 0) {
                     contexts = ('contexts' in todo) && todo.contexts && $.grep(todo.contexts, function(context) {
-                        return $.inArray(context, app.filters.contexts) !== -1;
+                        return $.inArray(context, self.filters.contexts) !== -1;
                     }).length > 0;
                 }
 
-                if (app.filters.due_date) {
-                    due_date = ('due' in todo.tags) && todo.tags.due && app.filters.due_date.isSame(todo.tags.due, 'day');
+                if (self.filters.due_date) {
+                    due_date = ('due' in todo.tags) && todo.tags.due && self.filters.due_date.isSame(todo.tags.due, 'day');
                 }
 
                 return text && completed && completion_date && priority && creation_date && projects && contexts && due_date;
@@ -431,6 +435,7 @@ var app = new Vue({
             }
 
             this.loading = true;
+            var self = this;
 
             $.ajax({
                 type: 'GET',
@@ -439,7 +444,7 @@ var app = new Vue({
                 cache: false,
                 success: function(response, status, xhr) {
                     if (response.status == 'success') {
-                        app.todos = $.map(response.data, function(todo) {
+                        self.todos = $.map(response.data, function(todo) {
                             if (('completion_date' in todo) && todo.completion_date) {
                                 todo.completion_date = moment(todo.completion_date);
                             }
@@ -455,7 +460,7 @@ var app = new Vue({
                             return todo;
                         });
 
-                        app.is_dirty = false;
+                        self.is_dirty = false;
                     } else {
                         alert(response.data.message);
                     }
@@ -471,15 +476,16 @@ var app = new Vue({
                     alert(message);
                 },
                 complete: function() {
-                    app.loading = false;
+                    self.loading = false;
                 }
             });
         },
         // Save all todos in the Todo.txt file from the Vue.js data
         saveTodoTxt: function() {
             this.loading = true;
+            var self = this;
 
-            var data = $.map($.extend(true, {}, app.todos), function(todo) {
+            var data = $.map($.extend(true, {}, this.todos), function(todo) {
                 if (('completion_date' in todo) && moment.isMoment(todo.completion_date)) {
                     todo.completion_date = todo.completion_date.format('YYYY-MM-DD');
                 }
@@ -504,7 +510,7 @@ var app = new Vue({
                     if (response.status != 'success') {
                         alert(response.data.message);
                     } else {
-                        app.is_dirty = false;
+                        self.is_dirty = false;
                     }
                 },
                 error: function(xhr, errorType, error) {
@@ -518,7 +524,7 @@ var app = new Vue({
                     alert(message);
                 },
                 complete: function() {
-                    app.loading = false;
+                    self.loading = false;
                 }
             });
         },
