@@ -29,6 +29,7 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
 
   - Should work on any Python 3.x version. Feel free to test with another Python version and give me feedback
   - A [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/)-capable web server (optional, but recommended)
+  - A modern web browser (which optionally support localStorage)
 
 ## Installation
 

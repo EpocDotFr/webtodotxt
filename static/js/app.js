@@ -63,11 +63,17 @@ var app = new Vue({
                 return undefined;
             }
 
-            (e || window.event).returnValue = dirty_state_message;
-            return dirty_state_message;
+            (e || window.event).returnValue = LOCALES.dirty_state_message;
+            return LOCALES.dirty_state_message;
         });
 
         this.is_local_storage_supported = isLocalStorageSupported();
+
+        // Load stored filters values and merge them
+        if (this.is_local_storage_supported) {
+            stored_filters = JSON.parse(localStorage.getItem('filters')) || [];
+            $.extend(this.filters, stored_filters);
+        }
 
         this.$nextTick(function() {
             app.loadTodoTxt(); // Load the Todo.txt file
@@ -80,7 +86,7 @@ var app = new Vue({
                 new Pikaday({
                     firstDay: FIRST_DAY_OF_WEEK,
                     format: 'L', // Short date format
-                    i18n: PIKADAY_LOCALE,
+                    i18n: LOCALES.pikaday,
                     field: el,
                     onSelect: function() {
                         app.filters[binding.arg] = this.getMoment(); // Update the filter accordingly
@@ -265,6 +271,14 @@ var app = new Vue({
             },
             set: function(contexts) {
                 localStorage.setItem('contexts', JSON.stringify(contexts));
+            }
+        }
+    },
+    watch: {
+        filters: {
+            deep: true,
+            handler: function(filters) {
+                localStorage.setItem('filters', JSON.stringify(filters));
             }
         }
     },
