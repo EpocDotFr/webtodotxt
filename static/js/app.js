@@ -24,8 +24,6 @@ function getTodoStringForSorting(todo) {
     return ret.join(' ');
 }
 
-local_storage_supported = isLocalStorageSupported();
-
 var app = new Vue({
     delimiters: ['${', '}'], // Because Jinja2 already uses double brackets
     el: '#app',
@@ -36,6 +34,7 @@ var app = new Vue({
         valid_priorities: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         humanize_data_timespan: 3, // If the todo dates are within -3 or +3 days from today: convert dates to relative ones
         due_date_highlight_timespan: 1, // Highlight the due date of a todo if it is for tomorrow or earlier
+        is_local_storage_supported: false,
 
         // --------------------------------------------------------
         // Variables
@@ -59,16 +58,18 @@ var app = new Vue({
     },
     // When Vue is ready
     mounted: function() {
+        window.addEventListener('beforeunload', function(e) {
+            if (!app.is_dirty) {
+                return undefined;
+            }
+
+            (e || window.event).returnValue = dirty_state_message;
+            return dirty_state_message;
+        });
+
+        this.is_local_storage_supported = isLocalStorageSupported();
+
         this.$nextTick(function() {
-            window.addEventListener('beforeunload', function(e) {
-                if (!app.is_dirty) {
-                    return undefined;
-                }
-
-                (e || window.event).returnValue = dirty_state_message;
-                return dirty_state_message;
-            });
-
             app.loadTodoTxt(); // Load the Todo.txt file
         });
     },
@@ -188,7 +189,7 @@ var app = new Vue({
         allProjects: function() {
             var all_projects = $.extend(true, [], this.currentProjects);
 
-            if (local_storage_supported) {
+            if (this.is_local_storage_supported) {
                 $.each(this.storedProjects, function(index, project) { // Merge the stored projects in the current ones
                     if ($.inArray(project, all_projects) !== -1) {
                         return;
@@ -200,7 +201,7 @@ var app = new Vue({
 
             all_projects = all_projects.sort();
 
-            if (local_storage_supported) {
+            if (this.is_local_storage_supported) {
                 this.storedProjects = all_projects;
             }
 
@@ -239,7 +240,7 @@ var app = new Vue({
         allContexts: function() {
             var all_contexts = $.extend(true, [], this.currentContexts);
 
-            if (local_storage_supported) {
+            if (this.is_local_storage_supported) {
                 $.each(this.storedContexts, function(index, context) { // Merge the stored contexts in the current ones
                     if ($.inArray(context, all_contexts) !== -1) {
                         return;
@@ -251,7 +252,7 @@ var app = new Vue({
 
             all_contexts = all_contexts.sort();
 
-            if (local_storage_supported) {
+            if (this.is_local_storage_supported) {
                 this.storedContexts = all_contexts;
             }
 
@@ -285,14 +286,14 @@ var app = new Vue({
             this.filters.contexts = [];
         },
         isStoredProjectOnly: function(project) {
-            if (!local_storage_supported) {
+            if (!this.is_local_storage_supported) {
                 return false;
             }
 
             return $.inArray(project, this.currentProjects) === -1 && $.inArray(project, this.storedProjects) !== -1;
         },
         isStoredContextOnly: function(context) {
-            if (!local_storage_supported) {
+            if (!this.is_local_storage_supported) {
                 return false;
             }
 
