@@ -35,6 +35,9 @@ var app = new Vue({
         humanize_data_timespan: 3, // If the todo dates are within -3 or +3 days from today: convert dates to relative ones
         due_date_highlight_timespan: 1, // Highlight the due date of a todo if it is for tomorrow or earlier
         is_local_storage_supported: false,
+        is_idle_callback_supported: false,
+        idle_callback_id: null,
+        auto_save_timeout: 5000,
 
         // --------------------------------------------------------
         // Variables
@@ -70,6 +73,7 @@ var app = new Vue({
         });
 
         this.is_local_storage_supported = isLocalStorageSupported();
+        this.is_idle_callback_supported = 'requestIdleCallback' in window;
 
         // Load stored filters values and merge them
         if (this.is_local_storage_supported) {
@@ -284,6 +288,13 @@ var app = new Vue({
             handler: function(filters) {
                 localStorage.setItem('filters', JSON.stringify(filters));
             }
+        },
+        is_dirty: function() {
+            if (!this.is_idle_callback_supported || this.idle_callback_id) {
+                return;
+            }
+
+            this.idle_callback_id = requestIdleCallback(this.saveTodoTxt, {timeout: this.auto_save_timeout});
         }
     },
     methods: {
@@ -362,11 +373,7 @@ var app = new Vue({
         },
         // Called when todo edition is done
         doneEditTodo: function(todo) {
-            if (!this.todo_being_edited) { // No todo being edited
-                return;
-            }
-
-            if (!todo.text) {
+            if (!this.todo_being_edited || !todo.text) {
                 return;
             }
 
@@ -525,6 +532,10 @@ var app = new Vue({
                 },
                 complete: function() {
                     self.loading = false;
+
+                    if (this.is_idle_callback_supported && this.idle_callback_id) {
+                        cancelIdleCallback(this.idle_callback_id);
+                    }
                 }
             });
         },
