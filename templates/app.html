@@ -9,7 +9,7 @@
             <div class="menu">
                 <button @click="addTodo()" :disabled="loading"><i class="fa fa-plus"></i> {{ _('Add') }}</button>
                 <button @click="loadTodoTxt()" :disabled="loading"><i class="fa fa-refresh"></i> {{ _('Reload') }}</button>
-                <button @click="saveTodoTxt()" :disabled="loading":class="[is_dirty ? 'strong' : '']"><i class="fa fa-floppy-o"></i> {{ _('Save') }}</button>
+                <button @click="saveTodoTxt()" :disabled="loading" :class="[is_dirty ? 'strong' : '']"><i class="fa fa-floppy-o"></i> {{ _('Save') }}</button>
             </div>
         </header>
         <div id="content" class="row">
@@ -83,7 +83,7 @@
                         </div>
                         <div class="priority" v-show="todo.priority"><span :class="['priority-chip', todo.priority]">${ todo.priority }</span></div>
                         <div class="content">
-                            <div class="text" v-html="anchorme(todo.text)"></div>
+                            <div class="text" v-html="autolinker(todo.text)"></div>
                             <div class="metadata">
                                 <template v-if="todo.tags.due"><span :class="[isDueDateImminent(todo.tags.due) ? 'txtred' : '']">{{ _('Due') }} ${ humanizeDate(todo.tags.due) }</span></template>
                                 <template v-for="project in todo.projects">+${ project } </template>
