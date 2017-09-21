@@ -35,8 +35,6 @@ var app = new Vue({
         humanize_data_timespan: 3, // If the todo dates are within -3 or +3 days from today: convert dates to relative ones
         due_date_highlight_timespan: 1, // Highlight the due date of a todo if it is for tomorrow or earlier
         is_local_storage_supported: false,
-        autosave_timeout_id: null,
-        autosave_timeout: 5000,
 
         // --------------------------------------------------------
         // Variables
@@ -287,18 +285,6 @@ var app = new Vue({
             handler: function(filters) {
                 localStorage.setItem('filters', JSON.stringify(filters));
             }
-        },
-        is_dirty: function(is_dirty) {
-            // FIXME This doesn't works because the watch hook isn't triggered every time a value change even if it's the same
-            /*if (is_dirty) {
-                if (this.autosave_timeout_id) {
-                    clearTimeout(this.autosave_timeout_id);
-                }
-
-                this.autosave_timeout_id = setTimeout(this.saveTodoTxt, this.autosave_timeout);
-            } else if (!is_dirty && this.autosave_timeout_id) {
-                clearTimeout(this.autosave_timeout_id);
-            }*/
         }
     },
     methods: {
