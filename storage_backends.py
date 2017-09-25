@@ -46,9 +46,9 @@ class Dropbox(StorageBackend):
     def retrieve(self):
         _, response = self.client.files_download(self.config['path'])
 
-        return todotxtio.from_string(response.content.decode('utf-8-sig'))
+        return todotxtio.from_string(response.content.decode('utf-8'))
 
     def store(self, todos):
-        data = todotxtio.to_string(todos).encode('utf-8-sig')
+        data = todotxtio.to_string(todos).encode('utf-8')
 
         self.client.files_upload(data, self.config['path'], mode=dropbox.files.WriteMode('overwrite'), mute=True)
