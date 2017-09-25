@@ -70,7 +70,6 @@ var app = new Vue({
         });
 
         this.is_local_storage_supported = isLocalStorageSupported();
-        this.is_idle_callback_supported = 'requestIdleCallback' in window;
 
         // Load stored filters values and merge them
         if (this.is_local_storage_supported) {
@@ -284,6 +283,13 @@ var app = new Vue({
             deep: true,
             handler: function(filters) {
                 localStorage.setItem('filters', JSON.stringify(filters));
+            }
+        },
+        is_dirty: function(is_dirty) {
+            if (is_dirty) {
+                document.title = '* Web Todo.txt';
+            } else {
+                document.title = 'Web Todo.txt';
             }
         }
     },
