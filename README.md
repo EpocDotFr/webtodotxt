@@ -53,6 +53,7 @@ More informations on the three above can be found [here](http://flask.pocoo.org/
   - `USERS` The credentials required to access the app. You can specify multiple ones. **It is highly recommended to serve Web Todo.txt through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
   - `FORCE_LANGUAGE` Force the lang to be one of the supported ones (defaults to `None`: auto-detection from the `Accept-Language` HTTP header). See in the features section above for a list of available lang keys
   - `DEFAULT_LANGUAGE` Default language if it cannot be determined automatically. Not taken into account if `FORCE_LANGUAGE` is defined. See in the features section above for a list of available lang keys
+  - `DISPLAY_CREATION_DATE` Whether the creation date of the tasks must be displayed or not
   - `STORAGE_BACKEND_TO_USE` The storage backend to use. Can be one of the ones in the table below, in the **Supported storage backends** section
   - `STORAGE_BACKENDS` Self-explanatory storage backends-specific configuration values. Don't forget to change them before using your desired storage backend
 

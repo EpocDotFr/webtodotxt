@@ -88,7 +88,7 @@
                                 <template v-if="todo.tags.due"><span :class="[isDueDateImminent(todo.tags.due) ? 'txtred' : '']">{{ _('Due') }} ${ humanizeDate(todo.tags.due) }</span></template>
                                 <template v-for="project in todo.projects">+${ project } </template>
                                 <template v-for="context in todo.contexts">@${ context } </template>
-                                <template v-if="todo.creation_date">{{ _('Created') }} ${ humanizeDate(todo.creation_date) }</template>
+                                {% if config['DISPLAY_CREATION_DATE'] %}<template v-if="todo.creation_date">{{ _('Created') }} ${ humanizeDate(todo.creation_date) }</template>{% endif %}
                                 <template v-if="todo.completion_date">{{ _('Completed') }} ${ humanizeDate(todo.completion_date) }</template>
                             </div>
                         </div>

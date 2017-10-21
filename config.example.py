@@ -4,6 +4,7 @@ LOGGER_HANDLER_POLICY = 'production'
 USERS = {'username': 'password'}
 FORCE_LANGUAGE = None
 DEFAULT_LANGUAGE = 'en'
+DISPLAY_CREATION_DATE = True
 STORAGE_BACKEND_TO_USE = 'FileSystem'
 STORAGE_BACKENDS = {
     'FileSystem': {
