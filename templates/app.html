@@ -137,7 +137,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
-    <script src="https://unpkg.com/vue@2.4.4/dist/vue{% if not config['DEBUG'] %}.min{% endif %}.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue{{ '.min' if not config['DEBUG'] else '' }}.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="{{ url_for('static', filename='js/anchorme.min.js') }}"></script>
