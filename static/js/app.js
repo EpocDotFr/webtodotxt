@@ -287,9 +287,9 @@ var app = new Vue({
         },
         is_dirty: function(is_dirty) {
             if (is_dirty) {
-                document.title = '* Web Todo.txt';
+                document.title = '* ' + TITLE;
             } else {
-                document.title = 'Web Todo.txt';
+                document.title = TITLE;
             }
         }
     },
