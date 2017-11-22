@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 
-    <title>{% block meta_title %}{% endblock %}{% if self.meta_title() | trim %} • {% endif %}Web Todo.txt</title>
+    <title>{% block meta_title %}{% endblock %}{% if self.meta_title() | trim %} • {% endif %}{{ config['TITLE'] }}</title>
 </head>
 <body>
     {% block content %} {% endblock %}

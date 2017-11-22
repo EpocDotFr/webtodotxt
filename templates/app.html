@@ -3,7 +3,7 @@
 {% block content %}
     <div id="app">
         <header class="row">
-            <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a>
+            <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> {{ config['TITLE'] }}</a>
                 <small v-show="loading" class="txtmuted"><i class="fa fa-spinner fa-pulse"></i> {{ _('Loading...') }}</small>
             </div>
             <div class="menu">

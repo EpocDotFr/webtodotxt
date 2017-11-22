@@ -5,7 +5,7 @@
 {% block content %}
     <div id="app">
         <header>
-            <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> Web Todo.txt</a></div>
+            <div class="title"><a href="{{ request.url_root }}"><img src="{{ url_for('static', filename='favicon.png') }}"> {{ config['TITLE'] }}</a></div>
         </header>
         <div class="alert error">{{ _('A server error occured! Please retry. If the error persists, please report an issue <a href="https://github.com/EpocDotFr/webtodotxt/issues">here</a>.') }}</div>
     </div>

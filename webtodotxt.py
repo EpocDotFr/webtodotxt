@@ -13,6 +13,9 @@ import logging
 app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('config.py')
 
+if not app.config['TITLE']:
+    app.config['TITLE'] = 'Web Todo.txt'
+
 app.config['LOGGER_HANDLER_POLICY'] = 'production'
 
 app.config['LANGUAGES'] = {
