@@ -1,6 +1,7 @@
 config.py
 storage/data/todo.txt
 storage/logs/*.log
+storage/logs/*.log.*
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
