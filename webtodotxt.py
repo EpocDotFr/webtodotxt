@@ -27,7 +27,7 @@ app.config['LANGUAGES'] = {
 babel = Babel(app)
 auth = HTTPBasicAuth()
 
-handler = RotatingFileHandler('storage/logs/errors.log', maxBytes=25000, backupCount=2)
+handler = RotatingFileHandler('storage/logs/errors.log', maxBytes=10000000, backupCount=2)
 handler.setLevel(logging.WARNING)
 formatter = logging.Formatter(fmt='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d/%m/%Y %H:%M:%S')
 handler.setFormatter(formatter)
