@@ -13,5 +13,11 @@ STORAGE_BACKENDS = {
     'Dropbox': {
         'access_token': '',
         'path': '/todo.txt'
+    },
+    'WebDav': {
+        'path': 'remote.php/dav/files/USER/todo.txt',
+        'webdav_hostname': 'https://my.nextcloud.com',
+        'webdav_login': 'USER',
+        'webdav_password': 'PASSWORD'
     }
 }
