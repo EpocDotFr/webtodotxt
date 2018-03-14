@@ -84,7 +84,8 @@ You'll probably have to hack with this application to make it work with one of t
 This project is built on [Vue.js](http://vuejs.org/) 2 for the frontend and [Flask](http://flask.pocoo.org/) (Python) for
 the backend. The [todotxtio](https://github.com/EpocDotFr/todotxtio) PyPI package is used to parse/write the Todo.txt file,
 giving/receiving data through [Ajax](https://en.wikipedia.org/wiki/Ajax_(programming)). Several storage backends
-are available so one can choose to save its Todo.txt file locally on the filesystem or on its Dropbox.
+are available so one can choose to save its Todo.txt file locally on the filesystem, on its Dropbox or in a WebDav instance
+like nextcloud..
 
 ## "API"
 
@@ -97,7 +98,7 @@ Please navigate [here](https://github.com/EpocDotFr/webtodotxt/blob/master/api.m
 Instead, use native mobile apps to edit and sync the Todo.txt file:
 
 **On Android**, you can use [Simpletask](https://play.google.com/store/apps/details?id=nl.mpcjanssen.todotxtholo&hl=en)
-(free) which can natively sync your tasks with your Dropbox. If you're using another storage provider (third-party or
+(free) which can natively sync your tasks with your Dropbox and Nextcloud. If you're using another storage provider (third-party or
 self-hosted), you can use a modified version of this app called [Simpletask Cloudless](https://play.google.com/store/apps/details?id=nl.mpcjanssen.simpletask&hl=en)
 (also free, from the same author) which comes with no sync at all, but instead saves all your tasks in a file on your
 device. You can then do whatever you want with this file like syncing it via SFTP or many other providers / protocols
@@ -120,6 +121,7 @@ So make sure you're modifying it from one location at a time with the latest up-
 |------|---------------------|------------------------------|
 | Local file system | `FileSystem` |  |
 | [Dropbox](https://www.dropbox.com/) | `Dropbox` | `dropbox` |
+| WebDAV | `WebDav` | `webdavclient3` |
 
 ## Contributors
 
