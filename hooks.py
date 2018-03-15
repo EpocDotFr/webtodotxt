@@ -1,6 +1,7 @@
 from flask import render_template, request, g, make_response
 from werkzeug.exceptions import HTTPException
 from webtodotxt import app, babel, auth
+from helpers import get_current_auth_backend
 
 
 @app.before_request
@@ -9,15 +10,15 @@ def set_locale():
         if app.config['FORCE_LANGUAGE']:
             g.CURRENT_LOCALE = app.config['FORCE_LANGUAGE']
         else:
-            g.CURRENT_LOCALE = request.accept_languages.best_match(app.config['LANGUAGES'].keys(), default=app.config['DEFAULT_LANGUAGE'])
+            g.CURRENT_LOCALE = request.accept_languages.best_match(app.config['LANGUAGES'].keys(),
+                                                                   default=app.config['DEFAULT_LANGUAGE'])
 
 
 @auth.get_password
 def get_password(username):
-    if username in app.config['USERS']:
-        return app.config['USERS'].get(username)
+    backend = get_current_auth_backend()
 
-    return None
+    return backend.retrieve_password(username)
 
 
 @auth.error_handler
