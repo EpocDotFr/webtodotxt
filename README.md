@@ -77,6 +77,29 @@ Edit this file and change the interface/port as needed.
 
 The uWSGI file you'll have to set in your uWSGI configuration is `uwsgi.py`. The callable is `app`.
 
+  - Docker
+
+Build the image in the applications root dir:
+
+```
+docker build -t <image_name> .
+```
+
+The image can be configured via environment variables. The available variables are:
+
+| Variable | Default |Description |
+|----------|---------|------------|
+| SECRET_KEY | `this-is-not-a-secret-key!` | The secret key of the app. **PLEASE CHANGE THIS!** |
+| USER_DICT | `{}` | The set of predefined users as python-sict (e.g. {"john": "secret_pass"} |
+| AUTH_BACKEND | `DictAuth` | The authentication backend to use. |
+| STORAGE_BACKEND | `FileSystem` | The storage backend to use. |
+| TODO_FILE_PATH | Backend-dependend | The path to the todo.txt in all backends |
+| DROPBOX_ACCESS_TOKEN | None | The accesstoken that is used if storage backend is dropbox |
+| WEBDAV_HOST | `https://my.webdav.com` | The hostname of the webdav server if WebDav storage is used. |
+| MODE | `http` | The mode the uwsgi should operate in. If set to `http` it can be used as a normal webserver. The other option is `socket` which enables the uwsgi protocol. |
+
+Please mention [@janLO](https://github.com/janLo/) in issues with the docker support.
+
   - Others
 
 You'll probably have to hack with this application to make it work with one of the solutions described [here](http://flask.pocoo.org/docs/0.12/deploying/). Send me a pull request if you make it work.
@@ -193,7 +216,7 @@ AUTH_BACKEND_TO_USE = 'WebDavAuth'
 Thanks to:
 
   - [@Pepsit36](https://github.com/Pepsit36) (Portuguese translations)
-  - [@janLo](https://github.com/janLo) (WebDav auth & storage support)
+  - [@janLo](https://github.com/janLo) (WebDav auth & storage support, Dockerfile)
 
 ## End words
 
