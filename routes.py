@@ -22,7 +22,7 @@ def todotxt():
         storage_backend = get_current_storage_backend_instance()
 
         if request.method == 'GET':
-            todos = storage_backend.retrieve()
+            todos = storage_backend.retrieve(auth.username())
 
             allowed_params = ['text', 'completed', 'completion_date', 'priority', 'creation_date', 'projects', 'contexts', 'tags']
 
@@ -46,7 +46,7 @@ def todotxt():
         elif request.method == 'POST':
             todos = todotxtio.from_dicts(request.get_json())
 
-            storage_backend.store(todos)
+            storage_backend.store(todos, auth.username())
 
             result = {'status': 'success', 'data': []}
     except Exception as e:
