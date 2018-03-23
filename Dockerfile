@@ -17,7 +17,7 @@ RUN apk add -U \
 	&& \
     pip install uwsgi && \
     pip install -r /requirements.txt && \
-    pip install git+https://github.com/janLo/webdav-client-python-3.git@resource-arg-fix && \
+    pip install webdavclient3 && \
     apk del .bdeps
 
 ADD . /app
