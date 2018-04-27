@@ -45,7 +45,7 @@ Copy the `config.example.py` file to `config.py` and fill in the configuration p
 Available configuration parameters are:
 
   - `SECRET_KEY` Set this to a complex random value
-  - `DEBUG` Enable/disable debug mode
+  - `ENV` Either `production` or `development` (debug mode enabled in this last)
 
 More informations on the three above can be found [here](http://flask.pocoo.org/docs/0.12/config/#builtin-configuration-values).
 
