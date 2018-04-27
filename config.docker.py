@@ -14,7 +14,7 @@ def _env(var_name, default):
 
 
 SECRET_KEY = _env('SECRET_KEY', 'this-is-not-a-secret-key!')
-DEBUG = False
+ENV = _env('ENV', 'production')
 USERS = _env("USER_DICT", {})
 FORCE_LANGUAGE = None
 DEFAULT_LANGUAGE = 'en'
