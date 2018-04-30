@@ -15,8 +15,6 @@ app.config.from_pyfile('config.py')
 if not app.config['TITLE']:
     app.config['TITLE'] = 'Web Todo.txt'
 
-app.config['LOGGER_HANDLER_POLICY'] = 'production'
-
 app.config['LANGUAGES'] = {
     'en': 'English',
     'fr': 'Français',
