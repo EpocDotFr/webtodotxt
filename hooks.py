@@ -6,7 +6,7 @@ from helpers import get_current_auth_backend
 
 @app.before_request
 def set_locale():
-    if not hasattr(g, 'CURRENT_LOCALE'):
+    if request.endpoint != 'static' and not hasattr(g, 'CURRENT_LOCALE'):
         if app.config['FORCE_LANGUAGE']:
             g.CURRENT_LOCALE = app.config['FORCE_LANGUAGE']
         else:
