@@ -1,5 +1,4 @@
 SECRET_KEY = 'secretkeyhere'
-ENV = 'production'
 USERS = {'username': 'password'}
 FORCE_LANGUAGE = None
 DEFAULT_LANGUAGE = 'en'

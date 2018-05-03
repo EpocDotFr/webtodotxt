@@ -46,9 +46,8 @@ Copy the `config.example.py` file to `config.py` and fill in the configuration p
 Available configuration parameters are:
 
   - `SECRET_KEY` Set this to a complex random value
-  - `ENV` Either `production` or `development` (debug mode enabled in this last)
 
-More informations on the three above can be found [here](http://flask.pocoo.org/docs/0.12/config/#builtin-configuration-values).
+More informations about Flask config values can be found [here](http://flask.pocoo.org/docs/1.0/config/#builtin-configuration-values).
 
   - `TITLE` If set to a string, will be used to replace the default app title (which is "Web Todo.txt")
   - `USERS` The credentials required to access the app. You can specify multiple ones. **It is highly recommended to serve Web Todo.txt through HTTPS** because it uses [HTTP basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication)
@@ -169,7 +168,7 @@ The `WebDav` storage backend has two special features:
   and `webdav_password` or, if omitted, from the current user.
 
 With these features there are several multi-user-scenarios possible:
-* You can have predefined users in the `USERS` dict that share one and the same todo file (no user 
+* You can have predefined users in the `USERS` dict that share one and the same todo file (no user
   placeholder, dav credentials given in the storage config and `DictAuth`).
 * You can have predefined users in the `USERS` dict which each has its own todo.txt file on the same
   storage (filename with user placeholder, dav credentials given in the storage config and `DictAuth`)
