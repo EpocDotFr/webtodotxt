@@ -18,7 +18,8 @@ if not app.config['TITLE']:
 app.config['LANGUAGES'] = {
     'en': 'English',
     'fr': 'Français',
-    'pt': 'Portuguese'
+    'pt': 'Portuguese',
+    'de': 'German'
 }
 
 babel = Babel(app)
