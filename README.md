@@ -24,6 +24,7 @@ A web-based GUI to manage a [Todo.txt](http://todotxt.com/) file.
     - English (`en`)
     - French (`fr`)
     - Portuguese (WIP) (`pt`)
+    - German (`de`)
   - Multi authentication backend support
 
 ## Prerequisites
@@ -216,6 +217,7 @@ Thanks to:
 
   - [@Pepsit36](https://github.com/Pepsit36) (Portuguese translations)
   - [@janLo](https://github.com/janLo) (WebDav auth & storage support, Dockerfile)
+  - [@Strubbl](https://github.com/Strubbl) (German translation)
 
 ## End words
 
