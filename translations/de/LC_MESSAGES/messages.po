@@ -21,307 +21,307 @@ msgstr ""
 #: webtodotxt.py:90
 #, python-format
 msgid "Error while loading or updating the Todo.txt file: %(exception)s"
-msgstr ""
+msgstr "Fehler beim Laden oder Aktualisieren der Todo.txt: %(exception)s"
 
 #: templates/app.html:7
 msgid "Loading..."
-msgstr ""
+msgstr "Lädt…"
 
 #: templates/app.html:10
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 #: templates/app.html:11
 msgid "Reload"
-msgstr ""
+msgstr "Neu laden"
 
 #: templates/app.html:12
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: templates/app.html:18
 msgid "General filters"
-msgstr ""
+msgstr "Allgemeine Filter"
 
 #: templates/app.html:18 templates/app.html:43 templates/app.html:51
 #: templates/app.html:60
 msgid "Clear these filters"
-msgstr ""
+msgstr "Lösche diese Filter"
 
 #: templates/app.html:20
 msgid "Completed:"
-msgstr ""
+msgstr "Erledigt:"
 
 #: templates/app.html:21
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: templates/app.html:22
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: templates/app.html:23
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: templates/app.html:26
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: templates/app.html:27 templates/app.html:31 templates/app.html:35
 #: templates/app.html:39
 msgid "Clear this filter"
-msgstr ""
+msgstr "Lösche diesen Filter"
 
 #: templates/app.html:30
 msgid "Completion date"
-msgstr ""
+msgstr "Fertigstellungstermin"
 
 #: templates/app.html:34
 msgid "Creation date"
-msgstr ""
+msgstr "Erstellungsdatum"
 
 #: templates/app.html:38
 msgid "Due date"
-msgstr ""
+msgstr "Fälligkeitsdatum"
 
 #: templates/app.html:43
 msgid "Priorities"
-msgstr ""
+msgstr "Prioritäten"
 
 #: templates/app.html:45 templates/app.html:53 templates/app.html:62
 #: templates/app.html:116 templates/app.html:126
 msgid "None a this moment."
-msgstr ""
+msgstr "Im Moment keine."
 
 #: templates/app.html:51 templates/app.html:113
 msgid "Projects"
-msgstr ""
+msgstr "Projekte"
 
 #: templates/app.html:56
 msgid "Delete this project"
-msgstr ""
+msgstr "Lösche dieses Projekt"
 
 #: templates/app.html:60 templates/app.html:123
 msgid "Contexts"
-msgstr ""
+msgstr "Kontext"
 
 #: templates/app.html:65
 msgid "Delete this context"
-msgstr ""
+msgstr "Lösche diesen Kontext"
 
 #: templates/app.html:69
 msgid "Clear all filters"
-msgstr ""
+msgstr "Lösche alle Filter"
 
 #: templates/app.html:73
 msgid "No todos to display"
-msgstr ""
+msgstr "Keine Todos zum Anzeigen"
 
 #: templates/app.html:76
 msgid "Done"
-msgstr ""
+msgstr "Erledigt"
 
 #: templates/app.html:77
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: templates/app.html:78
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: templates/app.html:88
 msgid "Due"
-msgstr ""
+msgstr "Fällig"
 
 #: templates/app.html:91
 msgid "Created"
-msgstr ""
+msgstr "Erstellt"
 
 #: templates/app.html:92
 msgid "Completed"
-msgstr ""
+msgstr "Fertiggestellt"
 
 #: templates/app.html:99
 msgid "Remove due date"
-msgstr ""
+msgstr "Entferne das Fälligkeitsdatum"
 
 #: templates/app.html:101
 msgid "Type some text and hit Enter or Esc"
-msgstr ""
+msgstr "Tippe ein paar Worte und drücke Enter oder Esc"
 
 #: templates/app.html:105
 msgid "Priority"
-msgstr ""
+msgstr "Priorität"
 
 #: templates/app.html:105
 msgid "Clear priority"
-msgstr ""
+msgstr "Lösche Priorität"
 
 #: templates/app.html:113
 msgid "Clear projects"
-msgstr ""
+msgstr "Lösche Projekte"
 
 #: templates/app.html:114 templates/app.html:124
 msgid "Type a name and hit Enter"
-msgstr ""
+msgstr "Gib einen Namen ein und drücke Enter"
 
 #: templates/app.html:123
 msgid "Clear contexts"
-msgstr ""
+msgstr "Lösche Kontexte"
 
 #: templates/app.html:150
 msgid "Previous Month"
-msgstr ""
+msgstr "Vorheriger Monat"
 
 #: templates/app.html:151
 msgid "Next Month"
-msgstr ""
+msgstr "Nächster Monat"
 
 #: templates/app.html:153
 msgid "January"
-msgstr ""
+msgstr "Januar"
 
 #: templates/app.html:154
 msgid "February"
-msgstr ""
+msgstr "Februar"
 
 #: templates/app.html:155
 msgid "March"
-msgstr ""
+msgstr "März"
 
 #: templates/app.html:156
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: templates/app.html:157
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #: templates/app.html:158
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 #: templates/app.html:159
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 #: templates/app.html:160
 msgid "August"
-msgstr ""
+msgstr "August"
 
 #: templates/app.html:161
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: templates/app.html:162
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: templates/app.html:163
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: templates/app.html:164
 msgid "December"
-msgstr ""
+msgstr "Dezember"
 
 #: templates/app.html:167
 msgid "Sunday"
-msgstr ""
+msgstr "Sonntag"
 
 #: templates/app.html:168
 msgid "Monday"
-msgstr ""
+msgstr "Montag"
 
 #: templates/app.html:169
 msgid "Tuesday"
-msgstr ""
+msgstr "Dienstag"
 
 #: templates/app.html:170
 msgid "Wednesday"
-msgstr ""
+msgstr "Mittwoch"
 
 #: templates/app.html:171
 msgid "Thursday"
-msgstr ""
+msgstr "Donnerstag"
 
 #: templates/app.html:172
 msgid "Friday"
-msgstr ""
+msgstr "Freitag"
 
 #: templates/app.html:173
 msgid "Saturday"
-msgstr ""
+msgstr "Samstag"
 
 #: templates/app.html:176
 msgid "Sun"
-msgstr ""
+msgstr "So"
 
 #: templates/app.html:177
 msgid "Mon"
-msgstr ""
+msgstr "Mo"
 
 #: templates/app.html:178
 msgid "Tue"
-msgstr ""
+msgstr "Di"
 
 #: templates/app.html:179
 msgid "Wed"
-msgstr ""
+msgstr "Mi"
 
 #: templates/app.html:180
 msgid "Thu"
-msgstr ""
+msgstr "Do"
 
 #: templates/app.html:181
 msgid "Fri"
-msgstr ""
+msgstr "Fr"
 
 #: templates/app.html:182
 msgid "Sat"
-msgstr ""
+msgstr "Sa"
 
 #: templates/app.html:188
 msgid "You have unsaved changes. Are you sure to continue without saving?"
-msgstr ""
+msgstr "Du hast ungesicherte Änderungen. Bist du sicher, dass du ohne zu speichern, fortfahren möchtest?"
 
 #: templates/layout.html:23
 msgid "Source code on GitHub"
-msgstr ""
+msgstr "Quellcode auf GitHub"
 
 #: templates/layout.html:23
 #, python-format
 msgid "Licensed under the %(license)s"
-msgstr ""
+msgstr "Lizensiert unter der %(license)s"
 
 #: templates/errors/401.html:3
 msgid "Unauthorized"
-msgstr ""
+msgstr "Unberechtigt"
 
 #: templates/errors/401.html:10
 msgid "It seems you're not authorized to go here."
-msgstr ""
+msgstr "Es scheint, dass du nicht berechtigt bist, hier zu sein."
 
 #: templates/errors/403.html:3
 msgid "Forbidden"
-msgstr ""
+msgstr "Verboten"
 
 #: templates/errors/403.html:10
 msgid "Access to this resource is forbidden."
-msgstr ""
+msgstr "Zugang zu dieser Ressource ist verboten."
 
 #: templates/errors/404.html:3
 msgid "Not found"
-msgstr ""
+msgstr "Nicht gefunden"
 
 #: templates/errors/404.html:10
 msgid "Sorry, there's nothing here."
-msgstr ""
+msgstr "Entschuldige, hier gibt es nichts."
 
 #: templates/errors/500.html:3
 msgid "Server error"
-msgstr ""
+msgstr "Serverfehler"
 
 #: templates/errors/500.html:10
 msgid ""
@@ -329,6 +329,9 @@ msgid ""
 "report an issue <a "
 "href=\"https://github.com/EpocDotFr/webtodotxt/issues\">here</a>."
 msgstr ""
+"Es gab einen Serverfehler! Bitte versuche es erneut. Wenn dieser Fehler bestehen bleibt, "
+"erstelle bitte einen Fehlerbericht <a "
+"href=\"https://github.com/EpocDotFr/webtodotxt/issues\">hier</a>."
 
 #~ msgid ""
 #~ "The Todo.txt file can't be found "
